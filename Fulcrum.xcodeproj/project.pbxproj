@@ -1,0 +1,491 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC72567C1A0C2990006F87B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567B1A0C2990006F87B1 /* Foundation.framework */; };
+		EC72567E1A0C2990006F87B1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */; };
+		EC7256801A0C2990006F87B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567F1A0C2990006F87B1 /* UIKit.framework */; };
+		EC7256861A0C2990006F87B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC7256841A0C2990006F87B1 /* InfoPlist.strings */; };
+		EC7256881A0C2990006F87B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7256871A0C2990006F87B1 /* main.m */; };
+		EC72568C1A0C2990006F87B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC72568B1A0C2990006F87B1 /* AppDelegate.m */; };
+		EC72568F1A0C2990006F87B1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC72568D1A0C2990006F87B1 /* Main_iPhone.storyboard */; };
+		EC7256921A0C2990006F87B1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7256901A0C2990006F87B1 /* Main_iPad.storyboard */; };
+		EC7256951A0C2990006F87B1 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7256941A0C2990006F87B1 /* FirstViewController.m */; };
+		EC7256981A0C2990006F87B1 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7256971A0C2990006F87B1 /* SecondViewController.m */; };
+		EC72569A1A0C2990006F87B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC7256991A0C2990006F87B1 /* Images.xcassets */; };
+		EC7256A11A0C2990006F87B1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7256A01A0C2990006F87B1 /* XCTest.framework */; };
+		EC7256A21A0C2990006F87B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567B1A0C2990006F87B1 /* Foundation.framework */; };
+		EC7256A31A0C2990006F87B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567F1A0C2990006F87B1 /* UIKit.framework */; };
+		EC7256AB1A0C2990006F87B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC7256A91A0C2990006F87B1 /* InfoPlist.strings */; };
+		EC7256AD1A0C2990006F87B1 /* FulcrumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7256AC1A0C2990006F87B1 /* FulcrumTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC7256A41A0C2990006F87B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC7256701A0C2990006F87B1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC7256771A0C2990006F87B1;
+			remoteInfo = Fulcrum;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EC7256781A0C2990006F87B1 /* Fulcrum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fulcrum.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC72567B1A0C2990006F87B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EC72567F1A0C2990006F87B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EC7256831A0C2990006F87B1 /* Fulcrum-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Fulcrum-Info.plist"; sourceTree = "<group>"; };
+		EC7256851A0C2990006F87B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EC7256871A0C2990006F87B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EC7256891A0C2990006F87B1 /* Fulcrum-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fulcrum-Prefix.pch"; sourceTree = "<group>"; };
+		EC72568A1A0C2990006F87B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EC72568B1A0C2990006F87B1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EC72568E1A0C2990006F87B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		EC7256911A0C2990006F87B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		EC7256931A0C2990006F87B1 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		EC7256941A0C2990006F87B1 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		EC7256961A0C2990006F87B1 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		EC7256971A0C2990006F87B1 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		EC7256991A0C2990006F87B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EC72569F1A0C2990006F87B1 /* FulcrumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FulcrumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC7256A01A0C2990006F87B1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		EC7256A81A0C2990006F87B1 /* FulcrumTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FulcrumTests-Info.plist"; sourceTree = "<group>"; };
+		EC7256AA1A0C2990006F87B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EC7256AC1A0C2990006F87B1 /* FulcrumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FulcrumTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC7256751A0C2990006F87B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC72567E1A0C2990006F87B1 /* CoreGraphics.framework in Frameworks */,
+				EC7256801A0C2990006F87B1 /* UIKit.framework in Frameworks */,
+				EC72567C1A0C2990006F87B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC72569C1A0C2990006F87B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7256A11A0C2990006F87B1 /* XCTest.framework in Frameworks */,
+				EC7256A31A0C2990006F87B1 /* UIKit.framework in Frameworks */,
+				EC7256A21A0C2990006F87B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC72566F1A0C2990006F87B1 = {
+			isa = PBXGroup;
+			children = (
+				EC7256811A0C2990006F87B1 /* Fulcrum */,
+				EC7256A61A0C2990006F87B1 /* FulcrumTests */,
+				EC72567A1A0C2990006F87B1 /* Frameworks */,
+				EC7256791A0C2990006F87B1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC7256791A0C2990006F87B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC7256781A0C2990006F87B1 /* Fulcrum.app */,
+				EC72569F1A0C2990006F87B1 /* FulcrumTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC72567A1A0C2990006F87B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC72567B1A0C2990006F87B1 /* Foundation.framework */,
+				EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */,
+				EC72567F1A0C2990006F87B1 /* UIKit.framework */,
+				EC7256A01A0C2990006F87B1 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC7256811A0C2990006F87B1 /* Fulcrum */ = {
+			isa = PBXGroup;
+			children = (
+				EC72568A1A0C2990006F87B1 /* AppDelegate.h */,
+				EC72568B1A0C2990006F87B1 /* AppDelegate.m */,
+				EC72568D1A0C2990006F87B1 /* Main_iPhone.storyboard */,
+				EC7256901A0C2990006F87B1 /* Main_iPad.storyboard */,
+				EC7256931A0C2990006F87B1 /* FirstViewController.h */,
+				EC7256941A0C2990006F87B1 /* FirstViewController.m */,
+				EC7256961A0C2990006F87B1 /* SecondViewController.h */,
+				EC7256971A0C2990006F87B1 /* SecondViewController.m */,
+				EC7256991A0C2990006F87B1 /* Images.xcassets */,
+				EC7256821A0C2990006F87B1 /* Supporting Files */,
+			);
+			path = Fulcrum;
+			sourceTree = "<group>";
+		};
+		EC7256821A0C2990006F87B1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC7256831A0C2990006F87B1 /* Fulcrum-Info.plist */,
+				EC7256841A0C2990006F87B1 /* InfoPlist.strings */,
+				EC7256871A0C2990006F87B1 /* main.m */,
+				EC7256891A0C2990006F87B1 /* Fulcrum-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC7256A61A0C2990006F87B1 /* FulcrumTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC7256AC1A0C2990006F87B1 /* FulcrumTests.m */,
+				EC7256A71A0C2990006F87B1 /* Supporting Files */,
+			);
+			path = FulcrumTests;
+			sourceTree = "<group>";
+		};
+		EC7256A71A0C2990006F87B1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC7256A81A0C2990006F87B1 /* FulcrumTests-Info.plist */,
+				EC7256A91A0C2990006F87B1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC7256771A0C2990006F87B1 /* Fulcrum */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC7256B01A0C2991006F87B1 /* Build configuration list for PBXNativeTarget "Fulcrum" */;
+			buildPhases = (
+				EC7256741A0C2990006F87B1 /* Sources */,
+				EC7256751A0C2990006F87B1 /* Frameworks */,
+				EC7256761A0C2990006F87B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Fulcrum;
+			productName = Fulcrum;
+			productReference = EC7256781A0C2990006F87B1 /* Fulcrum.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EC72569E1A0C2990006F87B1 /* FulcrumTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC7256B31A0C2991006F87B1 /* Build configuration list for PBXNativeTarget "FulcrumTests" */;
+			buildPhases = (
+				EC72569B1A0C2990006F87B1 /* Sources */,
+				EC72569C1A0C2990006F87B1 /* Frameworks */,
+				EC72569D1A0C2990006F87B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC7256A51A0C2990006F87B1 /* PBXTargetDependency */,
+			);
+			name = FulcrumTests;
+			productName = FulcrumTests;
+			productReference = EC72569F1A0C2990006F87B1 /* FulcrumTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC7256701A0C2990006F87B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "___FULLUSERNAME___";
+				TargetAttributes = {
+					EC72569E1A0C2990006F87B1 = {
+						TestTargetID = EC7256771A0C2990006F87B1;
+					};
+				};
+			};
+			buildConfigurationList = EC7256731A0C2990006F87B1 /* Build configuration list for PBXProject "Fulcrum" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EC72566F1A0C2990006F87B1;
+			productRefGroup = EC7256791A0C2990006F87B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC7256771A0C2990006F87B1 /* Fulcrum */,
+				EC72569E1A0C2990006F87B1 /* FulcrumTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC7256761A0C2990006F87B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7256921A0C2990006F87B1 /* Main_iPad.storyboard in Resources */,
+				EC72569A1A0C2990006F87B1 /* Images.xcassets in Resources */,
+				EC72568F1A0C2990006F87B1 /* Main_iPhone.storyboard in Resources */,
+				EC7256861A0C2990006F87B1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC72569D1A0C2990006F87B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7256AB1A0C2990006F87B1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC7256741A0C2990006F87B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7256981A0C2990006F87B1 /* SecondViewController.m in Sources */,
+				EC72568C1A0C2990006F87B1 /* AppDelegate.m in Sources */,
+				EC7256951A0C2990006F87B1 /* FirstViewController.m in Sources */,
+				EC7256881A0C2990006F87B1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC72569B1A0C2990006F87B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7256AD1A0C2990006F87B1 /* FulcrumTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC7256A51A0C2990006F87B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC7256771A0C2990006F87B1 /* Fulcrum */;
+			targetProxy = EC7256A41A0C2990006F87B1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC7256841A0C2990006F87B1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC7256851A0C2990006F87B1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EC72568D1A0C2990006F87B1 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC72568E1A0C2990006F87B1 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		EC7256901A0C2990006F87B1 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC7256911A0C2990006F87B1 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		EC7256A91A0C2990006F87B1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC7256AA1A0C2990006F87B1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC7256AE1A0C2991006F87B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC7256AF1A0C2991006F87B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC7256B11A0C2991006F87B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Fulcrum/Fulcrum-Prefix.pch";
+				INFOPLIST_FILE = "Fulcrum/Fulcrum-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EC7256B21A0C2991006F87B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Fulcrum/Fulcrum-Prefix.pch";
+				INFOPLIST_FILE = "Fulcrum/Fulcrum-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EC7256B41A0C2991006F87B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Fulcrum.app/Fulcrum";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Fulcrum/Fulcrum-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FulcrumTests/FulcrumTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		EC7256B51A0C2991006F87B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Fulcrum.app/Fulcrum";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Fulcrum/Fulcrum-Prefix.pch";
+				INFOPLIST_FILE = "FulcrumTests/FulcrumTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC7256731A0C2990006F87B1 /* Build configuration list for PBXProject "Fulcrum" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC7256AE1A0C2991006F87B1 /* Debug */,
+				EC7256AF1A0C2991006F87B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC7256B01A0C2991006F87B1 /* Build configuration list for PBXNativeTarget "Fulcrum" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC7256B11A0C2991006F87B1 /* Debug */,
+				EC7256B21A0C2991006F87B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EC7256B31A0C2991006F87B1 /* Build configuration list for PBXNativeTarget "FulcrumTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC7256B41A0C2991006F87B1 /* Debug */,
+				EC7256B51A0C2991006F87B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC7256701A0C2990006F87B1 /* Project object */;
+}
