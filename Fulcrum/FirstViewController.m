@@ -7,6 +7,7 @@
 //
 
 #import "FirstViewController.h"
+#import "MainViewController.h"
 
 @interface FirstViewController ()
 
@@ -14,10 +15,18 @@
 
 @implementation FirstViewController
 
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning
