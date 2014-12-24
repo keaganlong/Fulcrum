@@ -17,7 +17,7 @@
 		EC7256881A0C2990006F87B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7256871A0C2990006F87B1 /* main.m */; };
 		EC72568C1A0C2990006F87B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC72568B1A0C2990006F87B1 /* AppDelegate.m */; };
 		EC72568F1A0C2990006F87B1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC72568D1A0C2990006F87B1 /* Main_iPhone.storyboard */; };
-		EC7256951A0C2990006F87B1 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7256941A0C2990006F87B1 /* FirstViewController.m */; };
+		EC7256951A0C2990006F87B1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7256941A0C2990006F87B1 /* LoginViewController.m */; };
 		EC72569A1A0C2990006F87B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC7256991A0C2990006F87B1 /* Images.xcassets */; };
 		EC7256A11A0C2990006F87B1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7256A01A0C2990006F87B1 /* XCTest.framework */; };
 		EC7256A21A0C2990006F87B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567B1A0C2990006F87B1 /* Foundation.framework */; };
@@ -25,11 +25,11 @@
 		EC7256AB1A0C2990006F87B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC7256A91A0C2990006F87B1 /* InfoPlist.strings */; };
 		EC7256AD1A0C2990006F87B1 /* FulcrumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7256AC1A0C2990006F87B1 /* FulcrumTests.m */; };
 		EC7256B91A0C3993006F87B1 /* Logo_Main_Large.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7256B81A0C3993006F87B1 /* Logo_Main_Large.png */; };
-		EC72F8751A12FB9000BFD4DD /* Carousel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC72F8741A12FB9000BFD4DD /* Carousel.m */; };
 		EC9609CD1A106F80001FB02A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9609CC1A106F80001FB02A /* MainViewController.m */; };
 		EC9609DA1A107B05001FB02A /* JBBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9609D51A107B05001FB02A /* JBBarChartView.m */; };
 		EC9609DB1A107B05001FB02A /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9609D71A107B05001FB02A /* JBChartView.m */; };
 		EC9609DC1A107B05001FB02A /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9609D91A107B05001FB02A /* JBLineChartView.m */; };
+		EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D01A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m */; };
 		ECD590021A1AD4CE00DC307F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -46,10 +46,10 @@
 /* Begin PBXFileReference section */
 		EC15808E1A1555EC00AEFC84 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		EC15808F1A1555EC00AEFC84 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
-		EC1580991A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LowerCarouselDataSourceAndDelegate.m; sourceTree = "<group>"; };
-		EC15809B1A16770600AEFC84 /* LowerCarouselDataSourceAndDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LowerCarouselDataSourceAndDelegate.h; sourceTree = "<group>"; };
-		EC15809E1A16D44D00AEFC84 /* DailySurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DailySurveyViewController.m; path = Fulcrum/DailySurveyViewController.m; sourceTree = "<group>"; };
-		EC1580A01A16D45B00AEFC84 /* DailySurveyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyViewController.h; sourceTree = "<group>"; };
+		EC1580991A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LowerCarouselDataSourceAndDelegate.m; path = ../LowerCarouselDataSourceAndDelegate.m; sourceTree = "<group>"; };
+		EC15809B1A16770600AEFC84 /* LowerCarouselDataSourceAndDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LowerCarouselDataSourceAndDelegate.h; path = ../LowerCarouselDataSourceAndDelegate.h; sourceTree = "<group>"; };
+		EC15809E1A16D44D00AEFC84 /* DailySurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyViewController.m; sourceTree = "<group>"; };
+		EC1580A01A16D45B00AEFC84 /* DailySurveyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DailySurveyViewController.h; path = ../DailySurveyViewController.h; sourceTree = "<group>"; };
 		EC7256781A0C2990006F87B1 /* Fulcrum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fulcrum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC72567B1A0C2990006F87B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -58,11 +58,11 @@
 		EC7256851A0C2990006F87B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EC7256871A0C2990006F87B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EC7256891A0C2990006F87B1 /* Fulcrum-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fulcrum-Prefix.pch"; sourceTree = "<group>"; };
-		EC72568A1A0C2990006F87B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Fulcrum/AppDelegate.h; sourceTree = "<group>"; };
-		EC72568B1A0C2990006F87B1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Fulcrum/AppDelegate.m; sourceTree = "<group>"; };
+		EC72568A1A0C2990006F87B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EC72568B1A0C2990006F87B1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EC72568E1A0C2990006F87B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		EC7256931A0C2990006F87B1 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirstViewController.h; path = Fulcrum/FirstViewController.h; sourceTree = "<group>"; };
-		EC7256941A0C2990006F87B1 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FirstViewController.m; path = Fulcrum/FirstViewController.m; sourceTree = "<group>"; };
+		EC7256931A0C2990006F87B1 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		EC7256941A0C2990006F87B1 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		EC7256991A0C2990006F87B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EC72569F1A0C2990006F87B1 /* FulcrumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FulcrumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7256A01A0C2990006F87B1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -70,16 +70,16 @@
 		EC7256AA1A0C2990006F87B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EC7256AC1A0C2990006F87B1 /* FulcrumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FulcrumTests.m; sourceTree = "<group>"; };
 		EC7256B81A0C3993006F87B1 /* Logo_Main_Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_Main_Large.png; sourceTree = "<group>"; };
-		EC72F8741A12FB9000BFD4DD /* Carousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carousel.m; sourceTree = "<group>"; };
-		EC72F8761A12FC3100BFD4DD /* Carousel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Carousel.h; sourceTree = "<group>"; };
-		EC9609CB1A106F80001FB02A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Fulcrum/MainViewController.h; sourceTree = "<group>"; };
-		EC9609CC1A106F80001FB02A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Fulcrum/MainViewController.m; sourceTree = "<group>"; };
+		EC9609CB1A106F80001FB02A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		EC9609CC1A106F80001FB02A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		EC9609D41A107B05001FB02A /* JBBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBBarChartView.h; sourceTree = "<group>"; };
 		EC9609D51A107B05001FB02A /* JBBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBBarChartView.m; sourceTree = "<group>"; };
 		EC9609D61A107B05001FB02A /* JBChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChartView.h; sourceTree = "<group>"; };
 		EC9609D71A107B05001FB02A /* JBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartView.m; sourceTree = "<group>"; };
 		EC9609D81A107B05001FB02A /* JBLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBLineChartView.h; sourceTree = "<group>"; };
 		EC9609D91A107B05001FB02A /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBLineChartView.m; sourceTree = "<group>"; };
+		EC9FD7D01A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperCarouselDataSourceAndDelegate.m; sourceTree = "<group>"; };
+		EC9FD7D21A4A650000EE6446 /* UpperCarouselDataSourceAndDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpperCarouselDataSourceAndDelegate.h; sourceTree = "<group>"; };
 		ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +149,10 @@
 		EC7256811A0C2990006F87B1 /* Fulcrum */ = {
 			isa = PBXGroup;
 			children = (
+				EC72568A1A0C2990006F87B1 /* AppDelegate.h */,
+				EC72568B1A0C2990006F87B1 /* AppDelegate.m */,
+				EC9FD7CC1A4786ED00EE6446 /* Models */,
+				EC9FD7CD1A4786FA00EE6446 /* Controllers */,
 				EC72F8701A12F9C600BFD4DD /* Views */,
 				EC72568D1A0C2990006F87B1 /* Main_iPhone.storyboard */,
 				ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */,
@@ -192,18 +196,6 @@
 		EC72F8701A12F9C600BFD4DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EC72568A1A0C2990006F87B1 /* AppDelegate.h */,
-				EC72568B1A0C2990006F87B1 /* AppDelegate.m */,
-				EC9609CB1A106F80001FB02A /* MainViewController.h */,
-				EC9609CC1A106F80001FB02A /* MainViewController.m */,
-				EC7256931A0C2990006F87B1 /* FirstViewController.h */,
-				EC7256941A0C2990006F87B1 /* FirstViewController.m */,
-				EC72F8741A12FB9000BFD4DD /* Carousel.m */,
-				EC72F8761A12FC3100BFD4DD /* Carousel.h */,
-				EC1580991A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m */,
-				EC15809B1A16770600AEFC84 /* LowerCarouselDataSourceAndDelegate.h */,
-				EC15809E1A16D44D00AEFC84 /* DailySurveyViewController.m */,
-				EC1580A01A16D45B00AEFC84 /* DailySurveyViewController.h */,
 			);
 			name = Views;
 			path = ..;
@@ -229,6 +221,54 @@
 				EC9609D91A107B05001FB02A /* JBLineChartView.m */,
 			);
 			path = "Jawbone Charts";
+			sourceTree = "<group>";
+		};
+		EC9FD7CC1A4786ED00EE6446 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		EC9FD7CD1A4786FA00EE6446 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FD7D41A4A704900EE6446 /* DailySurveyView */,
+				EC9FD7D31A4A701D00EE6446 /* LoginView */,
+				EC9FD7CF1A4A636F00EE6446 /* MainView */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		EC9FD7CF1A4A636F00EE6446 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				EC1580991A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m */,
+				EC15809B1A16770600AEFC84 /* LowerCarouselDataSourceAndDelegate.h */,
+				EC9609CB1A106F80001FB02A /* MainViewController.h */,
+				EC9609CC1A106F80001FB02A /* MainViewController.m */,
+				EC9FD7D01A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m */,
+				EC9FD7D21A4A650000EE6446 /* UpperCarouselDataSourceAndDelegate.h */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		EC9FD7D31A4A701D00EE6446 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				EC7256931A0C2990006F87B1 /* LoginViewController.h */,
+				EC7256941A0C2990006F87B1 /* LoginViewController.m */,
+			);
+			name = LoginView;
+			sourceTree = "<group>";
+		};
+		EC9FD7D41A4A704900EE6446 /* DailySurveyView */ = {
+			isa = PBXGroup;
+			children = (
+				EC15809E1A16D44D00AEFC84 /* DailySurveyViewController.m */,
+				EC1580A01A16D45B00AEFC84 /* DailySurveyViewController.h */,
+			);
+			name = DailySurveyView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,11 +377,11 @@
 				EC9609DB1A107B05001FB02A /* JBChartView.m in Sources */,
 				EC9609DC1A107B05001FB02A /* JBLineChartView.m in Sources */,
 				EC1580901A1555EC00AEFC84 /* iCarousel.m in Sources */,
-				EC72F8751A12FB9000BFD4DD /* Carousel.m in Sources */,
 				EC15809A1A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m in Sources */,
 				EC9609DA1A107B05001FB02A /* JBBarChartView.m in Sources */,
-				EC7256951A0C2990006F87B1 /* FirstViewController.m in Sources */,
+				EC7256951A0C2990006F87B1 /* LoginViewController.m in Sources */,
 				EC15809F1A16D44D00AEFC84 /* DailySurveyViewController.m in Sources */,
+				EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */,
 				EC7256881A0C2990006F87B1 /* main.m in Sources */,
 				EC9609CD1A106F80001FB02A /* MainViewController.m in Sources */,
 			);

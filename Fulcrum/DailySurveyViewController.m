@@ -8,9 +8,6 @@
 
 #import "DailySurveyViewController.h"
 
-@interface DailySurveyViewController ()
-
-@end
 
 @implementation DailySurveyViewController
 
@@ -24,6 +21,25 @@ NSArray *question3Responses;
     question1Responses = [NSArray arrayWithObjects:@"Not Coping",@"Poorly",@"Ok",@"Well", @"Very Well", nil];
     question2Responses = [NSArray arrayWithObjects:@"Terrible",@"Bad",@"Fair",@"Good", @"Fantastic", nil];
     question3Responses = [NSArray arrayWithObjects:@"Distant",@"Unconnected",@"Eh..",@"Connected", @"Very Connected", nil];
+    
+    CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
+    scrollView.contentSize=CGSizeMake(320,758);
+    scrollView.contentInset=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
+    
+    for(int i = 0; i<10;i++){
+        CGRect frame = CGRectMake(0.0, i*100, 200.0, 10.0);
+        UISlider *slider = [[UISlider alloc] initWithFrame:frame];
+        [slider addTarget:self action:@selector(onSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [slider setBackgroundColor:[UIColor clearColor]];
+        slider.minimumValue = 0.0;
+        slider.maximumValue = 50.0;
+        slider.continuous = YES;
+        slider.value = 25.0;
+        [scrollView addSubview:slider];
+    }
+    self.questionScrollView = scrollView;
+    [self.view addSubview:self.questionScrollView];
 
 }
 

@@ -5,10 +5,9 @@
 //  Created by Keagan Long on 11/14/14.
 //  Copyright (c) 2014 Keagan Long. All rights reserved.
 //
+#import "iCarousel.h"
 
-#ifndef Fulcrum_LowerCarouselDataSourceAndDelegate_h
-#define Fulcrum_LowerCarouselDataSourceAndDelegate_h
+@interface LowerCarouselDataSourceAndDelegate: NSObject<iCarouselDataSource, iCarouselDelegate>
 
-@interface LowerCarouselDataSourceAndDelegate: UIViewController<iCarouselDataSource, iCarouselDelegate>
 @end
-#endif
+

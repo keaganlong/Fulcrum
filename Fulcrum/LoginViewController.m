@@ -6,14 +6,10 @@
 //  Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "LoginViewController.h"
 #import "MainViewController.h"
 
-@interface FirstViewController ()
-
-@end
-
-@implementation FirstViewController
+@implementation LoginViewController
 
 -(void)dismissKeyboard {
     [self.view endEditing:YES];

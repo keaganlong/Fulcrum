@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *question2Label;
 @property (weak, nonatomic) IBOutlet UISlider *question3Slider;
 @property (weak, nonatomic) IBOutlet UILabel *question3Label;
+@property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
 
 @end
 

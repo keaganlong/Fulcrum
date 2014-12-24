@@ -8,7 +8,7 @@
         <!--First-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
-                <viewController title="First" id="CZ4-MO-1fc" customClass="FirstViewController" sceneMemberID="viewController">
+                <viewController title="First" id="CZ4-MO-1fc" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hW3-io-bzh"/>
                         <viewControllerLayoutGuide type="bottom" id="Uu2-4p-Avv"/>
@@ -251,23 +251,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0c-Zc-E5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="685" y="-128"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="FsC-8v-BG4">
-            <objects>
-                <viewController id="j99-2A-kby" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PhF-eP-57O"/>
-                        <viewControllerLayoutGuide type="bottom" id="HvL-5B-69B"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="faQ-Qw-bxD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tde-3g-w8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>
