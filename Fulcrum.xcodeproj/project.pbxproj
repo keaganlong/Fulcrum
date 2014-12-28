@@ -30,6 +30,8 @@
 		EC9609DB1A107B05001FB02A /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9609D71A107B05001FB02A /* JBChartView.m */; };
 		EC9609DC1A107B05001FB02A /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9609D91A107B05001FB02A /* JBLineChartView.m */; };
 		EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D01A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m */; };
+		EC9FD7D61A4FB6E200EE6446 /* DailySurveyQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D51A4FB6E200EE6446 /* DailySurveyQuestion.m */; };
+		EC9FD7D91A4FBB8400EE6446 /* DailySurveyQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D81A4FBB8400EE6446 /* DailySurveyQuestionView.m */; };
 		ECD590021A1AD4CE00DC307F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,10 @@
 		EC9609D91A107B05001FB02A /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBLineChartView.m; sourceTree = "<group>"; };
 		EC9FD7D01A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpperCarouselDataSourceAndDelegate.m; sourceTree = "<group>"; };
 		EC9FD7D21A4A650000EE6446 /* UpperCarouselDataSourceAndDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpperCarouselDataSourceAndDelegate.h; sourceTree = "<group>"; };
+		EC9FD7D51A4FB6E200EE6446 /* DailySurveyQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyQuestion.m; sourceTree = "<group>"; };
+		EC9FD7D71A4FB6FB00EE6446 /* DailySurveyQuestion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyQuestion.h; sourceTree = "<group>"; };
+		EC9FD7D81A4FBB8400EE6446 /* DailySurveyQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyQuestionView.m; sourceTree = "<group>"; };
+		EC9FD7DA1A4FBB9000EE6446 /* DailySurveyQuestionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyQuestionView.h; sourceTree = "<group>"; };
 		ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +202,8 @@
 		EC72F8701A12F9C600BFD4DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EC9FD7D81A4FBB8400EE6446 /* DailySurveyQuestionView.m */,
+				EC9FD7DA1A4FBB9000EE6446 /* DailySurveyQuestionView.h */,
 			);
 			name = Views;
 			path = ..;
@@ -226,6 +234,8 @@
 		EC9FD7CC1A4786ED00EE6446 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EC9FD7D51A4FB6E200EE6446 /* DailySurveyQuestion.m */,
+				EC9FD7D71A4FB6FB00EE6446 /* DailySurveyQuestion.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -378,11 +388,13 @@
 				EC9609DC1A107B05001FB02A /* JBLineChartView.m in Sources */,
 				EC1580901A1555EC00AEFC84 /* iCarousel.m in Sources */,
 				EC15809A1A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m in Sources */,
+				EC9FD7D61A4FB6E200EE6446 /* DailySurveyQuestion.m in Sources */,
 				EC9609DA1A107B05001FB02A /* JBBarChartView.m in Sources */,
 				EC7256951A0C2990006F87B1 /* LoginViewController.m in Sources */,
 				EC15809F1A16D44D00AEFC84 /* DailySurveyViewController.m in Sources */,
 				EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */,
 				EC7256881A0C2990006F87B1 /* main.m in Sources */,
+				EC9FD7D91A4FBB8400EE6446 /* DailySurveyQuestionView.m in Sources */,
 				EC9609CD1A106F80001FB02A /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

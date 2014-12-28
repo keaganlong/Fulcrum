@@ -7,7 +7,8 @@
 //
 
 #import "DailySurveyViewController.h"
-
+#import "DailySurveyQuestion.h"
+#import "DailySurveyQuestionView.h"
 
 @implementation DailySurveyViewController
 
@@ -15,84 +16,54 @@ NSArray *question1Responses;
 NSArray *question2Responses;
 NSArray *question3Responses;
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    question1Responses = [NSArray arrayWithObjects:@"Not Coping",@"Poorly",@"Ok",@"Well", @"Very Well", nil];
-    question2Responses = [NSArray arrayWithObjects:@"Terrible",@"Bad",@"Fair",@"Good", @"Fantastic", nil];
-    question3Responses = [NSArray arrayWithObjects:@"Distant",@"Unconnected",@"Eh..",@"Connected", @"Very Connected", nil];
-    
-    CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
-    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
-    scrollView.contentSize=CGSizeMake(320,758);
-    scrollView.contentInset=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
-    
-    for(int i = 0; i<10;i++){
-        CGRect frame = CGRectMake(0.0, i*100, 200.0, 10.0);
-        UISlider *slider = [[UISlider alloc] initWithFrame:frame];
-        [slider addTarget:self action:@selector(onSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-        [slider setBackgroundColor:[UIColor clearColor]];
-        slider.minimumValue = 0.0;
-        slider.maximumValue = 50.0;
-        slider.continuous = YES;
-        slider.value = 25.0;
-        [scrollView addSubview:slider];
-    }
-    self.questionScrollView = scrollView;
-    [self.view addSubview:self.questionScrollView];
-
-}
-
-- (IBAction)onSliderValueChanged:(id)sender {
-    int index;
-    if(sender == self.question1Slider){
-        index = ((int)self.question1Slider.value)-1;
-        self.question1Label.text = [question1Responses objectAtIndex:index];
-    }
-    else if(sender==self.question2Slider){
-        index = ((int)self.question2Slider.value)-1;
-        self.question2Label.text = [question2Responses objectAtIndex:index];
-    }
-    else if(sender==self.question3Slider){
-        index = ((int)self.question3Slider.value)-1;
-        self.question3Label.text = [question3Responses objectAtIndex:index];
-    }
-}
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onTouchDragExit:(id)sender {
-    if(sender == self.question1Slider){
-        self.question1Slider.value = round(self.question1Slider.value);
-    }
-    else if(sender==self.question2Slider){
-        self.question2Slider.value = round(self.question2Slider.value);
-    }
-    else if(sender==self.question3Slider){
-        self.question3Slider.value = round(self.question3Slider.value);
-    }
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    question1Responses = [NSArray arrayWithObjects:@"Not Coping",@"Poorly",@"Ok",@"Well", @"Very Well", nil];
+    question2Responses = [NSArray arrayWithObjects:@"Terrible",@"Bad",@"Fair",@"Good", @"Fantastic", nil];
+    question3Responses = [NSArray arrayWithObjects:@"Distant",@"Unconnected",@"Eh..",@"Connected", @"Very Connected", nil];
+    self.dailySurveyQuestions = [[NSMutableArray alloc] init];
     
-    int index;
-    if(sender == self.question1Slider){
-        index = ((int)self.question1Slider.value)-1;
-        self.question1Label.text = [question1Responses objectAtIndex:index];
-    }
-    else if(sender==self.question2Slider){
-        index = ((int)self.question2Slider.value)-1;
-        self.question2Label.text = [question2Responses objectAtIndex:index];
-    }
-    else if(sender==self.question3Slider){
-        index = ((int)self.question3Slider.value)-1;
-        self.question3Label.text = [question3Responses objectAtIndex:index];
-    }
+    DailySurveyQuestion* q1 = [[DailySurveyQuestion alloc] init];
+    [q1 setQuestionString:@"How well did you cope today?"];
+    [q1 setResponses:question1Responses];
+    [self.dailySurveyQuestions addObject:q1];
+    DailySurveyQuestion* q2 = [[DailySurveyQuestion alloc] init];
+    [q2 setQuestionString:@"How did you feel today overall?"];
+    [q2 setResponses:question2Responses];
+    [self.dailySurveyQuestions addObject:q2];
+    DailySurveyQuestion* q3 = [[DailySurveyQuestion alloc] init];
+    [q3 setQuestionString:@"How connected to others did you feel today?"];
+    [q3 setResponses:question3Responses];
+    [self.dailySurveyQuestions addObject:q3];
+    
+    [self initQuestionViews];
 }
 
-
-
+-(void) initQuestionViews{
+    CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+    fullScreenRect.origin.x = 20;
+    fullScreenRect.origin.y = 80;
+    fullScreenRect.size.height = fullScreenRect.size.height - 80;
+    fullScreenRect.size.width = fullScreenRect.size.width - 20;
+    
+    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
+    scrollView.contentSize=CGSizeMake(fullScreenRect.size.width-60,140*[self.dailySurveyQuestions count]);
+    //scrollView.contentInset=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
+    
+    for(int i = 0; i<[self.dailySurveyQuestions count];i++){
+        UIView* currView = [[DailySurveyQuestionView alloc] initWithDailySurveyQuestion:[self.dailySurveyQuestions objectAtIndex:i]AndWithFrame:CGRectMake(0,140*i,fullScreenRect.size.width-40,140)];
+        
+        [scrollView addSubview:currView];
+    }
+    self.questionScrollView = scrollView;
+    [self.view addSubview:self.questionScrollView];
+}
 
 @end
