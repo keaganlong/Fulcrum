@@ -11,18 +11,10 @@
 #import "JBBarChartView.h"
 #import "LowerCarouselDataSourceAndDelegate.h"
 #import "UpperCarouselDataSourceAndDelegate.h"
+#import "MainView.h"
 
-@interface MainViewController:UIViewController {
-}
-@property (nonatomic, assign) BOOL wrap;
-@property (nonatomic, strong) UINavigationItem *navItem;
-@property (nonatomic, strong) iCarousel *upperCarousel;
-@property (strong,nonatomic) LowerCarouselDataSourceAndDelegate* lowerCarouselDataSourceAndDelegate;
-@property (strong,nonatomic) UpperCarouselDataSourceAndDelegate* upperCarouselDataSourceAndDelegate;
-@property (nonatomic, strong) iCarousel *lowerCarousel;
-@property (nonatomic) NSMutableArray *dates;
+@interface MainViewController:UIViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-
+@property MainView* mainView;
 
 @end

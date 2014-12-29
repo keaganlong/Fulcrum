@@ -21,6 +21,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
+    UINavigationController* n = self.navigationController;
+    NSLog(@"%@",n);
+    
+    [self.loginButton addTarget:self action:@selector(onLoginButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addGestureRecognizer:tap];
 }
@@ -29,6 +33,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)onLoginButtonTouchUpInside:(id)sender{
+    MainViewController* mainViewController = [[MainViewController alloc]init];
+    [self.navigationController pushViewController:mainViewController animated:YES];
 }
 
 @end

@@ -13,5 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
 @property NSMutableArray* dailySurveyQuestions;
+@property NSMutableArray* dailySurveyQuestionViews;
 
 @end

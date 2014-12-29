@@ -9,12 +9,22 @@
 #import "DailySurveyViewController.h"
 #import "DailySurveyQuestion.h"
 #import "DailySurveyQuestionView.h"
+#import "MainViewController.h"
+
 
 @implementation DailySurveyViewController
 
 NSArray *question1Responses;
 NSArray *question2Responses;
 NSArray *question3Responses;
+
+-(id)init{
+    self = [super init];
+    if(self){
+        self.view.backgroundColor = [UIColor whiteColor];
+    }
+    return self;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -25,6 +35,9 @@ NSArray *question3Responses;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.dailySurveyQuestionViews = [[NSMutableArray alloc]init];
+    
     question1Responses = [NSArray arrayWithObjects:@"Not Coping",@"Poorly",@"Ok",@"Well", @"Very Well", nil];
     question2Responses = [NSArray arrayWithObjects:@"Terrible",@"Bad",@"Fair",@"Good", @"Fantastic", nil];
     question3Responses = [NSArray arrayWithObjects:@"Distant",@"Unconnected",@"Eh..",@"Connected", @"Very Connected", nil];
@@ -44,6 +57,9 @@ NSArray *question3Responses;
     [self.dailySurveyQuestions addObject:q3];
     
     [self initQuestionViews];
+    
+
+    
 }
 
 -(void) initQuestionViews{
@@ -54,16 +70,61 @@ NSArray *question3Responses;
     fullScreenRect.size.width = fullScreenRect.size.width - 20;
     
     UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
-    scrollView.contentSize=CGSizeMake(fullScreenRect.size.width-60,140*[self.dailySurveyQuestions count]);
+    scrollView.contentSize=CGSizeMake(fullScreenRect.size.width-60,140*[self.dailySurveyQuestions count]+100);
     //scrollView.contentInset=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
     
-    for(int i = 0; i<[self.dailySurveyQuestions count];i++){
+    int i;
+    for(i = 0; i<[self.dailySurveyQuestions count];i++){
         UIView* currView = [[DailySurveyQuestionView alloc] initWithDailySurveyQuestion:[self.dailySurveyQuestions objectAtIndex:i]AndWithFrame:CGRectMake(0,140*i,fullScreenRect.size.width-40,140)];
-        
+        [self.dailySurveyQuestionViews addObject:currView];
         [scrollView addSubview:currView];
     }
+    
+    UIButton* completeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    completeButton.frame = CGRectMake(105,140*i+15,50,30);
+    [completeButton setTitle:@"Done" forState:UIControlStateNormal];
+    [completeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [completeButton setBackgroundColor:[UIColor blueColor]];
+    [completeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    [completeButton setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [completeButton addTarget:self action:@selector(onTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:completeButton];
+    
     self.questionScrollView = scrollView;
     [self.view addSubview:self.questionScrollView];
+}
+
+- (IBAction)onTouchUpInside:(id)sender{
+    UIAlertController* confirmationAlertController = [UIAlertController alertControllerWithTitle:@"Confirm" message:@"Submit daily survey?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self saveResponses];
+        [self surveySubmitted];
+    }];
+    
+    [self presentViewController:confirmationAlertController animated:YES completion:^(void) {}];
+    
+    [confirmationAlertController addAction: noAction];
+    [confirmationAlertController addAction:yesAction];
+}
+
+-(void)saveResponses{
+    for(int i = 0;i<[self.dailySurveyQuestionViews count];i++){
+        DailySurveyQuestionView* currView = [self.dailySurveyQuestionViews objectAtIndex:i];
+        float rawValue = [[currView slider] value];
+        int roundedValue = round(rawValue);
+        NSLog(@"%d",roundedValue);
+    }
+}
+
+-(void)surveySubmitted{
+    MainViewController* mainViewController = [[MainViewController alloc]init];
+    [[self navigationController] pushViewController:mainViewController animated:YES];
+    
 }
 
 @end

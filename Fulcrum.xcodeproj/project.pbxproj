@@ -32,6 +32,7 @@
 		EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D01A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m */; };
 		EC9FD7D61A4FB6E200EE6446 /* DailySurveyQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D51A4FB6E200EE6446 /* DailySurveyQuestion.m */; };
 		EC9FD7D91A4FBB8400EE6446 /* DailySurveyQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D81A4FBB8400EE6446 /* DailySurveyQuestionView.m */; };
+		EC9FD7E11A50F13500EE6446 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7E01A50F13500EE6446 /* MainView.m */; };
 		ECD590021A1AD4CE00DC307F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,8 @@
 		EC9FD7D71A4FB6FB00EE6446 /* DailySurveyQuestion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyQuestion.h; sourceTree = "<group>"; };
 		EC9FD7D81A4FBB8400EE6446 /* DailySurveyQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyQuestionView.m; sourceTree = "<group>"; };
 		EC9FD7DA1A4FBB9000EE6446 /* DailySurveyQuestionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyQuestionView.h; sourceTree = "<group>"; };
+		EC9FD7E01A50F13500EE6446 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
+		EC9FD7E21A50F14000EE6446 /* MainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,8 +205,8 @@
 		EC72F8701A12F9C600BFD4DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EC9FD7D81A4FBB8400EE6446 /* DailySurveyQuestionView.m */,
-				EC9FD7DA1A4FBB9000EE6446 /* DailySurveyQuestionView.h */,
+				EC9FD7DF1A50F11B00EE6446 /* Main */,
+				EC9FD7DE1A50F10900EE6446 /* DailySurvey */,
 			);
 			name = Views;
 			path = ..;
@@ -279,6 +282,24 @@
 				EC1580A01A16D45B00AEFC84 /* DailySurveyViewController.h */,
 			);
 			name = DailySurveyView;
+			sourceTree = "<group>";
+		};
+		EC9FD7DE1A50F10900EE6446 /* DailySurvey */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FD7D81A4FBB8400EE6446 /* DailySurveyQuestionView.m */,
+				EC9FD7DA1A4FBB9000EE6446 /* DailySurveyQuestionView.h */,
+			);
+			name = DailySurvey;
+			sourceTree = "<group>";
+		};
+		EC9FD7DF1A50F11B00EE6446 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FD7E01A50F13500EE6446 /* MainView.m */,
+				EC9FD7E21A50F14000EE6446 /* MainView.h */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,6 +413,7 @@
 				EC9609DA1A107B05001FB02A /* JBBarChartView.m in Sources */,
 				EC7256951A0C2990006F87B1 /* LoginViewController.m in Sources */,
 				EC15809F1A16D44D00AEFC84 /* DailySurveyViewController.m in Sources */,
+				EC9FD7E11A50F13500EE6446 /* MainView.m in Sources */,
 				EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */,
 				EC7256881A0C2990006F87B1 /* main.m in Sources */,
 				EC9FD7D91A4FBB8400EE6446 /* DailySurveyQuestionView.m in Sources */,
