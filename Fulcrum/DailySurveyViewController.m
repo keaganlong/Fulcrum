@@ -10,7 +10,9 @@
 #import "DailySurveyQuestion.h"
 #import "DailySurveyQuestionView.h"
 #import "MainViewController.h"
-
+#import "FulcrumAPIFacade.h"
+#import "DailySurveyResponse.h"
+#import "DailySurveyQuestionResponse.h"
 
 @implementation DailySurveyViewController
 
@@ -113,12 +115,24 @@ NSArray *question3Responses;
 }
 
 -(void)saveResponses{
+    DailySurveyResponse* dailySurveyResponse = [[DailySurveyResponse alloc]init];
+    [dailySurveyResponse setSubmissionDate:[NSDate date]];
+    [dailySurveyResponse setForDate:[NSDate date]];
+    NSMutableArray* dailySurveyQuestionResponses = [NSMutableArray new];
     for(int i = 0;i<[self.dailySurveyQuestionViews count];i++){
         DailySurveyQuestionView* currView = [self.dailySurveyQuestionViews objectAtIndex:i];
         float rawValue = [[currView slider] value];
         int roundedValue = round(rawValue);
-        NSLog(@"%d",roundedValue);
+        DailySurveyQuestionResponse* questionResponse = [[DailySurveyQuestionResponse alloc] init];
+        [questionResponse setValue:roundedValue];
+        [questionResponse setTitle:[[currView currentSelectionLabel] text]];
+        [dailySurveyQuestionResponses addObject:questionResponse];
     }
+    [dailySurveyResponse setDailySurveyQuestionResponses:dailySurveyQuestionResponses];
+    
+    [FulcrumAPIFacade submitForUser:1 dailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 -(void)surveySubmitted{

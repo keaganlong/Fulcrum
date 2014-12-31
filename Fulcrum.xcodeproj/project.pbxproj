@@ -33,6 +33,10 @@
 		EC9FD7D61A4FB6E200EE6446 /* DailySurveyQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D51A4FB6E200EE6446 /* DailySurveyQuestion.m */; };
 		EC9FD7D91A4FBB8400EE6446 /* DailySurveyQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7D81A4FBB8400EE6446 /* DailySurveyQuestionView.m */; };
 		EC9FD7E11A50F13500EE6446 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7E01A50F13500EE6446 /* MainView.m */; };
+		EC9FD7E61A53745900EE6446 /* FulcrumAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7E51A53745900EE6446 /* FulcrumAPIService.m */; };
+		EC9FD7E81A538E6E00EE6446 /* DailySurveyQuestionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7E71A538E6E00EE6446 /* DailySurveyQuestionResponse.m */; };
+		EC9FD7EC1A538FE700EE6446 /* DailySurveyResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7EB1A538FE700EE6446 /* DailySurveyResponse.m */; };
+		EC9FD7EF1A53909300EE6446 /* FulcrumAPIFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7EE1A53909300EE6446 /* FulcrumAPIFacade.m */; };
 		ECD590021A1AD4CE00DC307F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +93,14 @@
 		EC9FD7DA1A4FBB9000EE6446 /* DailySurveyQuestionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyQuestionView.h; sourceTree = "<group>"; };
 		EC9FD7E01A50F13500EE6446 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		EC9FD7E21A50F14000EE6446 /* MainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
+		EC9FD7E41A5371BF00EE6446 /* FulcrumAPIService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FulcrumAPIService.h; sourceTree = "<group>"; };
+		EC9FD7E51A53745900EE6446 /* FulcrumAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FulcrumAPIService.m; sourceTree = "<group>"; };
+		EC9FD7E71A538E6E00EE6446 /* DailySurveyQuestionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyQuestionResponse.m; sourceTree = "<group>"; };
+		EC9FD7E91A538E8A00EE6446 /* DailySurveyQuestionResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyQuestionResponse.h; sourceTree = "<group>"; };
+		EC9FD7EA1A538F4200EE6446 /* DailySurveyResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyResponse.h; sourceTree = "<group>"; };
+		EC9FD7EB1A538FE700EE6446 /* DailySurveyResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyResponse.m; sourceTree = "<group>"; };
+		EC9FD7ED1A53906D00EE6446 /* FulcrumAPIFacade.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FulcrumAPIFacade.h; sourceTree = "<group>"; };
+		EC9FD7EE1A53909300EE6446 /* FulcrumAPIFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FulcrumAPIFacade.m; sourceTree = "<group>"; };
 		ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +170,7 @@
 		EC7256811A0C2990006F87B1 /* Fulcrum */ = {
 			isa = PBXGroup;
 			children = (
+				EC9FD7E31A53718900EE6446 /* Services */,
 				EC72568A1A0C2990006F87B1 /* AppDelegate.h */,
 				EC72568B1A0C2990006F87B1 /* AppDelegate.m */,
 				EC9FD7CC1A4786ED00EE6446 /* Models */,
@@ -237,8 +250,12 @@
 		EC9FD7CC1A4786ED00EE6446 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EC9FD7D51A4FB6E200EE6446 /* DailySurveyQuestion.m */,
 				EC9FD7D71A4FB6FB00EE6446 /* DailySurveyQuestion.h */,
+				EC9FD7D51A4FB6E200EE6446 /* DailySurveyQuestion.m */,
+				EC9FD7E91A538E8A00EE6446 /* DailySurveyQuestionResponse.h */,
+				EC9FD7E71A538E6E00EE6446 /* DailySurveyQuestionResponse.m */,
+				EC9FD7EA1A538F4200EE6446 /* DailySurveyResponse.h */,
+				EC9FD7EB1A538FE700EE6446 /* DailySurveyResponse.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -300,6 +317,17 @@
 				EC9FD7E21A50F14000EE6446 /* MainView.h */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		EC9FD7E31A53718900EE6446 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FD7E41A5371BF00EE6446 /* FulcrumAPIService.h */,
+				EC9FD7E51A53745900EE6446 /* FulcrumAPIService.m */,
+				EC9FD7ED1A53906D00EE6446 /* FulcrumAPIFacade.h */,
+				EC9FD7EE1A53909300EE6446 /* FulcrumAPIFacade.m */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,14 +432,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC9FD7E81A538E6E00EE6446 /* DailySurveyQuestionResponse.m in Sources */,
 				EC72568C1A0C2990006F87B1 /* AppDelegate.m in Sources */,
 				EC9609DB1A107B05001FB02A /* JBChartView.m in Sources */,
+				EC9FD7E61A53745900EE6446 /* FulcrumAPIService.m in Sources */,
 				EC9609DC1A107B05001FB02A /* JBLineChartView.m in Sources */,
+				EC9FD7EF1A53909300EE6446 /* FulcrumAPIFacade.m in Sources */,
 				EC1580901A1555EC00AEFC84 /* iCarousel.m in Sources */,
 				EC15809A1A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m in Sources */,
 				EC9FD7D61A4FB6E200EE6446 /* DailySurveyQuestion.m in Sources */,
 				EC9609DA1A107B05001FB02A /* JBBarChartView.m in Sources */,
 				EC7256951A0C2990006F87B1 /* LoginViewController.m in Sources */,
+				EC9FD7EC1A538FE700EE6446 /* DailySurveyResponse.m in Sources */,
 				EC15809F1A16D44D00AEFC84 /* DailySurveyViewController.m in Sources */,
 				EC9FD7E11A50F13500EE6446 /* MainView.m in Sources */,
 				EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */,
