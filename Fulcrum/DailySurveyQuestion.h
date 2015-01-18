@@ -9,6 +9,6 @@
 @interface DailySurveyQuestion: NSObject
 
 @property NSString* questionString;
-@property NSArray* responses;
+@property NSMutableArray* responses;
 
 @end

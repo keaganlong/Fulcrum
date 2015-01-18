@@ -8,15 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "UpperCarouselDataSourceAndDelegate.h"
+#import "MainViewController.h"
+#import "WellnessAreaViewController.h"
 
 @implementation UpperCarouselDataSourceAndDelegate
 
 
-- (id)init {
+- (id)initWithController:(MainViewController*)mainViewController {
     self = [super init];
     if (self) {
         [self initItems];
     }
+    [self setParentViewController:mainViewController];
     return self;
 }
 
@@ -58,6 +61,7 @@
         case 1:
             [label setText: @"Physical"];
             view.backgroundColor = [UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.8];
+            [self addGestureToView:view];
             break;
         case 2:
             [label setText: @"Emotional"];
@@ -74,6 +78,19 @@
     //set label
     [view addSubview:label];
     return view;
+}
+
+-(void)addGestureToView:(UIView*)view{
+    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [view addGestureRecognizer:tapGestureRecognizer];
+}
+
+-(IBAction)onTap:(id)sender{
+    UITapGestureRecognizer* tapGestureRecognizer = (UITapGestureRecognizer*)sender;
+    switch([tapGestureRecognizer state]){
+        case UIGestureRecognizerStateEnded:
+            [[self parentViewController]changeToViewController:[[WellnessAreaViewController alloc]init] ];
+    }
 }
 
 - (UIView *)carousel:(iCarousel *)carousel placeholderViewAtIndex:(NSInteger)index reusingView:(UIView *)view

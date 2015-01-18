@@ -10,6 +10,6 @@
 
 @property NSDate* forDate;
 @property NSDate* submissionDate;
-@property NSArray* dailySurveyQuestionResponses;
+@property NSMutableArray* dailySurveyQuestionResponses;
 
 @end

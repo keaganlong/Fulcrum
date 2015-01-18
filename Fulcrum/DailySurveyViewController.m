@@ -130,9 +130,14 @@ NSArray *question3Responses;
     }
     [dailySurveyResponse setDailySurveyQuestionResponses:dailySurveyQuestionResponses];
     
-    [FulcrumAPIFacade submitForUser:1 dailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* token = [defaults valueForKey:@"access_token"];
+    if(token != nil){
+        NSLog(@"%@",token);
+        [FulcrumAPIFacade submitForUser:1 dailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 -(void)surveySubmitted{

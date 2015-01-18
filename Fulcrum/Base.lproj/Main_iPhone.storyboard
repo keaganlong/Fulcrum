@@ -65,7 +65,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ce5-rW-7oP"/>
                     <connections>
+                        <outlet property="emailTextField" destination="nRz-g9-pRo" id="EFQ-R5-Cd3"/>
                         <outlet property="loginButton" destination="hbE-Hk-jvz" id="4re-PJ-RiM"/>
+                        <outlet property="passwordTextField" destination="20G-Ov-m4P" id="dct-Ov-nrE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>

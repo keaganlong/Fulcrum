@@ -11,10 +11,16 @@
 #import "JBBarChartView.h"
 #import "LowerCarouselDataSourceAndDelegate.h"
 #import "UpperCarouselDataSourceAndDelegate.h"
-#import "MainView.h"
 
 @interface MainViewController:UIViewController
 
-@property MainView* mainView;
+@property (nonatomic, strong) iCarousel *upperCarousel;
+@property (strong,nonatomic) LowerCarouselDataSourceAndDelegate* lowerCarouselDataSourceAndDelegate;
+@property (strong,nonatomic) UpperCarouselDataSourceAndDelegate* upperCarouselDataSourceAndDelegate;
+@property (nonatomic, strong) iCarousel *lowerCarousel;
+@property (nonatomic) NSMutableArray *dates;
+@property UIButton* dailySurveyButton;
+
+-(void)changeToViewController:(UIViewController*)viewController;
 
 @end

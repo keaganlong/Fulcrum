@@ -9,7 +9,8 @@
 
 @interface FulcrumAPIFacade : NSObject
 
-+(void)getDailySurveyResponsesForUser:(int) userId withCallback:(void(^)(NSArray *dailySurveyResponses))callbackFunction;
++(void)getDailySurveyResponsesForUser:(int) userId withCallback:(void(^)(NSMutableArray *dailySurveyResponses))callbackFunction;
 +(void)submitForUser:(int)userId dailySurveyResponse:(DailySurveyResponse*)response withCallback:(void(^)(NSError*))callbackFunction;
++(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSString*))callbackFunction;
 
 @end

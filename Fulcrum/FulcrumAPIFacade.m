@@ -11,25 +11,45 @@
 #import "FulcrumAPIService.h"
 #import "DailySurveyResponse.h"
 #import "DailySurveyQuestionResponse.h"
+#import "DateRangeService.h"
 
 @implementation FulcrumAPIFacade
 
--(void)getDailySurveyResponsesForUser:(int) userId withCallback:(void(^)(NSArray *dailySurveyResponses))callbackFunction{
-    [FulcrumAPIService getDailySurveyResponsesForUser:userId withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSError* serializeError = nil;
-        NSArray* jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
-        if(jsonArray){
-            NSMutableArray* dailySurveyResponses = [NSMutableArray new];
-            for(NSDictionary* dailySurveyResponseDictionary in jsonArray){
-                DailySurveyResponse* dailySurveyResponse = [self dictionaryToDailySurveyResponse:dailySurveyResponseDictionary];
-                [dailySurveyResponses addObject:dailySurveyResponse];
-            }
-            callbackFunction(dailySurveyResponses);
+-(void)getDailySurveyResponsesForUser:(int) userId withCallback:(void(^)(NSMutableArray *dailySurveyResponses))callbackFunction{
+//    [FulcrumAPIService getDailySurveyResponsesForUser:userId withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        NSError* serializeError = nil;
+//        NSArray* jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
+//        if(jsonArray){
+//            NSMutableArray* dailySurveyResponses = [NSMutableArray new];
+//            for(NSDictionary* dailySurveyResponseDictionary in jsonArray){
+//                DailySurveyResponse* dailySurveyResponse = [self dictionaryToDailySurveyResponse:dailySurveyResponseDictionary];
+//                [dailySurveyResponses addObject:dailySurveyResponse];
+//            }
+//            callbackFunction(dailySurveyResponses);
+//        }
+//        else{
+//            callbackFunction(nil);
+//        }
+//    }];
+    NSMutableArray* arr = [NSMutableArray new];
+    NSMutableArray* dates = [DateRangeService getSevenDaysPriorStartingWithDate:[NSDate date]];
+    for(int i = 0; i<7;i++){
+        if(i==4 || i==5){
+            continue;
         }
-        else{
-            callbackFunction(nil);
+        DailySurveyResponse* curr = [[DailySurveyResponse alloc] init];
+        NSDate* date = [dates objectAtIndex:i];
+        [curr setForDate:date];
+        NSMutableArray* qrs = [NSMutableArray new];
+        for(int i = 0; i<10;i++){
+            DailySurveyQuestionResponse* res = [[DailySurveyQuestionResponse alloc] init];
+            [res setValue:(1+rand()%5)];
+            [qrs addObject:res];
         }
-    }];
+        [curr setDailySurveyQuestionResponses:qrs];
+        [arr addObject:curr];
+    }
+    callbackFunction(arr);
 }
 
 -(void)submitForUser:(int)userId dailySurveyResponse:(DailySurveyResponse*)response withCallback:(void(^)(NSError*))callbackFunction{
@@ -41,6 +61,20 @@
     }];
     
 }
+
+-(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSString*))callbackFunction{
+    [FulcrumAPIService loginWithUsername:username andWithPassword:password withCallback:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if(error){
+            callbackFunction(nil);
+        }
+        else{
+            NSError* deserializeError = nil;
+            NSDictionary* jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&deserializeError];
+            callbackFunction(jsonDictionary[@"access_token"]);
+        }
+    }];
+}
+
 
 -(NSDictionary*)dailySurveyResponseToDictionary:(DailySurveyResponse*)response{
     NSMutableDictionary* dictionary = [NSMutableDictionary new];
@@ -106,6 +140,10 @@
 
 +(void)submitForUser:(int)userId dailySurveyResponse:(DailySurveyResponse*)response withCallback:(void(^)(NSError*))callbackFunction{
     [[self instance] submitForUser:userId dailySurveyResponse:response withCallback:callbackFunction];
+}
+
++(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSString*))callbackFunction{
+    [[self instance] loginWithUsername:username andWithPassword:password withCallback:callbackFunction];
 }
 
 

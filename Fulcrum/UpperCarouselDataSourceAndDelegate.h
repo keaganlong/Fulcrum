@@ -7,9 +7,13 @@
 //
 
 #import "iCarousel.h"
+@class MainViewController;
 
 @interface UpperCarouselDataSourceAndDelegate: NSObject<iCarouselDataSource, iCarouselDelegate>
 
 @property (nonatomic, strong) NSMutableArray *items;
+@property MainViewController* parentViewController;
+
+- (id)initWithController:(MainViewController*)mainViewController;
 
 @end
