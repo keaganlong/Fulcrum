@@ -13,21 +13,37 @@
 #define BASE_FULCRUM_URL @"http://fulcrumservice.azurewebsites.net"
 #define GET_DAILY_SURVEY_RESPONSES_FOR_USER_URL @"/Users/GetDailySurveyResponses"
 #define POST_USER_DAILY_SURVEY_RESPONSE_URL @"/Users/AddUserDailySurveyResponse"
+#define REGISTER_USER_URL @"/Account/Register"
 #define GET_TOKEN_URL @"/Token"
+#define LAST_DAILY_SURVEY_RESPONSE_URL @"/Users/LastDailySurveyResponse"
 
 @implementation FulcrumAPIService
 
--(void)postForUser:(int) userId dailySurveyResponseDate:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%d",BASE_FULCRUM_API_URL,POST_USER_DAILY_SURVEY_RESPONSE_URL,userId]];
-    NSURLRequest* request = [self _createPOSTRequestWithURL:url andData:data];
+-(void)postDailySurveyResponseDate:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* token = [defaults objectForKey:@"access_token"];
+    if(token == nil){
+        return; //TODO
+    }
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/",BASE_FULCRUM_API_URL,POST_USER_DAILY_SURVEY_RESPONSE_URL]];
+    NSMutableURLRequest* request = [self _createPOSTRequestWithURL:url andData:data];
+    NSString* authorizationHeader = [NSString stringWithFormat:@"Bearer %@",token];
+    [request setValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
     NSURLSession* session = [NSURLSession sharedSession];
     [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
 }
 
 
-- (void) getDailySurveyResponsesForUser:(int)userId withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%d",BASE_FULCRUM_API_URL,GET_DAILY_SURVEY_RESPONSES_FOR_USER_URL,userId]];
-    NSURLRequest* request = [self _createGETRequestWithURL:url];
+- (void) getDailySurveyResponsesWithCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* token = [defaults objectForKey:@"access_token"];
+    if(token == nil){
+        return; //TODO
+    }
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/",BASE_FULCRUM_API_URL,GET_DAILY_SURVEY_RESPONSES_FOR_USER_URL]];
+    NSMutableURLRequest* request = [self _createGETRequestWithURL:url];
+    NSString* authorizationHeader = [NSString stringWithFormat:@"Bearer %@",token];
+    [request setValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
     NSURLSession* session = [NSURLSession sharedSession];
     [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
 }
@@ -41,6 +57,35 @@
     NSURLSession* session = [NSURLSession sharedSession];
     [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
 }
+
+-(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/",BASE_FULCRUM_API_URL,REGISTER_USER_URL]];
+    NSError* serializeError;
+    NSMutableDictionary* dict = [NSMutableDictionary new];
+    dict[@"Email"] = username;
+    dict[@"Password"] = password;
+    dict[@"ConfirmPassword"] = password;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&serializeError];
+    NSMutableURLRequest* request = [self _createPOSTRequestWithURL:url andData:jsonData];
+    NSURLSession* session = [NSURLSession sharedSession];
+    [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
+}
+
+-(void)lastDailySurveyResponse:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* token = [defaults objectForKey:@"access_token"];
+    if(token == nil){
+        return; //TODO
+    }
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/",BASE_FULCRUM_API_URL,LAST_DAILY_SURVEY_RESPONSE_URL]];
+    NSMutableURLRequest* request = [self _createGETRequestWithURL:url];
+    NSString* authorizationHeader = [NSString stringWithFormat:@"Bearer %@",token];
+    [request setValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
+    NSURLSession* session = [NSURLSession sharedSession];
+    [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
+}
+
 
 - (NSMutableURLRequest *) _createGETRequestWithURL: (NSURL *)url{
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
@@ -57,18 +102,28 @@
     return request;
 }
 
-+(void)postForUser:(int) userId dailySurveyResponseDate:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
-    [[self instance] postForUser:userId dailySurveyResponseDate:data withCompletionHandler:completionFunction];
++(void)postDailySurveyResponseDate:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    [[self instance] postDailySurveyResponseDate:data withCompletionHandler:completionFunction];
 }
 
 
-+ (void) getDailySurveyResponsesForUser:(int)userId withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
-    [[self instance] getDailySurveyResponsesForUser:userId withCompletionHandler:completionFunction];
++ (void) getDailySurveyResponsesWithCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    [[self instance] getDailySurveyResponsesWithCompletionHandler:completionFunction];
 }
 
 +(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
     [[self instance] loginWithUsername:username andWithPassword:password withCallback:completionFunction];
 }
+
++(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    [[self instance] registerAccountWithUsername:username andPassword:password withCallback:completionFunction];
+}
+
++(void)lastDailySurveyResponse:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    [[self instance] lastDailySurveyResponse:completionFunction];
+}
+
+
 
 + (FulcrumAPIService*) instance{
     static FulcrumAPIService* instance = nil;

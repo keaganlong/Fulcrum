@@ -14,12 +14,12 @@
 #import "DailySurveyResponse.h"
 #import "DailySurveyQuestionResponse.h"
 
-@implementation DailySurveyViewController
+#import "DateService.h"
 
-NSArray *question1Responses;
-NSArray *question2Responses;
-NSArray *question3Responses;
-
+@implementation DailySurveyViewController{
+    NSArray *questionResponses;
+    NSArray* questionTitles;
+}
 -(id)init{
     self = [super init];
     if(self){
@@ -39,29 +39,48 @@ NSArray *question3Responses;
     [super viewDidLoad];
 
     self.dailySurveyQuestionViews = [[NSMutableArray alloc]init];
+    questionResponses = [NSArray arrayWithObjects:
+                        [NSArray arrayWithObjects:@"Not Coping",@"Poorly",@"Ok",@"Well", @"Very Well", nil],
+                        [NSArray arrayWithObjects:@"Terrible",@"Bad",@"Fair",@"Good", @"Fantastic", nil],
+                        [NSArray arrayWithObjects:@"Hopeless",@"Down",@"Ok",@"Good", @"Amazing", nil],
+                        [NSArray arrayWithObjects:@"Very Dissatisfied",@"Dissatisfied",@"Neutral",@"Satisfied", @"Very Satisfied", nil],
+                        [NSArray arrayWithObjects:@"Very Stressed",@"Stressed",@"Ok",@"Somewhat Relaxed", @"Relaxed", nil],
+                        [NSArray arrayWithObjects:@"Very Dissatisfied",@"Dissatisfied",@"Neutral",@"Satisfied", @"Very Satisfied", nil],
+                        [NSArray arrayWithObjects:@"Very Dissatisfied",@"Dissatisfied",@"Neutral",@"Satisfied", @"Very Satisfied", nil],
+                        [NSArray arrayWithObjects:@"Very Unhealthy",@"Unhealthy",@"Ok",@"Healthy", @"Very Healthy", nil],
+                        [NSArray arrayWithObjects:@"Very Dissatisfied",@"Dissatisfied",@"Neutral",@"Satisfied", @"Very Satisfied", nil],
+                        [NSArray arrayWithObjects:@"Distant",@"Unconnected",@"Eh..",@"Connected", @"Very Connected", nil], nil];
+
+    questionTitles = [NSArray arrayWithObjects:
+                      @"How well did you cope today?",
+                      @"How did you feel today overall?",
+                      @"How did you feel about yourself today?",
+                      @"How do you feel about your academic performance today?",
+                      @"How stressed do you feel today?",
+                      @"How satisfied are you with your academic productivity today?",
+                      @"How satisfied are you with your physical activity today",
+                      @"How healthy do you feel today",
+                      @"Rate your social life today",
+                      @"How connected to others did you feel today?",
+                      nil];
+
     
-    question1Responses = [NSArray arrayWithObjects:@"Not Coping",@"Poorly",@"Ok",@"Well", @"Very Well", nil];
-    question2Responses = [NSArray arrayWithObjects:@"Terrible",@"Bad",@"Fair",@"Good", @"Fantastic", nil];
-    question3Responses = [NSArray arrayWithObjects:@"Distant",@"Unconnected",@"Eh..",@"Connected", @"Very Connected", nil];
-    self.dailySurveyQuestions = [[NSMutableArray alloc] init];
-    
-    DailySurveyQuestion* q1 = [[DailySurveyQuestion alloc] init];
-    [q1 setQuestionString:@"How well did you cope today?"];
-    [q1 setResponses:question1Responses];
-    [self.dailySurveyQuestions addObject:q1];
-    DailySurveyQuestion* q2 = [[DailySurveyQuestion alloc] init];
-    [q2 setQuestionString:@"How did you feel today overall?"];
-    [q2 setResponses:question2Responses];
-    [self.dailySurveyQuestions addObject:q2];
-    DailySurveyQuestion* q3 = [[DailySurveyQuestion alloc] init];
-    [q3 setQuestionString:@"How connected to others did you feel today?"];
-    [q3 setResponses:question3Responses];
-    [self.dailySurveyQuestions addObject:q3];
-    
+    [self initDailySurveyQuestions];
     [self initQuestionViews];
     
 
     
+}
+
+-(void)initDailySurveyQuestions{
+    self.dailySurveyQuestions = [[NSMutableArray alloc] init];
+
+    for(int i = 0; i< [questionTitles count];i++){
+        DailySurveyQuestion* q = [[DailySurveyQuestion alloc] init];
+        [q setQuestionString:[questionTitles objectAtIndex:i]];
+        [q setResponses:[questionResponses objectAtIndex:i]];
+        [self.dailySurveyQuestions addObject:q];
+    }
 }
 
 -(void) initQuestionViews{
@@ -117,7 +136,9 @@ NSArray *question3Responses;
 -(void)saveResponses{
     DailySurveyResponse* dailySurveyResponse = [[DailySurveyResponse alloc]init];
     [dailySurveyResponse setSubmissionDate:[NSDate date]];
-    [dailySurveyResponse setForDate:[NSDate date]];
+    //[dailySurveyResponse setForDate:[NSDate date]];
+    NSDate* hackDate = [DateService dateFromYearMonthDateString:@"2015-02-16"];
+    [dailySurveyResponse setForDate:hackDate];
     NSMutableArray* dailySurveyQuestionResponses = [NSMutableArray new];
     for(int i = 0;i<[self.dailySurveyQuestionViews count];i++){
         DailySurveyQuestionView* currView = [self.dailySurveyQuestionViews objectAtIndex:i];
@@ -133,15 +154,16 @@ NSArray *question3Responses;
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* token = [defaults valueForKey:@"access_token"];
     if(token != nil){
-        NSLog(@"%@",token);
-        [FulcrumAPIFacade submitForUser:1 dailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
-            NSLog(@"%@",error);
+        //NSLog(@"%@",token);
+        [FulcrumAPIFacade submitDailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
+            NSLog(@"Submit Error: %@",error);
         }];
     }
 }
 
 -(void)surveySubmitted{
     MainViewController* mainViewController = [[MainViewController alloc]init];
+    [[self navigationController] popViewControllerAnimated:NO];
     [[self navigationController] pushViewController:mainViewController animated:YES];
     
 }

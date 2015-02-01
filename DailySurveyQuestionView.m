@@ -42,8 +42,8 @@
         [self addSubview:[self questionLabel]];
         [self addSubview:[self slider]];
         [self addSubview:[self currentSelectionLabel]];
-        self.layer.borderColor = [UIColor redColor].CGColor;
-        self.layer.borderWidth = 2.0f;
+        //self.layer.borderColor = [UIColor redColor].CGColor;
+        //self.layer.borderWidth = 2.0f;
         
     }
     return self;

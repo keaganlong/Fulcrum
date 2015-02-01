@@ -20,6 +20,7 @@
 @property (nonatomic, strong) iCarousel *lowerCarousel;
 @property (nonatomic) NSMutableArray *dates;
 @property UIButton* dailySurveyButton;
+@property CGRect frame;
 
 -(void)changeToViewController:(UIViewController*)viewController;
 

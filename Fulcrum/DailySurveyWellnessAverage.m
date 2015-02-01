@@ -25,14 +25,33 @@
         emotionalTotal += [questionResponse value];
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:2];
         emotionalTotal += [questionResponse value];
+        
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:3];
-        socialTotal += [questionResponse value];
+        academicTotal += [questionResponse value];
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:4];
+        academicTotal += [questionResponse value];
+        questionResponse = [dailySurveyQuetionResponses objectAtIndex:5];
+        academicTotal += [questionResponse value];
+        
+        questionResponse = [dailySurveyQuetionResponses objectAtIndex:6];
+        physicalTotal += [questionResponse value];
+        questionResponse = [dailySurveyQuetionResponses objectAtIndex:7];
+        physicalTotal += [questionResponse value];
+        
+        questionResponse = [dailySurveyQuetionResponses objectAtIndex:8];
         socialTotal += [questionResponse value];
-        //etc
+        questionResponse = [dailySurveyQuetionResponses objectAtIndex:9];
+        socialTotal += [questionResponse value];
+        
         
         NSNumber* emotionalAverage = [NSNumber numberWithFloat:(emotionalTotal/3.0)];
         [self setEmotionalAverage:emotionalAverage];
+        NSNumber* academicAverage = [NSNumber numberWithFloat:(academicTotal/3.0)];
+        [self setAcademicAverage:academicAverage];
+        NSNumber* physicalAverage = [NSNumber numberWithFloat:(physicalTotal/2.0)];
+        [self setPhysicalAverage:physicalAverage];
+        NSNumber* socialAverage = [NSNumber numberWithFloat:(socialTotal/2.0)];
+        [self setSocialAverage:socialAverage];
         
     }
     return self;

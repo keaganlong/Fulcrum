@@ -9,8 +9,12 @@
 
 @interface FulcrumAPIFacade : NSObject
 
-+(void)getDailySurveyResponsesForUser:(int) userId withCallback:(void(^)(NSMutableArray *dailySurveyResponses))callbackFunction;
-+(void)submitForUser:(int)userId dailySurveyResponse:(DailySurveyResponse*)response withCallback:(void(^)(NSError*))callbackFunction;
-+(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSString*))callbackFunction;
++(void)getDailySurveyResponsesWithCallback:(void(^)(NSMutableArray *dailySurveyResponses))callbackFunction;
++(void)submitDailySurveyResponse:(DailySurveyResponse*)response withCallback:(void(^)(NSError*))callbackFunction;
++(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSString* token,NSString* errorMessage))callbackFunction;
++(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSString*))callbackFunction;
+
+
++(void)lastDateDailySurveyCompletedForWithCallback:(void(^)(NSDate* lastDate))callbackFunction;
 
 @end

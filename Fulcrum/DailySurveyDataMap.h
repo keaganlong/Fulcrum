@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 Keagan Long. All rights reserved.
 //
 
+typedef enum { EMOTIONAL, ACADEMIC, PHYSICAL, SOCIAL } WELLNESS_AREA;
+
 @interface DailySurveyDataMap: NSObject
 
 @property NSDate* firstDate;
 @property NSDate* lastDate;
 
 -(id)initWithDailySurveyResponses:(NSMutableArray*)dailySurveyResponses;
--(CGFloat)valueForDate:(NSDate*)date;
+-(CGFloat)valueForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area;
 -(BOOL)dataExistsForDate:(NSDate*)date;
 
 @end

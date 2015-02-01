@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "UpperCarouselDataSourceAndDelegate.h"
 #import "MainViewController.h"
+#import "WellnessAreaViewFactory.h"
 #import "WellnessAreaViewController.h"
 
 @implementation UpperCarouselDataSourceAndDelegate
@@ -58,22 +59,29 @@
         
     }
     switch(index){
+        case 0:
+            [label setText: @"Emotional"];
+            [view setTag:0];
+            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.4 blue:0.3 alpha:0.8];
+            [self addGestureToView:view];
+            break;
         case 1:
-            [label setText: @"Physical"];
-            view.backgroundColor = [UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.8];
+            [view setTag:1];
+            [label setText: @"Social"];
+            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.7 blue:0.8 alpha:0.8];
             [self addGestureToView:view];
             break;
         case 2:
-            [label setText: @"Emotional"];
-            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.4 blue:0.3 alpha:0.8];
-            break;
-        case 3:
-            [label setText: @"Social"];
-            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.7 blue:0.8 alpha:0.8];
+            [label setText: @"Physical"];
+            [view setTag:2];
+            view.backgroundColor = [UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.8];
+            [self addGestureToView:view];
             break;
         default:
+            [view setTag:3];
             [label setText: @"Academic"];
             view.backgroundColor = [UIColor colorWithRed:0.0 green:0.6 blue:0.9 alpha:0.8];
+            [self addGestureToView:view];
     }
     //set label
     [view addSubview:label];
@@ -87,9 +95,28 @@
 
 -(IBAction)onTap:(id)sender{
     UITapGestureRecognizer* tapGestureRecognizer = (UITapGestureRecognizer*)sender;
+    NSInteger tag = tapGestureRecognizer.view.tag;
+    WELLNESS_AREA area;
+    switch(tag){
+        case 0:
+            area = EMOTIONAL;
+            break;
+        case 1:
+            area = SOCIAL;
+            break;
+        case 2:
+            area = PHYSICAL;
+            break;
+        default:
+            area = ACADEMIC;
+            break;
+    }
+    WellnessAreaViewController* controller;
     switch([tapGestureRecognizer state]){
         case UIGestureRecognizerStateEnded:
-            [[self parentViewController]changeToViewController:[[WellnessAreaViewController alloc]init] ];
+            controller = [WellnessAreaViewFactory wellnessAreaViewControllerForWellnessArea:area];
+            [self.parentViewController changeToViewController:controller];
+            break;
     }
 }
 

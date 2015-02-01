@@ -40,7 +40,12 @@
 		EC9FD7F81A5DA64800EE6446 /* JBLineChartFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7F71A5DA64800EE6446 /* JBLineChartFooterView.m */; };
 		EC9FD7FB1A658D0D00EE6446 /* DailySurveyDataMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7FA1A658D0D00EE6446 /* DailySurveyDataMap.m */; };
 		EC9FD7FE1A6590F200EE6446 /* DailySurveyWellnessAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7FD1A6590F200EE6446 /* DailySurveyWellnessAverage.m */; };
-		EC9FD8001A65B47500EE6446 /* DateRangeService.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7FF1A65B47500EE6446 /* DateRangeService.m */; };
+		EC9FD8001A65B47500EE6446 /* DateService.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD7FF1A65B47500EE6446 /* DateService.m */; };
+		EC9FD8061A6C553C00EE6446 /* GraphFooterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD8051A6C553C00EE6446 /* GraphFooterFactory.m */; };
+		EC9FD8091A6CD6D300EE6446 /* WellnessAreaViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD8081A6CD6D300EE6446 /* WellnessAreaViewFactory.m */; };
+		EC9FD80C1A6E19C600EE6446 /* RegistrationViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD80B1A6E19C600EE6446 /* RegistrationViewContoller.m */; };
+		EC9FD8111A719B8300EE6446 /* YAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD8101A719B8300EE6446 /* YAxisView.m */; };
+		EC9FD8151A7D94C600EE6446 /* AlertFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD8141A7D94C600EE6446 /* AlertFactory.m */; };
 		ECD590021A1AD4CE00DC307F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +116,18 @@
 		EC9FD7FA1A658D0D00EE6446 /* DailySurveyDataMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyDataMap.m; sourceTree = "<group>"; };
 		EC9FD7FC1A6590C300EE6446 /* DailySurveyWellnessAverage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailySurveyWellnessAverage.h; sourceTree = "<group>"; };
 		EC9FD7FD1A6590F200EE6446 /* DailySurveyWellnessAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyWellnessAverage.m; sourceTree = "<group>"; };
-		EC9FD7FF1A65B47500EE6446 /* DateRangeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateRangeService.m; sourceTree = "<group>"; };
-		EC9FD8011A65B48200EE6446 /* DateRangeService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateRangeService.h; sourceTree = "<group>"; };
+		EC9FD7FF1A65B47500EE6446 /* DateService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateService.m; sourceTree = "<group>"; };
+		EC9FD8011A65B48200EE6446 /* DateService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateService.h; sourceTree = "<group>"; };
+		EC9FD8041A6C552F00EE6446 /* GraphFooterFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphFooterFactory.h; sourceTree = "<group>"; };
+		EC9FD8051A6C553C00EE6446 /* GraphFooterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphFooterFactory.m; sourceTree = "<group>"; };
+		EC9FD8071A6CD69200EE6446 /* WellnessAreaViewFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WellnessAreaViewFactory.h; sourceTree = "<group>"; };
+		EC9FD8081A6CD6D300EE6446 /* WellnessAreaViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellnessAreaViewFactory.m; sourceTree = "<group>"; };
+		EC9FD80B1A6E19C600EE6446 /* RegistrationViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewContoller.m; sourceTree = "<group>"; };
+		EC9FD80D1A6E19D200EE6446 /* RegistrationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
+		EC9FD80F1A719A3C00EE6446 /* YAxisView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YAxisView.h; sourceTree = "<group>"; };
+		EC9FD8101A719B8300EE6446 /* YAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAxisView.m; sourceTree = "<group>"; };
+		EC9FD8131A7D945700EE6446 /* AlertFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertFactory.h; sourceTree = "<group>"; };
+		EC9FD8141A7D94C600EE6446 /* AlertFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertFactory.m; sourceTree = "<group>"; };
 		ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +245,8 @@
 		EC72F8701A12F9C600BFD4DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EC9FD8121A7D944500EE6446 /* Factories */,
+				EC9FD80E1A719A0000EE6446 /* WellnessView */,
 				EC9FD7F61A5DA64800EE6446 /* JBLineChartFooterView.h */,
 				EC9FD7F71A5DA64800EE6446 /* JBLineChartFooterView.m */,
 				EC9FD7DE1A50F10900EE6446 /* DailySurvey */,
@@ -280,6 +297,7 @@
 		EC9FD7CD1A4786FA00EE6446 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EC9FD80A1A6E199700EE6446 /* RegistrationView */,
 				EC9FD7F01A588C9100EE6446 /* WellnessAreaView */,
 				EC9FD7D41A4A704900EE6446 /* DailySurveyView */,
 				EC9FD7D31A4A701D00EE6446 /* LoginView */,
@@ -335,8 +353,8 @@
 				EC9FD7E51A53745900EE6446 /* FulcrumAPIService.m */,
 				EC9FD7ED1A53906D00EE6446 /* FulcrumAPIFacade.h */,
 				EC9FD7EE1A53909300EE6446 /* FulcrumAPIFacade.m */,
-				EC9FD7FF1A65B47500EE6446 /* DateRangeService.m */,
-				EC9FD8011A65B48200EE6446 /* DateRangeService.h */,
+				EC9FD7FF1A65B47500EE6446 /* DateService.m */,
+				EC9FD8011A65B48200EE6446 /* DateService.h */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -344,10 +362,49 @@
 		EC9FD7F01A588C9100EE6446 /* WellnessAreaView */ = {
 			isa = PBXGroup;
 			children = (
+				EC9FD8031A6C551800EE6446 /* Factories */,
 				EC9FD7F21A588CD600EE6446 /* WellnessAreaViewController.h */,
 				EC9FD7F41A588D1400EE6446 /* WellnessAreaViewController.m */,
 			);
 			name = WellnessAreaView;
+			sourceTree = "<group>";
+		};
+		EC9FD8031A6C551800EE6446 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FD8041A6C552F00EE6446 /* GraphFooterFactory.h */,
+				EC9FD8051A6C553C00EE6446 /* GraphFooterFactory.m */,
+				EC9FD8071A6CD69200EE6446 /* WellnessAreaViewFactory.h */,
+				EC9FD8081A6CD6D300EE6446 /* WellnessAreaViewFactory.m */,
+			);
+			name = Factories;
+			sourceTree = "<group>";
+		};
+		EC9FD80A1A6E199700EE6446 /* RegistrationView */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FD80B1A6E19C600EE6446 /* RegistrationViewContoller.m */,
+				EC9FD80D1A6E19D200EE6446 /* RegistrationViewController.h */,
+			);
+			name = RegistrationView;
+			sourceTree = "<group>";
+		};
+		EC9FD80E1A719A0000EE6446 /* WellnessView */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FD80F1A719A3C00EE6446 /* YAxisView.h */,
+				EC9FD8101A719B8300EE6446 /* YAxisView.m */,
+			);
+			name = WellnessView;
+			sourceTree = "<group>";
+		};
+		EC9FD8121A7D944500EE6446 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FD8131A7D945700EE6446 /* AlertFactory.h */,
+				EC9FD8141A7D94C600EE6446 /* AlertFactory.m */,
+			);
+			name = Factories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,6 +512,7 @@
 				EC9FD7FB1A658D0D00EE6446 /* DailySurveyDataMap.m in Sources */,
 				EC9FD7E81A538E6E00EE6446 /* DailySurveyQuestionResponse.m in Sources */,
 				EC9FD7F51A588D1400EE6446 /* WellnessAreaViewController.m in Sources */,
+				EC9FD8151A7D94C600EE6446 /* AlertFactory.m in Sources */,
 				EC72568C1A0C2990006F87B1 /* AppDelegate.m in Sources */,
 				EC9609DB1A107B05001FB02A /* JBChartView.m in Sources */,
 				EC9FD7E61A53745900EE6446 /* FulcrumAPIService.m in Sources */,
@@ -462,6 +520,7 @@
 				EC9FD7EF1A53909300EE6446 /* FulcrumAPIFacade.m in Sources */,
 				EC1580901A1555EC00AEFC84 /* iCarousel.m in Sources */,
 				EC9FD7FE1A6590F200EE6446 /* DailySurveyWellnessAverage.m in Sources */,
+				EC9FD8061A6C553C00EE6446 /* GraphFooterFactory.m in Sources */,
 				EC15809A1A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m in Sources */,
 				EC9FD7D61A4FB6E200EE6446 /* DailySurveyQuestion.m in Sources */,
 				EC9609DA1A107B05001FB02A /* JBBarChartView.m in Sources */,
@@ -471,9 +530,12 @@
 				EC15809F1A16D44D00AEFC84 /* DailySurveyViewController.m in Sources */,
 				EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */,
 				EC7256881A0C2990006F87B1 /* main.m in Sources */,
-				EC9FD8001A65B47500EE6446 /* DateRangeService.m in Sources */,
+				EC9FD8001A65B47500EE6446 /* DateService.m in Sources */,
+				EC9FD8111A719B8300EE6446 /* YAxisView.m in Sources */,
+				EC9FD8091A6CD6D300EE6446 /* WellnessAreaViewFactory.m in Sources */,
 				EC9FD7D91A4FBB8400EE6446 /* DailySurveyQuestionView.m in Sources */,
 				EC9609CD1A106F80001FB02A /* MainViewController.m in Sources */,
+				EC9FD80C1A6E19C600EE6446 /* RegistrationViewContoller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

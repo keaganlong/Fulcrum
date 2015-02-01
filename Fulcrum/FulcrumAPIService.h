@@ -8,9 +8,10 @@
 
 @interface FulcrumAPIService : NSObject
 
-+(void)getDailySurveyResponsesForUser:(int) userId withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
-+(void)postForUser:(int) userId dailySurveyResponseDate:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
++(void)getDailySurveyResponsesWithCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
++(void)postDailySurveyResponseDate:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
 +(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
-
++(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
++(void)lastDailySurveyResponse:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
 
 @end
