@@ -14,4 +14,8 @@
 +(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
 +(void)lastDailySurveyResponse:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
 
++(void)postCalenderEvents:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
+
++(void)getCalenderEventsWithStartDate:(NSDate*)startDate AndEndDate:(NSDate*)endDate withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction;
+                                                                                                            
 @end

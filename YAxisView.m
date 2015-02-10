@@ -26,7 +26,7 @@
         int i = 0;
         for(int v = endValue; v>=startValue;v--,i++){
             CGFloat tickX = 10;
-            CGFloat tickY = startY+i*(1.8+(height/numTicks));
+            CGFloat tickY = startY+i*(1.25+(height/numTicks));
             CGFloat tickWidth = width-10;
             CGFloat tickHeight = 1;
             CGRect tickFrame = CGRectMake(tickX, tickY, tickWidth, tickHeight);

@@ -13,6 +13,8 @@
 #import "DailySurveyViewController.h"
 #import "DateService.h"
 #import "FulcrumAPIFacade.h"
+#import <EventKit/EventKit.h>
+#import "iCalService.h"
 
 @implementation MainViewController
 
@@ -46,25 +48,42 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     
     [self initDailySurveyButton];
     
-    LowerCarouselDataSourceAndDelegate* lowerCarouselDSandD = [[LowerCarouselDataSourceAndDelegate alloc] init];
-    self.lowerCarouselDataSourceAndDelegate = lowerCarouselDSandD;
-    
-    self.lowerCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0,250,self.frame.size.width,400)];
-    self.lowerCarousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.lowerCarousel.type = iCarouselTypeLinear;
-    
-    self.lowerCarousel.dataSource = self.lowerCarouselDataSourceAndDelegate;
-    self.lowerCarousel.delegate = self.lowerCarouselDataSourceAndDelegate;
-    
-    
-    [self.view addSubview:self.lowerCarousel];
+    [self initCalender];
+
+}
+
+-(void)initCalender{
+    EKEventStore* store = [iCalService currentStore];
+    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+        if(granted){
+            [self initLowerCarousel];
+        }
+    }];
+}
+
+-(void)initLowerCarousel{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+
+                       
+                       self.lowerCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0,250,self.frame.size.width,400)];
+                       self.lowerCarousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+                       self.lowerCarousel.type = iCarouselTypeLinear;
+                       
+                       LowerCarouselDataSourceAndDelegate* lowerCarouselDSandD = [[LowerCarouselDataSourceAndDelegate alloc] initWithController:self AndWithCarousel:self.lowerCarousel];
+                       self.lowerCarouselDataSourceAndDelegate = lowerCarouselDSandD;
+                       
+                       self.lowerCarousel.dataSource = self.lowerCarouselDataSourceAndDelegate;
+                       self.lowerCarousel.delegate = self.lowerCarouselDataSourceAndDelegate;
+                       [self.view addSubview:self.lowerCarousel];
+                   });
 }
 
 -(void)initDailySurveyButton{
     [FulcrumAPIFacade lastDateDailySurveyCompletedForWithCallback:^(NSDate *lastDate) {
         //NSDate* today = [NSDate date];
-        NSDate* today = [DateService dateFromYearMonthDateString:@"2015-02-16"];
-        NSLog(@"%@ %@",lastDate, today);
+        NSDate* today = [DateService dateFromYearMonthDateString:@"2016-02-16"];
+        //NSLog(@"%@ %@",lastDate, today);
         if([DateService date1:lastDate compareToDate2:today]==NSOrderedAscending){
             dispatch_async(dispatch_get_main_queue(),
                            ^{

@@ -7,7 +7,17 @@
 //
 #import "iCarousel.h"
 
+@class MainViewController;
+
 @interface LowerCarouselDataSourceAndDelegate: NSObject<iCarouselDataSource, iCarouselDelegate>
+
+- (id)initWithController:(MainViewController*)mainViewController AndWithCarousel:(iCarousel*)carousel;
+
+@property NSMutableArray* dates;
+@property NSMutableDictionary* eventMap;
+
+@property (nonatomic, weak) iCarousel *carousel;
+@property MainViewController* parentViewController;
 
 @end
 

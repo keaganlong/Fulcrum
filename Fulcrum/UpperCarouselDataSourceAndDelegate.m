@@ -49,10 +49,11 @@
         view.layer.cornerRadius = 60;
         view.alpha = 0.7;
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, 120, 120)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 120)];
         [label setTextColor:[UIColor whiteColor]];
         [label setBackgroundColor:[UIColor clearColor]];
         [label setFont:[UIFont fontWithName: @"Trebuchet MS" size: 20.0f]];
+        label.textAlignment = NSTextAlignmentCenter;
     }
     else
     {

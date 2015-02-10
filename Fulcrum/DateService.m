@@ -62,6 +62,26 @@
     return arr;
 }
 
++(NSMutableArray*)getDateRangeStartingWithDate:(NSDate*)date daysPrior:(NSInteger)daysPrior daysFuture:(NSInteger)daysFuture{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSMutableArray* arr = [NSMutableArray new];
+    
+    NSDateComponents* comps = [[NSDateComponents alloc]init];
+    
+    for(int i = daysPrior-2; i>=-1;i--){
+        comps.day = (i+1)*-1;
+        NSDate* currDate = [calendar dateByAddingComponents:comps toDate:date options:nil];
+        [arr addObject:currDate];
+    }
+    for(int i = 1;i<=daysFuture;i++){
+        comps.day = i;
+        NSDate* currDate = [calendar dateByAddingComponents:comps toDate:date options:nil];
+        [arr addObject:currDate];
+    }
+    return arr;
+}
+
+
 +(NSDate*)date:(NSDate*)date offsetByInteger:(NSInteger)integer{
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSDateComponents* comps = [[NSDateComponents alloc]init];
@@ -73,7 +93,7 @@
 +(NSDate*)dateFromYearMonthDateString:(NSString*)dateString{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
     NSDate* date = [formatter dateFromString:dateString];
     return date;
 }
@@ -81,7 +101,7 @@
 +(NSString*)yearMonthDateStringFromDate:(NSDate*)date{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
     NSString* dateString = [formatter stringFromDate:date];
     return dateString;
 }
@@ -89,7 +109,7 @@
 +(NSComparisonResult)date1:(NSDate*)date1 compareToDate2:(NSDate*)date2{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
     NSString* date1String = [formatter stringFromDate:date1];
     NSString* date2String = [formatter stringFromDate:date2];
     NSDate* date1Clean = [formatter dateFromString:date1String];
@@ -101,10 +121,15 @@
 +(NSString*)readableStringFromDate:(NSDate*)date{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"EEEE MMMM d, YYYY"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
     NSString* dateString = [formatter stringFromDate:date];
     return dateString;
 }
 
++(NSString*)dateJSONTransformer:(NSDate*)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ssZZZ"];
+    return [dateFormatter stringFromDate:date];
+}
 
 @end

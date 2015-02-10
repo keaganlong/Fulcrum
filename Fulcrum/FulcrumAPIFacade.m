@@ -12,45 +12,59 @@
 #import "DailySurveyResponse.h"
 #import "DailySurveyQuestionResponse.h"
 #import "DateService.h"
+#import "CalenderEvent.h"
 
 @implementation FulcrumAPIFacade
 
 -(void)getDailySurveyResponsesWithCallback:(void(^)(NSMutableArray *dailySurveyResponses))callbackFunction{
-    [FulcrumAPIService getDailySurveyResponsesWithCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSError* serializeError = nil;
-        NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
-        if([self validateGetDailySurveyResponses:serializedObject]){
-            NSArray* jsonArray = (NSArray*)serializedObject;
-            NSMutableArray* dailySurveyResponses = [NSMutableArray new];
-            for(NSDictionary* dailySurveyResponseDictionary in jsonArray){
-                DailySurveyResponse* dailySurveyResponse = [self dictionaryToDailySurveyResponse:dailySurveyResponseDictionary];
-                [dailySurveyResponses addObject:dailySurveyResponse];
-            }
-            callbackFunction(dailySurveyResponses);
+//    [FulcrumAPIService getDailySurveyResponsesWithCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        NSError* serializeError = nil;
+//        NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
+//        if([self validateGetDailySurveyResponses:serializedObject]){
+//            NSArray* jsonArray = (NSArray*)serializedObject;
+//            NSMutableArray* dailySurveyResponses = [NSMutableArray new];
+//            for(NSDictionary* dailySurveyResponseDictionary in jsonArray){
+//                DailySurveyResponse* dailySurveyResponse = [self dictionaryToDailySurveyResponse:dailySurveyResponseDictionary];
+//                [dailySurveyResponses addObject:dailySurveyResponse];
+//            }
+//            callbackFunction(dailySurveyResponses);
+//        }
+//        else{
+//            callbackFunction(nil);
+//        }
+//    }];
+    NSMutableArray* arr = [NSMutableArray new];
+    NSMutableArray* dates = [DateService getDateRangeStartingWithDate:[NSDate date] withInteger:74];
+    for(int i = 0; i<[dates count];i++){
+        if(i<0){
+            continue;
+        }
+        DailySurveyResponse* curr = [[DailySurveyResponse alloc] init];
+        NSDate* date = [dates objectAtIndex:i];
+        [curr setForDate:date];
+        NSMutableArray* qrs = [NSMutableArray new];
+        int value = 3;
+        if(i<=[dates count]-20){
+            value = 2;
+            value+=rand()%2;
+        }
+        else if(i>[dates count]-20 && i<[dates count]-10){
+            value = 3;
+            value+=rand()%2;
         }
         else{
-            callbackFunction(nil);
+            value = 4;
+            value+=rand()%2;
         }
-    }];
-//    NSMutableArray* arr = [NSMutableArray new];
-//    NSMutableArray* dates = [DateService getDateRangeStartingWithDate:[NSDate date] withInteger:74];
-//    for(int i = 0; i<[dates count];i++){
-//        if(i<0){
-//            continue;
-//        }
-//        DailySurveyResponse* curr = [[DailySurveyResponse alloc] init];
-//        NSDate* date = [dates objectAtIndex:i];
-//        [curr setForDate:date];
-//        NSMutableArray* qrs = [NSMutableArray new];
-//        for(int j = 0; j<10;j++){
-//            DailySurveyQuestionResponse* res = [[DailySurveyQuestionResponse alloc] init];
-//            [res setValue:(1+(rand()%6))];
-//            [qrs addObject:res];
-//        }
-//        [curr setDailySurveyQuestionResponses:qrs];
-//        [arr addObject:curr];
-//    }
-//    callbackFunction(arr);
+        for(int j = 0; j<10;j++){
+            DailySurveyQuestionResponse* res = [[DailySurveyQuestionResponse alloc] init];
+            [res setValue:value+1-(rand()%2)];
+            [qrs addObject:res];
+        }
+        [curr setDailySurveyQuestionResponses:qrs];
+        [arr addObject:curr];
+    }
+    callbackFunction(arr);
 }
 
 -(BOOL)validateGetDailySurveyResponses:(NSObject*)object{
@@ -130,6 +144,7 @@
 
 - (NSString*)dateJSONTransformer:(NSDate*)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
     [dateFormatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ssZZZ"];
     return [dateFormatter stringFromDate:date];
 }
@@ -143,6 +158,7 @@
     NSString* forDateString = [dictionary[@"ForDate"]substringToIndex:10];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
     NSDate* forDate = [formatter dateFromString:forDateString];
     if(submissionDate != nil){
         [dailySurveyResponse setForDate:forDate];
@@ -179,6 +195,91 @@
         }];
 }
 
+-(NSMutableDictionary*)calenderEventToDictionary:(CalenderEvent*) event{
+    NSMutableDictionary* dict = [NSMutableDictionary new];
+    dict[@"EventIdentifier"]=event.EventIdentifier;
+    dict[@"StressLevel"]=[NSNumber numberWithInteger:event.StressLevel];
+    dict[@"Rated"]=event.Rated ? @"true" : @"false";
+    dict[@"Ignored"]=event.Ignored ? @"true" : @"false";
+    dict[@"StartDate"]= [self dateJSONTransformer:event.StartDate];
+    dict[@"Title"] = event.Title;
+    return dict;
+}
+
+-(NSMutableArray*)calenderEventsToJSONAbleArray:(NSArray*)calenderEvents{
+    NSMutableArray* output = [NSMutableArray new];
+    
+    for(int i = 0;i<[calenderEvents count];i++){
+        CalenderEvent* currEvent = [calenderEvents objectAtIndex:i];
+        NSMutableDictionary* eventDict = [self calenderEventToDictionary:currEvent];
+        [output addObject:eventDict];
+    }
+    
+    return output;
+}
+
+-(void)addCalenderEvents:(NSArray*)calenderEvents withCompletionHandler:(void(^)(NSError*))completionFunction{
+    NSError* serializeError = nil;
+    NSArray* serializedCalenderEvents = [self calenderEventsToJSONAbleArray:calenderEvents];
+    bool valid = [NSJSONSerialization isValidJSONObject:serializedCalenderEvents];
+    if(valid){
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:serializedCalenderEvents options:NSJSONWritingPrettyPrinted error:&serializeError];
+        [FulcrumAPIService postCalenderEvents:jsonData withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSLog(@"Response: %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            completionFunction(error);
+        }];
+    }
+    else{
+        
+    }
+}
+
+-(void)getCalenderEventsWithStartDate:(NSDate*)startDate AndEndDate:(NSDate*)endDate withCompletionHandler:(void(^)(NSArray*))completionFunction{
+    [FulcrumAPIService getCalenderEventsWithStartDate:startDate AndEndDate:endDate withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if(error){
+            completionFunction(nil);
+        }
+        else{
+            NSError* serializeError;
+            NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
+            if([serializedObject isKindOfClass:[NSArray class]]){
+                NSArray* arr = (NSArray*)serializedObject;
+                NSMutableArray* calenderArr = [self jsonToCalenderEventArray:arr];
+                completionFunction(calenderArr);
+            }
+            else{
+                completionFunction(nil);
+            }
+        }
+    }];
+}
+
+-(NSMutableArray*)jsonToCalenderEventArray:(NSArray*)eventDicts{
+    NSMutableArray* output = [NSMutableArray new];
+    for(int i = 0; i<[eventDicts count];i++){
+        NSDictionary* currDict = [eventDicts objectAtIndex:i];
+        CalenderEvent* currCalenderEvent = [self dictionaryToCalenderEvent:currDict];
+        [output addObject:currCalenderEvent];
+    }
+    return output;
+}
+
+-(CalenderEvent*)dictionaryToCalenderEvent:(NSDictionary*)dict{
+    CalenderEvent* output = [[CalenderEvent alloc] init];
+    output.EventIdentifier = dict[@"EventIdentifier"];
+    output.StressLevel = [dict[@"StressLevel"] integerValue];
+    output.Rated = dict[@"Rated"];
+    output.Ignored = dict[@"Ignored"];
+    output.Title = dict[@"Title"];
+    NSString* startDateString = [dict[@"StartDate"]substringToIndex:10];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate* startDate = [formatter dateFromString:startDateString];
+    output.StartDate = startDate;
+    return output;
+}
+
 -(DailySurveyQuestionResponse*)dictionaryToDailySurveyQuestionResponse:(NSDictionary*)dictionary{
     DailySurveyQuestionResponse* dailySurveyQuestionResponse = [[DailySurveyQuestionResponse alloc]init];
     NSInteger value = [dictionary[@"Value"] intValue];
@@ -207,6 +308,15 @@
 +(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSString*))callbackFunction{
     [[self instance] registerAccountWithUsername:username andPassword:password withCallback:callbackFunction];
 }
+
++(void)addCalenderEvents:(NSArray*)calenderEvents withCompletionHandler:(void(^)(NSError*))completionFunction{
+    [[self instance] addCalenderEvents:calenderEvents withCompletionHandler:completionFunction];
+}
+
++(void)getCalenderEventsWithStartDate:(NSDate*)startDate AndEndDate:(NSDate*)endDate withCompletionHandler:(void(^)(NSArray*))completionFunction{
+    [[self instance] getCalenderEventsWithStartDate:startDate AndEndDate:endDate withCompletionHandler:completionFunction];
+}
+
 
 + (FulcrumAPIFacade*) instance{
     static FulcrumAPIFacade* instance = nil;

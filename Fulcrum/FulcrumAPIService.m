@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FulcrumAPIService.h"
+#import "DateService.h"
 
 #define BASE_FULCRUM_API_URL @"http://fulcrumservice.azurewebsites.net/api"
 #define BASE_FULCRUM_URL @"http://fulcrumservice.azurewebsites.net"
@@ -16,6 +17,8 @@
 #define REGISTER_USER_URL @"/Account/Register"
 #define GET_TOKEN_URL @"/Token"
 #define LAST_DAILY_SURVEY_RESPONSE_URL @"/Users/LastDailySurveyResponse"
+#define ADD_CALENDER_EVENTS_URL @"/Users/AddCalenderEvents"
+#define GET_CALENDER_EVENTS_IN_RANGE_URL @"/Users/GetCalenderEventsInRange"
 
 @implementation FulcrumAPIService
 
@@ -86,6 +89,37 @@
     [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
 }
 
+-(void)postCalenderEvents:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* token = [defaults objectForKey:@"access_token"];
+    if(token == nil){
+        return; //TODO
+    }
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/",BASE_FULCRUM_API_URL,ADD_CALENDER_EVENTS_URL]];
+    NSMutableURLRequest* request = [self _createPOSTRequestWithURL:url andData:data];
+    NSString* authorizationHeader = [NSString stringWithFormat:@"Bearer %@",token];
+    [request setValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
+    NSURLSession* session = [NSURLSession sharedSession];
+    NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
+}
+
+-(void)getCalenderEventsWithStartDate:(NSDate*)startDate AndEndDate:(NSDate*)endDate withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* token = [defaults objectForKey:@"access_token"];
+    if(token == nil){
+        return; //TODO
+    }
+    NSString* startDateString = [DateService dateJSONTransformer:startDate];
+    NSString* endDateString = [DateService dateJSONTransformer:endDate];
+    
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?startDate=%@&endDate=%@",BASE_FULCRUM_API_URL,GET_CALENDER_EVENTS_IN_RANGE_URL,startDateString,endDateString]];
+    NSMutableURLRequest* request = [self _createGETRequestWithURL:url];
+    NSString* authorizationHeader = [NSString stringWithFormat:@"Bearer %@",token];
+    [request setValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
+    NSURLSession* session = [NSURLSession sharedSession];
+    [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
+}
 
 - (NSMutableURLRequest *) _createGETRequestWithURL: (NSURL *)url{
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
@@ -123,7 +157,13 @@
     [[self instance] lastDailySurveyResponse:completionFunction];
 }
 
++(void)postCalenderEvents:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    [[self instance] postCalenderEvents:data withCompletionHandler:completionFunction];
+}
 
++(void)getCalenderEventsWithStartDate:(NSDate*)startDate AndEndDate:(NSDate*)endDate withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    [[self instance] getCalenderEventsWithStartDate:startDate AndEndDate:endDate withCompletionHandler:completionFunction];
+}
 
 + (FulcrumAPIService*) instance{
     static FulcrumAPIService* instance = nil;

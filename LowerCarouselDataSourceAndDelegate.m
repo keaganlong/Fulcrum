@@ -10,131 +10,148 @@
 #import "iCarousel.h"
 #import "LowerCarouselDataSourceAndDelegate.h"
 #import "JBBarChartView.h"
+#import "iCalService.h"
+#import "CalenderEvent.h"
+#import "FulcrumAPIFacade.h"
+#import "DateService.h"
+#import "LowerCarouselDateView.h"
+#import "DateViewController.h"
+#import "MainViewController.h"
+#import "iCarousel.h"
 
+@implementation LowerCarouselDataSourceAndDelegate
 
-@implementation LowerCarouselDataSourceAndDelegate{
-    NSMutableArray *dates;
-}
-
-
-- (id)init {
+- (id)initWithController:(MainViewController*)mainViewController AndWithCarousel:(iCarousel*)carousel{
     self = [super init];
     if (self) {
-        [self initDates];
+        self.parentViewController = mainViewController;
+        self.carousel = carousel;
+        [self initCalenderEvents];
     }
     return self;
 }
 
--(void) initDates{
-    dates = [[NSMutableArray alloc] init];
-    NSTimeInterval secondsPerDay = 24 * 60 * 60;
-
-    for(int i = -50; i< 50;i++){
-        NSDate* day = [[NSDate alloc] initWithTimeIntervalSinceNow:secondsPerDay*i];
-        [dates addObject:day];
+-(void)initCalenderEvents{
+    self.dates = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:14 daysFuture:14];
+    NSDate* startDate = [self.dates firstObject];
+    NSDate* endDate = [self.dates lastObject];
+    self.eventMap = [NSMutableDictionary new];
+    [FulcrumAPIFacade getCalenderEventsWithStartDate:startDate AndEndDate:endDate withCompletionHandler:^(NSArray *calenderEvents) {
+        if(calenderEvents!=nil){
+            [self processCalenderEvents:calenderEvents];
+        }
+        [self.carousel reloadData];
+    }];
+}
+-(void)processCalenderEvents:(NSArray*)calenderEvents{
+    for(int i = 0; i<[calenderEvents count];i++){
+        CalenderEvent* currEvent = [calenderEvents objectAtIndex:i];
+        NSString* key = [DateService yearMonthDateStringFromDate:currEvent.StartDate];
+        if(self.eventMap[key]==nil){
+            self.eventMap[key] = [NSMutableArray new];
+        }
+        NSMutableArray* eventListForDate = self.eventMap[key];
+        [eventListForDate addObject:currEvent];
     }
 }
 
+-(void)retrieveNewCalenderEvents{
+    EKEventStore* store = [iCalService currentStore];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents *oneDayAgoComponents = [[NSDateComponents alloc] init];
+    oneDayAgoComponents.day = -1;
+    NSDate *oneDayAgo = [NSDate date];
+    
+    NSDateComponents *oneWeekFromNowComponents = [[NSDateComponents alloc] init];
+    oneWeekFromNowComponents.day = 7;
+    NSDate *oneWeekFromNow = [calendar dateByAddingComponents:oneWeekFromNowComponents
+                                                       toDate:[NSDate date]
+                                                      options:0];
+    NSPredicate *predicate = [store predicateForEventsWithStartDate:oneDayAgo
+                                                            endDate:oneWeekFromNow
+                                                          calendars:nil];
+    NSArray* eventsUnsorted = [store eventsMatchingPredicate:predicate];
+    NSArray* events = [eventsUnsorted sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
+    NSMutableDictionary* eventDict = [NSMutableDictionary new];
+    for(int i = 0; i<[events count];i++){
+        EKEvent* event = [events objectAtIndex:i];
+        if(eventDict[event.eventIdentifier]==nil){
+            eventDict[event.eventIdentifier] = event;
+        }
+    }
+    NSMutableArray* calenderEvents = [NSMutableArray new];
+    for(NSString* key in eventDict){
+        EKEvent* event = eventDict[key];
+        CalenderEvent* calenderEvent = [[CalenderEvent alloc] init];
+        calenderEvent.EventIdentifier = event.eventIdentifier;
+        calenderEvent.StressLevel = 1+rand()%5;
+        calenderEvent.Rated = true;
+        calenderEvent.Ignored = false;
+        calenderEvent.StartDate = event.startDate;
+        [calenderEvents addObject:calenderEvent];
+    }
+    NSLog(@"New events to add: %lu",[calenderEvents count]);
+    [FulcrumAPIFacade addCalenderEvents:calenderEvents withCompletionHandler:^(NSError * error) {
+        if(error != nil){
+            NSLog(@"%@",error);
+        }
+    }];
+}
+
+
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return [dates count];
+    return [self.dates count];
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
-    UILabel *label = nil;
+//    if(view!=nil){
+//        return view;
+//    }
+    index = (13+index)%[self.dates count];
+    NSDate* date = [self.dates objectAtIndex:index];
+    NSInteger totalStress = [self getTotalStressForDate:date];
     
-    if(carousel !=nil){
-        
-        view = [[UIView alloc] initWithFrame:CGRectMake(0,0,100,260)];
-        
-        int barHeight = 20+arc4random()%110;
-        UIView* barView = [[UIView alloc] initWithFrame:CGRectMake(0,0,70,barHeight)];
-        float red = 0.0;
-        float green = 1.0-((2.0*barHeight)/255.0);
-        float blue = 0.6;
-        float lowerBound = 0.2;
-        float upperBound = 0.6;
-        green = (upperBound-lowerBound)*green+lowerBound;
-        blue = green*2;
-        barView.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:0.8];
-        barView.alpha = 0.8;
-        
-        UIView* circleView = [[UIView alloc] initWithFrame:CGRectMake(100,100,80,80)];
-        circleView.layer.cornerRadius = 40;
-        circleView.alpha = 1;
-        circleView.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:0.8];
-        
-        label = [[UILabel alloc] initWithFrame:CGRectMake(26, 16, 60, 30)];
-        [label setTextColor:[UIColor whiteColor]];
-        [label setFont:[UIFont fontWithName: @"Trebuchet MS" size: 9.0f]];
-        
-        UILabel* label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 31, 60, 30)];
-        [label2 setTextColor:[UIColor whiteColor]];
-        [label2 setFont:[UIFont fontWithName: @"Trebuchet MS" size: 9.0f]];
-        
-        CGPoint circleCenter = CGPointMake(view.center.x,view.center.y+65);
-        circleView.center = circleCenter;
-        
-        int barCenterY = 130-(barHeight/2);
-        CGPoint barCenter = CGPointMake(view.center.x,barCenterY);
-        barView.center = barCenter;
-        
-        NSDate* date = [dates objectAtIndex:((index+50)%100)];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateStyle:NSDateFormatterFullStyle];
-        NSString *dateAsString = [formatter stringFromDate:date];
-        int i;
-        for(i = 0; i<dateAsString.length;i++){
-            if([dateAsString characterAtIndex:i] == ','){
-                break;
-            }
-        }
-        
-        NSString* dayName = [dateAsString substringToIndex:i];
-        NSString* rest = [dateAsString substringFromIndex:i+2];
-        rest = [@"" stringByAppendingString:[rest substringToIndex:rest.length-6]];
-        [label setText:dayName];
-        [label2 setText:rest];
-        [circleView addSubview:label];
-        [circleView addSubview:label2];
-        [view addSubview:barView];
-        [view addSubview:circleView];
-        return view;
+    UIView* newView = [[LowerCarouselDateView alloc] initWithDate:date AndTotalStress:totalStress];
+    [newView setTag:index];
+    [self addGestureToView:newView];
+    return newView;
+}
+
+-(void)addGestureToView:(UIView*)view{
+    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [view addGestureRecognizer:tapGestureRecognizer];
+}
+
+-(NSMutableArray*)getCalenderEventsForDate:(NSDate*)date{
+    NSString* key = [DateService yearMonthDateStringFromDate:date];
+    NSMutableArray* calenderEventsForDay = self.eventMap[key];
+    return calenderEventsForDay;
+}
+
+-(NSInteger)getTotalStressForDate:(NSDate*)date{
+    NSInteger output = 0;
+    NSMutableArray* calenderEvents = [self getCalenderEventsForDate:date];
+    for(int i = 0; i<[calenderEvents count];i++){
+        CalenderEvent* currCalenderEvent = [calenderEvents objectAtIndex:i];
+        output+= currCalenderEvent.StressLevel;
     }
-    
-    //create new view if no view is available for recycling
-    if (view == nil)
-    {
-        view = [[UIView alloc] initWithFrame:CGRectMake(0,0,120,120)];
-        view.layer.cornerRadius = 60;
-        view.alpha = 0.7;
+    return output;
+}
+
+-(IBAction)onTap:(id)sender{
+    UITapGestureRecognizer* tapGestureRecognizer = (UITapGestureRecognizer*)sender;
+    NSInteger tag = tapGestureRecognizer.view.tag;
+   
+    if([tapGestureRecognizer state]==UIGestureRecognizerStateEnded){
+        NSDate* dateClicked = [self.dates objectAtIndex:tag];
+        NSMutableArray* calenderEventsForDay = [self getCalenderEventsForDate:dateClicked];
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, 120, 120)];
-        [label setTextColor:[UIColor whiteColor]];
-        [label setBackgroundColor:[UIColor clearColor]];
-        [label setFont:[UIFont fontWithName: @"Trebuchet MS" size: 20.0f]];
+        UIViewController* dateViewController = [[DateViewController alloc]initWithCalenderEvents:calenderEventsForDay];
+        [self.parentViewController changeToViewController:dateViewController];
     }
-    switch(index){
-        case 1:
-            [label setText: @"Physical"];
-            view.backgroundColor = [UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.8];
-            break;
-        case 2:
-            [label setText: @"Emotional"];
-            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.4 blue:0.3 alpha:0.8];
-            break;
-        case 3:
-            [label setText: @"Social"];
-            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.7 blue:0.8 alpha:0.8];
-            break;
-        default:
-            [label setText: @"Academic"];
-            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.6 blue:0.9 alpha:0.8];
-    }
-    //set label
-    [view addSubview:label];
-    return view;
 }
 
 - (UIView *)carousel:(iCarousel *)carousel placeholderViewAtIndex:(NSInteger)index reusingView:(UIView *)view
@@ -144,7 +161,6 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"page.png"]];
         label = [[UILabel alloc] initWithFrame:view.bounds];
         label.backgroundColor = [UIColor clearColor];
         label.textAlignment = UITextAlignmentCenter;
@@ -177,7 +193,7 @@
         case iCarouselOptionWrap:
         {
             //normally you would hard-code this to YES or NO
-            return YES;
+            return NO;
         }
         case iCarouselOptionSpacing:
         {

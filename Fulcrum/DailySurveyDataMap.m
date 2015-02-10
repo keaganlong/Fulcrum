@@ -106,6 +106,7 @@
     CGFloat leftValue = [self valueForDate:leftDate forWellnessArea:area];
     CGFloat rightValue = [self valueForDate:rightDate forWellnessArea:area];
     CGFloat slope = (rightValue-leftValue)/gaps;
+    static int count = 0;
     return slope*(-1*leftDistance)+leftValue;
 }
 

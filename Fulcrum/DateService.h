@@ -13,6 +13,7 @@
 +(NSMutableArray*)getNinetyDaysPriorStartingWithDate:(NSDate*)date;
 +(NSMutableArray*)getOneYearDaysPriorStartingWithDate:(NSDate*)date;
 +(NSMutableArray*)getDateRangeStartingWithDate:(NSDate*)date withInteger:(NSInteger)integer;
++(NSMutableArray*)getDateRangeStartingWithDate:(NSDate*)date daysPrior:(NSInteger)daysPrior daysFuture:(NSInteger)daysFuture;
 
 +(NSDate*)date:(NSDate*)date offsetByInteger:(NSInteger)integer;
 
@@ -24,7 +25,7 @@
 +(NSString*)yearMonthDateStringFromDate:(NSDate*)date;
 
 +(NSString*)readableStringFromDate:(NSDate*)date;
-
++(NSString*)dateJSONTransformer:(NSDate*)date;
 
 +(NSComparisonResult)date1:(NSDate*)date1 compareToDate2:(NSDate*)date2;
 

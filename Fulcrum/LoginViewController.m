@@ -19,7 +19,7 @@
 }
 
 - (void)viewDidLoad
-{
+{    
     [super viewDidLoad];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -46,6 +46,7 @@
 }
 
 -(IBAction)onLoginButtonTouchUpInside:(id)sender{
+    self.loginButton.enabled = NO;
     NSString* email = [self.emailTextField text];
     NSString* password = [self.passwordTextField text];
     [FulcrumAPIFacade loginWithUsername:email andWithPassword:password withCallback:^(NSString * token, NSString* errorMessage) {
@@ -62,6 +63,7 @@
         else{
             UIAlertController* confirmationAlertController = [AlertFactory alertWithMessage:errorMessage];
             [self presentViewController:confirmationAlertController animated:YES completion:^(void) {}];
+            self.loginButton.enabled = YES;
         }
     }];
 }

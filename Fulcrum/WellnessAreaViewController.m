@@ -23,25 +23,32 @@
     if(self){
         self.wellnessArea = area;
         
+        CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+        UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,70,appFrame.size.width-20,30)];
+        [titleLabel setText:@"Social"];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        [titleLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 26.0f]];
+        [self.view addSubview:titleLabel];
+        
         UIButton* allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [allButton setTitle:@"All" forState:UIControlStateNormal];
         [allButton addTarget:self action:@selector(onTouchUpInsideAllButton:) forControlEvents:UIControlEventTouchUpInside];
-        allButton.frame = CGRectMake(0,50,60,60);
+        allButton.frame = CGRectMake(0,100,60,60);
         
         UIButton* threeMonthButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [threeMonthButton setTitle:@"3Mo" forState:UIControlStateNormal];
         [threeMonthButton addTarget:self action:@selector(onTouchUpInsideThreeMonthButton:) forControlEvents:UIControlEventTouchUpInside];
-        threeMonthButton.frame = CGRectMake(60,50,60,60);
+        threeMonthButton.frame = CGRectMake(45,100,60,60);
         
         UIButton* monthButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        monthButton.frame = CGRectMake(120,50,60,60);
+        monthButton.frame = CGRectMake(95,100,60,60);
         [monthButton setTitle:@"1Mo" forState:UIControlStateNormal];
         [monthButton addTarget:self action:@selector(onTouchUpInsideMonthButton:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton* weekButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [weekButton setTitle:@"Week" forState:UIControlStateNormal];
         [weekButton addTarget:self action:@selector(onTouchUpInsideWeekButton:) forControlEvents:UIControlEventTouchUpInside];
-        weekButton.frame = CGRectMake(180,50,60,60);
+        weekButton.frame = CGRectMake(150,100,60,60);
 
         [self.view addSubview:allButton];
         [self.view addSubview:threeMonthButton];
@@ -51,23 +58,23 @@
         self.view.backgroundColor = [UIColor whiteColor];
         JBLineChartView* lineChartView = [[JBLineChartView alloc] init];
         CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
-        lineChartView.frame = CGRectMake(35,120,screenFrame.size.width-40,screenFrame.size.height-150);
+        lineChartView.frame = CGRectMake(35,150,screenFrame.size.width-40,screenFrame.size.height-150);
         [lineChartView setDataSource:self];
         [lineChartView setDelegate:self];
         [lineChartView setMinimumValue:0];
         [lineChartView setMaximumValue:5];
-        [lineChartView setHeaderPadding:30];
+        [lineChartView setHeaderPadding:50];
         [lineChartView setFooterPadding:0];
         
         [self setLineChartView:lineChartView];
         [self.view addSubview:self.lineChartView];
         [lineChartView setHeaderView:nil];
         
-        self.selectedDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(-100+screenFrame.size.width/2.0,130,240,25)];
+        self.selectedDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(-100+screenFrame.size.width/2.0,160,240,25)];
         [self.selectedDateLabel setFont:[UIFont fontWithName:@"Helvetica" size:16.0]];
         [self.view addSubview:self.selectedDateLabel];
         
-        YAxisView* yAxisView = [[YAxisView alloc] initWithFrame:CGRectMake(10,120,25,screenFrame.size.height-150) AndHeaderPadding:30 StartValue:0 EndValue:5];
+        YAxisView* yAxisView = [[YAxisView alloc] initWithFrame:CGRectMake(10,150,25,screenFrame.size.height-150) AndHeaderPadding:50 StartValue:0 EndValue:5];
         
         [self setYAxisView:yAxisView];
         [self.view addSubview:yAxisView];
@@ -75,6 +82,8 @@
     }
     return self;
 }
+
+-(NSString*)getTitleFrom
 
 -(void)setGraphBackgroundColor:(UIColor*)color{
     [self.lineChartView setBackgroundColor:color];
