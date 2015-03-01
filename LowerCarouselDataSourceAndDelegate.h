@@ -15,9 +15,15 @@
 
 @property NSMutableArray* dates;
 @property NSMutableDictionary* eventMap;
+@property NSMutableSet* currentEventsSet;
+@property NSMutableSet* needsRatingSet;
+@property NSMutableArray* currentEvents;
 
 @property (nonatomic, weak) iCarousel *carousel;
 @property MainViewController* parentViewController;
+@property BOOL firstTimeViewed;
+
+-(void)refresh;
 
 @end
 

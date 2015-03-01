@@ -18,6 +18,7 @@
 #define GET_TOKEN_URL @"/Token"
 #define LAST_DAILY_SURVEY_RESPONSE_URL @"/Users/LastDailySurveyResponse"
 #define ADD_CALENDER_EVENTS_URL @"/Users/AddCalenderEvents"
+#define UPDATE_CALENDER_EVENTS_URL @"/Users/UpdateCalenderEvent"
 #define GET_CALENDER_EVENTS_IN_RANGE_URL @"/Users/GetCalenderEventsInRange"
 
 @implementation FulcrumAPIService
@@ -100,7 +101,20 @@
     NSString* authorizationHeader = [NSString stringWithFormat:@"Bearer %@",token];
     [request setValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
     NSURLSession* session = [NSURLSession sharedSession];
-    NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
+}
+
+-(void)updateCalenderEvent:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* token = [defaults objectForKey:@"access_token"];
+    if(token == nil){
+        return; //TODO
+    }
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/",BASE_FULCRUM_API_URL,UPDATE_CALENDER_EVENTS_URL]];
+    NSMutableURLRequest* request = [self _createPOSTRequestWithURL:url andData:data];
+    NSString* authorizationHeader = [NSString stringWithFormat:@"Bearer %@",token];
+    [request setValue:authorizationHeader forHTTPHeaderField:@"Authorization"];
+    NSURLSession* session = [NSURLSession sharedSession];
     [[session dataTaskWithRequest:request completionHandler:completionFunction] resume];
 }
 
@@ -159,6 +173,10 @@
 
 +(void)postCalenderEvents:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
     [[self instance] postCalenderEvents:data withCompletionHandler:completionFunction];
+}
+
++(void)updateCalenderEvent:(NSData*)data withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{
+    [[self instance] updateCalenderEvent:data withCompletionHandler:completionFunction];
 }
 
 +(void)getCalenderEventsWithStartDate:(NSDate*)startDate AndEndDate:(NSDate*)endDate withCompletionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *error))completionFunction{

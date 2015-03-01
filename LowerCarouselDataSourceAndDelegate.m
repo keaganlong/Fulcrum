@@ -26,27 +26,40 @@
     if (self) {
         self.parentViewController = mainViewController;
         self.carousel = carousel;
-        [self initCalenderEvents];
     }
     return self;
 }
 
 -(void)initCalenderEvents{
-    self.dates = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:14 daysFuture:14];
+    self.dates = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:7 daysFuture:7];
     NSDate* startDate = [self.dates firstObject];
     NSDate* endDate = [self.dates lastObject];
     self.eventMap = [NSMutableDictionary new];
     [FulcrumAPIFacade getCalenderEventsWithStartDate:startDate AndEndDate:endDate withCompletionHandler:^(NSArray *calenderEvents) {
         if(calenderEvents!=nil){
+            NSLog(@"Retrived: %lu calender events",[calenderEvents count]);
             [self processCalenderEvents:calenderEvents];
         }
-        [self.carousel reloadData];
+        [self retrieveNewCalenderEvents];
+        
+        dispatch_async(dispatch_get_main_queue(),
+                       ^{
+                           [self.carousel reloadData];
+                       });
     }];
 }
+
 -(void)processCalenderEvents:(NSArray*)calenderEvents{
     for(int i = 0; i<[calenderEvents count];i++){
         CalenderEvent* currEvent = [calenderEvents objectAtIndex:i];
+        [self.currentEventsSet addObject:currEvent.EventIdentifier];
+        
+        [self.currentEvents addObject:currEvent];
+        
         NSString* key = [DateService yearMonthDateStringFromDate:currEvent.StartDate];
+        if(!currEvent.Rated){
+            [self.needsRatingSet addObject:key];
+        }
         if(self.eventMap[key]==nil){
             self.eventMap[key] = [NSMutableArray new];
         }
@@ -59,43 +72,60 @@
     EKEventStore* store = [iCalService currentStore];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
-    NSDateComponents *oneDayAgoComponents = [[NSDateComponents alloc] init];
-    oneDayAgoComponents.day = -1;
-    NSDate *oneDayAgo = [NSDate date];
+    NSDateComponents *oneWeekBeforeNowComponents = [[NSDateComponents alloc] init];
+    oneWeekBeforeNowComponents.day = -7;
+    
+    NSDate *oneWeekBeforeNow = [calendar dateByAddingComponents:oneWeekBeforeNowComponents
+                                                       toDate:[NSDate date]
+                                                      options:0];
     
     NSDateComponents *oneWeekFromNowComponents = [[NSDateComponents alloc] init];
     oneWeekFromNowComponents.day = 7;
+    
     NSDate *oneWeekFromNow = [calendar dateByAddingComponents:oneWeekFromNowComponents
                                                        toDate:[NSDate date]
                                                       options:0];
-    NSPredicate *predicate = [store predicateForEventsWithStartDate:oneDayAgo
+    NSPredicate *predicate = [store predicateForEventsWithStartDate:oneWeekBeforeNow
                                                             endDate:oneWeekFromNow
                                                           calendars:nil];
     NSArray* eventsUnsorted = [store eventsMatchingPredicate:predicate];
     NSArray* events = [eventsUnsorted sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
-    NSMutableDictionary* eventDict = [NSMutableDictionary new];
+    NSMutableArray* eventsToAdd = [NSMutableArray new];
     for(int i = 0; i<[events count];i++){
         EKEvent* event = [events objectAtIndex:i];
-        if(eventDict[event.eventIdentifier]==nil){
-            eventDict[event.eventIdentifier] = event;
+        NSMutableString* hackedEventIdentifier = [NSMutableString stringWithString:event.eventIdentifier];
+        NSString* startDateString = [DateService yearMonthDateStringFromDate:event.startDate];
+        [hackedEventIdentifier appendString:startDateString];
+        if(![self.currentEventsSet containsObject:hackedEventIdentifier]){
+            [self.currentEventsSet addObject:hackedEventIdentifier];
+            [eventsToAdd addObject:event];
         }
     }
     NSMutableArray* calenderEvents = [NSMutableArray new];
-    for(NSString* key in eventDict){
-        EKEvent* event = eventDict[key];
+    NSLog(@"New Events to Add: %lu",[eventsToAdd count]);
+    for(int i = 0; i<[eventsToAdd count];i++){
+        EKEvent* event = [eventsToAdd objectAtIndex:i];
         CalenderEvent* calenderEvent = [[CalenderEvent alloc] init];
-        calenderEvent.EventIdentifier = event.eventIdentifier;
-        calenderEvent.StressLevel = 1+rand()%5;
-        calenderEvent.Rated = true;
+        NSMutableString* hackedEventIdentifier = [NSMutableString stringWithString:event.eventIdentifier];
+        NSString* startDateString = [DateService yearMonthDateStringFromDate:event.startDate];
+        [hackedEventIdentifier appendString:startDateString];
+        calenderEvent.EventIdentifier = hackedEventIdentifier;
+        calenderEvent.StressLevel = 0;
+        calenderEvent.Rated = false;
         calenderEvent.Ignored = false;
         calenderEvent.StartDate = event.startDate;
+        calenderEvent.EndDate = event.endDate;
+        calenderEvent.Title = event.title;
         [calenderEvents addObject:calenderEvent];
+        
+        NSString* key = [DateService yearMonthDateStringFromDate:calenderEvent.StartDate];
+        [self.needsRatingSet addObject:key];
     }
-    NSLog(@"New events to add: %lu",[calenderEvents count]);
     [FulcrumAPIFacade addCalenderEvents:calenderEvents withCompletionHandler:^(NSError * error) {
         if(error != nil){
-            NSLog(@"%@",error);
+            NSLog(@"Error: %@",error);
         }
+        [self processCalenderEvents:calenderEvents];
     }];
 }
 
@@ -110,12 +140,17 @@
 //    if(view!=nil){
 //        return view;
 //    }
-    index = (13+index)%[self.dates count];
+    index = (7+index)%[self.dates count];
     NSDate* date = [self.dates objectAtIndex:index];
     NSInteger totalStress = [self getTotalStressForDate:date];
     
-    UIView* newView = [[LowerCarouselDateView alloc] initWithDate:date AndTotalStress:totalStress];
+    LowerCarouselDateView* newView = [[LowerCarouselDateView alloc] initWithDate:date AndTotalStress:totalStress];
     [newView setTag:index];
+    NSString* dateString = [DateService yearMonthDateStringFromDate:date];
+    if([self.needsRatingSet containsObject:dateString]){
+        [newView setNeedsRating];
+    }
+    
     [self addGestureToView:newView];
     return newView;
 }
@@ -149,7 +184,7 @@
         NSDate* dateClicked = [self.dates objectAtIndex:tag];
         NSMutableArray* calenderEventsForDay = [self getCalenderEventsForDate:dateClicked];
         
-        UIViewController* dateViewController = [[DateViewController alloc]initWithCalenderEvents:calenderEventsForDay];
+        UIViewController* dateViewController = [[DateViewController alloc]initWithCalenderEvents:calenderEventsForDay forDate:dateClicked];
         [self.parentViewController changeToViewController:dateViewController];
     }
 }
@@ -224,7 +259,6 @@
 
 - (CGFloat)barChartView:(JBBarChartView *)barChartView heightForBarViewAtIndex:(NSUInteger)index{
     int randomInt = 1+(index % 2);
-    NSLog(@"%i",randomInt);
     return index+1;
 }
 
@@ -236,7 +270,24 @@
     return view;
 }
 
+-(void)updateNeedsRatingSet{
+    self.needsRatingSet = [NSMutableSet new];
+    for(CalenderEvent* calenderEvent in self.currentEvents){
+        if(!calenderEvent.Rated){
+            NSString* key = [DateService yearMonthDateStringFromDate:calenderEvent.StartDate];
+            [self.needsRatingSet addObject:key];
+        }
+    }
+}
 
+-(void)refresh{
+    self.currentEvents = [NSMutableArray new];
+    self.firstTimeViewed = YES;
+
+    self.currentEventsSet = [NSMutableSet new];
+    self.needsRatingSet = [NSMutableSet new];
+    [self initCalenderEvents];
+}
 
 
 @end

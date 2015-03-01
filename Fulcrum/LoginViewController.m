@@ -19,7 +19,7 @@
 }
 
 - (void)viewDidLoad
-{    
+{
     [super viewDidLoad];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -30,8 +30,8 @@
     
     [self.view addGestureRecognizer:tap];
     
-    [self.emailTextField setText:@"w@w.com"];
-    [self.passwordTextField setText:@"wwwwww"];
+    [self.emailTextField setText:@"k@k.com"];
+    [self.passwordTextField setText:@"kkkkkk"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,5 +67,7 @@
         }
     }];
 }
+
+
 
 @end

@@ -22,6 +22,8 @@
 @property UIButton* dailySurveyButton;
 @property CGRect frame;
 
+@property UIButton* todayButton;
+
 -(void)changeToViewController:(UIViewController*)viewController;
 
 @end

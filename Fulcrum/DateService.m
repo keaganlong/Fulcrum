@@ -106,6 +106,15 @@
     return dateString;
 }
 
++(NSString*)hourMinuteForDate:(NSDate*)date{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"hh:mm"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
+    NSString* dateString = [formatter stringFromDate:date];
+    return dateString;
+}
+
+
 +(NSComparisonResult)date1:(NSDate*)date1 compareToDate2:(NSDate*)date2{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd"];

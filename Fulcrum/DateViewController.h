@@ -8,8 +8,8 @@
 
 @interface DateViewController : UIViewController
 
-@property NSMutableArray* calenderEvents;
+@property NSArray* calenderEvents;
 
--(id)initWithCalenderEvents:(NSMutableArray*)calenderEvents;
+-(id)initWithCalenderEvents:(NSMutableArray*)calenderEvents forDate:(NSDate*)date;
 
 @end

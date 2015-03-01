@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Keagan Long. All rights reserved.
 //
 #import "DailySurveyResponse.h"
+#import "CalenderEvent.h"
 
 @interface FulcrumAPIFacade : NSObject
 
@@ -16,6 +17,7 @@
 +(void)lastDateDailySurveyCompletedForWithCallback:(void(^)(NSDate* lastDate))callbackFunction;
 
 +(void)addCalenderEvents:(NSArray*)calenderEvents withCompletionHandler:(void(^)(NSError*))completionFunction;
++(void)updateCalenderEvent:(CalenderEvent*)calenderEvent withCompletionHandler:(void(^)(NSError*))completionFunction;
 
 +(void)getCalenderEventsWithStartDate:(NSDate*)startDate AndEndDate:(NSDate*)endDate withCompletionHandler:(void(^)(NSArray*))completionFunction;
 

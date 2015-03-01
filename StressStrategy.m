@@ -10,9 +10,10 @@
 #import "StressStrategy.h"
 
 #define LOWER_BOUND 0
-#define UPPER_BOUND 30
+#define UPPER_BOUND 20
 #define MIN_HEIGHT 20
 #define MAX_HEIGHT 120
+
 
 @implementation StressStrategy
 

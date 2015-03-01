@@ -44,7 +44,7 @@
     circleView.layer.cornerRadius = 40;
     circleView.alpha = 1;
     circleView.backgroundColor = color;
-    
+    self.circleView = circleView;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, circleView.frame.size.width, circleView.frame.size.height-12)];
     [label setTextColor:[UIColor whiteColor]];
     label.textAlignment = NSTextAlignmentCenter;
@@ -61,6 +61,7 @@
     int barCenterY = 130-(barHeight/2);
     CGPoint barCenter = CGPointMake(self.center.x,barCenterY);
     barView.center = barCenter;
+    self.barView = barView;
     
     NSDate* date = self.date;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -84,6 +85,18 @@
     [circleView addSubview:label2];
     [self addSubview:barView];
     [self addSubview:circleView];
+}
+
+-(void)setNeedsRating{
+    CGFloat borderWidth = 2.0f;
+    
+    self.barView.frame = CGRectInset(self.barView.frame, -borderWidth, -borderWidth);
+    self.barView.layer.borderColor = [UIColor yellowColor].CGColor;
+    self.barView.layer.borderWidth = borderWidth;
+    
+    self.circleView.frame = CGRectInset(self.circleView.frame, -borderWidth, -borderWidth);
+    self.circleView.layer.borderColor = [UIColor yellowColor].CGColor;
+    self.circleView.layer.borderWidth = borderWidth;
 }
 
 @end

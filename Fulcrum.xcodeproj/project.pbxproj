@@ -52,6 +52,7 @@
 		ECACFA2D1A8140030047285B /* StressStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA2C1A8140030047285B /* StressStrategy.m */; };
 		ECACFA311A814F910047285B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA301A814F910047285B /* DateViewController.m */; };
 		ECD590021A1AD4CE00DC307F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */; };
+		ECDE86031A8C605E00310EB6 /* CalenderEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDE86021A8C605E00310EB6 /* CalenderEventView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,8 @@
 		ECACFA2F1A814F770047285B /* DateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateViewController.h; sourceTree = "<group>"; };
 		ECACFA301A814F910047285B /* DateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateViewController.m; sourceTree = "<group>"; };
 		ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
+		ECDE86011A8C603F00310EB6 /* CalenderEventView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalenderEventView.h; sourceTree = "<group>"; };
+		ECDE86021A8C605E00310EB6 /* CalenderEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalenderEventView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +263,7 @@
 		EC72F8701A12F9C600BFD4DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ECDE86001A8C600E00310EB6 /* DateView */,
 				ECACFA271A81379A0047285B /* MainView */,
 				EC9FD8121A7D944500EE6446 /* Factories */,
 				EC9FD80E1A719A0000EE6446 /* WellnessView */,
@@ -448,6 +452,15 @@
 			name = DateView;
 			sourceTree = "<group>";
 		};
+		ECDE86001A8C600E00310EB6 /* DateView */ = {
+			isa = PBXGroup;
+			children = (
+				ECDE86011A8C603F00310EB6 /* CalenderEventView.h */,
+				ECDE86021A8C605E00310EB6 /* CalenderEventView.m */,
+			);
+			name = DateView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -582,6 +595,7 @@
 				EC9609CD1A106F80001FB02A /* MainViewController.m in Sources */,
 				EC9FD8181A7ECF6800EE6446 /* iCalService.m in Sources */,
 				EC9FD80C1A6E19C600EE6446 /* RegistrationViewContoller.m in Sources */,
+				ECDE86031A8C605E00310EB6 /* CalenderEventView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

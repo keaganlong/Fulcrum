@@ -145,7 +145,7 @@
 - (NSString*)dateJSONTransformer:(NSDate*)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
-    [dateFormatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ssZZZ"];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss"];
     return [dateFormatter stringFromDate:date];
 }
 
@@ -195,6 +195,25 @@
         }];
 }
 
+-(void)updateCalenderEvent:(CalenderEvent*)calenderEvent withCompletionHandler:(void(^)(NSError*))completionFunction{
+    NSError* serializeError = nil;
+    NSMutableDictionary* serializedCalenderEvent = [self calenderEventToDictionary:calenderEvent];
+    bool valid = [NSJSONSerialization isValidJSONObject:serializedCalenderEvent];
+    if(valid){
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:serializedCalenderEvent options:NSJSONWritingPrettyPrinted error:&serializeError];
+        [FulcrumAPIService updateCalenderEvent:jsonData withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            completionFunction(error);
+        }];
+    }
+    else{
+        
+    }
+}
+
++(void)updateCalenderEvent:(CalenderEvent*)calenderEvent withCompletionHandler:(void(^)(NSError*))completionFunction{
+    [[self instance] updateCalenderEvent:calenderEvent withCompletionHandler:completionFunction];
+}
+
 -(NSMutableDictionary*)calenderEventToDictionary:(CalenderEvent*) event{
     NSMutableDictionary* dict = [NSMutableDictionary new];
     dict[@"EventIdentifier"]=event.EventIdentifier;
@@ -202,6 +221,7 @@
     dict[@"Rated"]=event.Rated ? @"true" : @"false";
     dict[@"Ignored"]=event.Ignored ? @"true" : @"false";
     dict[@"StartDate"]= [self dateJSONTransformer:event.StartDate];
+    dict[@"EndDate"] = [self dateJSONTransformer:event.EndDate];
     dict[@"Title"] = event.Title;
     return dict;
 }
@@ -245,6 +265,10 @@
             if([serializedObject isKindOfClass:[NSArray class]]){
                 NSArray* arr = (NSArray*)serializedObject;
                 NSMutableArray* calenderArr = [self jsonToCalenderEventArray:arr];
+//                for(int i = 0; i<[calenderArr count];i++){
+//                    CalenderEvent* e = [calenderArr objectAtIndex:i];
+//                    NSLog(@"%@ %@    %@ %@",e.Title,e.StartDate, e.EndDate, e.EventIdentifier);
+//                }
                 completionFunction(calenderArr);
             }
             else{
@@ -268,15 +292,21 @@
     CalenderEvent* output = [[CalenderEvent alloc] init];
     output.EventIdentifier = dict[@"EventIdentifier"];
     output.StressLevel = [dict[@"StressLevel"] integerValue];
-    output.Rated = dict[@"Rated"];
-    output.Ignored = dict[@"Ignored"];
+    NSNumber* ratedNumber = dict[@"Rated"];
+    output.Rated = [ratedNumber integerValue] == 1 ? YES:NO;
+    NSNumber* ignoredNumber = dict[@"Ignored"];
+    output.Ignored = [ignoredNumber integerValue] == 1 ? YES:NO;
+    
     output.Title = dict[@"Title"];
-    NSString* startDateString = [dict[@"StartDate"]substringToIndex:10];
+    NSString* startDateString = [dict[@"StartDate"]substringToIndex:19];
+    NSString* endDateString = [dict[@"EndDate"] substringToIndex:19];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss"];
     NSDate* startDate = [formatter dateFromString:startDateString];
     output.StartDate = startDate;
+    NSDate* endDate = [formatter dateFromString:endDateString];
+    output.EndDate = endDate;
     return output;
 }
 

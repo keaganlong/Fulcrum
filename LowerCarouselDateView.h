@@ -16,8 +16,9 @@
 @property NSInteger totalStress;
 
 @property UIView* barView;
-
+@property UIView* circleView;
 
 -(id)initWithDate:(NSDate*)date AndTotalStress:(NSInteger)totalStress;
+-(void)setNeedsRating;
 
 @end

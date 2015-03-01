@@ -20,6 +20,7 @@
 +(NSString*)weekdayAbbreviationStringForDate:(NSDate*)date;
 +(NSString*)monthDayStringForDate:(NSDate*)date;
 +(NSString*)yearStringForDate:(NSDate*)date;
++(NSString*)hourMinuteForDate:(NSDate*)date;
 
 +(NSDate*)dateFromYearMonthDateString:(NSString*)dateString;
 +(NSString*)yearMonthDateStringFromDate:(NSDate*)date;

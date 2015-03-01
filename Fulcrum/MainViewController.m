@@ -66,7 +66,7 @@ CGFloat const CAROUSEL_HEIGHT = 200;
                    ^{
 
                        
-                       self.lowerCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0,250,self.frame.size.width,400)];
+                       self.lowerCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0,220,self.frame.size.width,400)];
                        self.lowerCarousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
                        self.lowerCarousel.type = iCarouselTypeLinear;
                        
@@ -76,7 +76,18 @@ CGFloat const CAROUSEL_HEIGHT = 200;
                        self.lowerCarousel.dataSource = self.lowerCarouselDataSourceAndDelegate;
                        self.lowerCarousel.delegate = self.lowerCarouselDataSourceAndDelegate;
                        [self.view addSubview:self.lowerCarousel];
+                       
+                       self.todayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                       self.todayButton.frame = CGRectMake(-25+self.frame.size.width/2,540,50,20);
+                       [self.todayButton setTitle:@"Today" forState:UIControlStateNormal];
+                       [self.todayButton addTarget:self action:@selector(onTodayButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+                       
+                       [self.view addSubview:self.todayButton];
                    });
+}
+
+-(IBAction)onTodayButtonTouchUpInside:(id)sender{
+    [self.lowerCarousel scrollToItemAtIndex:0 animated:YES];
 }
 
 -(void)initDailySurveyButton{
@@ -133,6 +144,12 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 
 -(void)changeToViewController:(UIViewController*)viewController{
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.lowerCarouselDataSourceAndDelegate refresh];
+    [self.upperCarousel reloadData];
 }
 
 @end

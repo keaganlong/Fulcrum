@@ -83,7 +83,6 @@
     return self;
 }
 
--(NSString*)getTitleFrom
 
 -(void)setGraphBackgroundColor:(UIColor*)color{
     [self.lineChartView setBackgroundColor:color];
