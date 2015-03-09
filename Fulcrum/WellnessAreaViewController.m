@@ -15,6 +15,7 @@
 #import "DateService.h"
 #import "GraphFooterFactory.h"
 #import "YAxisView.h"
+#import "UPApiService.h"
 
 @implementation WellnessAreaViewController
 
@@ -200,10 +201,21 @@
     [FulcrumAPIFacade getDailySurveyResponsesWithCallback:^(NSMutableArray *dailySurveyResponses) {
         if(dailySurveyResponses!=nil){
             DailySurveyDataMap* dataMap = [[DailySurveyDataMap alloc] initWithDailySurveyResponses:dailySurveyResponses];
-            [self setDailySurveyDataMap:dataMap];
-            [self setEarliestDate:[dataMap firstDate]];
-            [self setLatestDate:[dataMap lastDate]];
-            [self setRangeToWeek];
+            if(self.wellnessArea == PHYSICAL){
+                [UPApiService getSleepsWithCompletionHandler:^(NSArray* sleeps) {
+                    [dataMap setSleeps:sleeps];
+                    [self setDailySurveyDataMap:dataMap];
+                    [self setEarliestDate:[dataMap firstDate]];
+                    [self setLatestDate:[dataMap lastDate]];
+                    [self setRangeToWeek];
+                }];
+            }
+            else{
+                [self setDailySurveyDataMap:dataMap];
+                [self setEarliestDate:[dataMap firstDate]];
+                [self setLatestDate:[dataMap lastDate]];
+                [self setRangeToWeek];
+            }
         }
         else{
             // Alert user

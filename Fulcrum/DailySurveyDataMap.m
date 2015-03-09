@@ -11,15 +11,18 @@
 #import "DailySurveyResponse.h"
 #import "DailySurveyWellnessAverage.h"
 #import "DateService.h"
+#import <UPPlatformSDK/UPPlatformSDK.h>
+#import "AggregationAlgorithm.h"
 
 @implementation DailySurveyDataMap{
-    NSMutableDictionary* dictionary;
+    NSMutableDictionary* dailySurveyScoreDictionary;
+    NSMutableDictionary* sleepScoreDictionary;
 }
 
 -(id)init{
     self = [super init];
     if(self){
-        dictionary = [NSMutableDictionary new];
+        dailySurveyScoreDictionary = [NSMutableDictionary new];
     }
     return self;
 }
@@ -34,7 +37,7 @@
             NSDate* forDate = [currDailySurveyResponse forDate];
             NSString* forDateString = [DateService yearMonthDateStringFromDate:forDate];
             DailySurveyWellnessAverage* currWellnessAverage = [[DailySurveyWellnessAverage alloc] initWithDailySurveyQuestionResponses:[currDailySurveyResponse dailySurveyQuestionResponses]];
-            [dictionary setObject:currWellnessAverage forKey:forDateString];
+            [dailySurveyScoreDictionary setObject:currWellnessAverage forKey:forDateString];
             if(candidateFirstDate==nil || candidateLastDate==nil){
                 candidateFirstDate = forDate;
                 candidateLastDate = forDate;
@@ -54,23 +57,52 @@
     return self;
 }
 
+-(void)setSleeps:(NSArray*)sleeps{
+    for(int i = 0; i<[sleeps count];i++){
+        UPSleep* currSleep = [sleeps objectAtIndex:i];
+        NSDate* forDate = currSleep.date;
+        NSString* forDateString = [DateService yearMonthDateStringFromDate:forDate];
+        sleepScoreDictionary[forDateString] = currSleep.quality;
+    }
+    
+}
+
 -(CGFloat)valueForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area{
     NSString* dateString = [DateService yearMonthDateStringFromDate:date];
-    DailySurveyWellnessAverage* dailySurveyWellnessAverage = [dictionary objectForKey:dateString];
+    DailySurveyWellnessAverage* dailySurveyWellnessAverage = [dailySurveyScoreDictionary objectForKey:dateString];
+    NSNumber* baseValue;
     if(dailySurveyWellnessAverage == nil){
-        return [self getMissingValueForDate:date forWellnessArea:area];
+        baseValue = [NSNumber numberWithFloat:[self getMissingValueForDate:date forWellnessArea:area]];
     }
-    switch(area){
-        case EMOTIONAL:
-            return [[dailySurveyWellnessAverage emotionalAverage] floatValue];
-        case ACADEMIC:
-            return [[dailySurveyWellnessAverage academicAverage] floatValue];
-        case PHYSICAL:
-            return [[dailySurveyWellnessAverage physicalAverage] floatValue];
-        case SOCIAL:
-        default:
-            return [[dailySurveyWellnessAverage socialAverage] floatValue];
+    else{
+        switch(area){
+            case EMOTIONAL:
+                baseValue = [dailySurveyWellnessAverage emotionalAverage];
+                break;
+            case ACADEMIC:
+                baseValue = [dailySurveyWellnessAverage academicAverage];
+                break;
+            case PHYSICAL:
+                baseValue = [dailySurveyWellnessAverage physicalAverage];
+                break;
+            case SOCIAL:
+                baseValue = [dailySurveyWellnessAverage socialAverage];
+                break;
+            default:
+                baseValue = [dailySurveyWellnessAverage socialAverage];
+                break;
+        }
     }
+    if(area == PHYSICAL){
+        NSNumber* sleepScore = sleepScoreDictionary[dateString];
+        NSNumber* physicalValue = [AggregationAlgorithm phyiscalScoreWithDailySurveyScore:baseValue sleepQuality:sleepScore];
+        if(physicalValue==nil){
+            //TODO: get missing value!
+            return [baseValue floatValue];
+        }
+        return [physicalValue floatValue];
+    }
+    return [baseValue floatValue];
 }
 
 -(CGFloat)getMissingValueForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area{
@@ -112,7 +144,7 @@
 
 -(BOOL)dataExistsForDate:(NSDate*)date{
     NSString* dateString = [DateService yearMonthDateStringFromDate:date];
-    DailySurveyWellnessAverage* dailySurveyWellnessAverage = [dictionary objectForKey:dateString];
+    DailySurveyWellnessAverage* dailySurveyWellnessAverage = [dailySurveyScoreDictionary objectForKey:dateString];
     return dailySurveyWellnessAverage != nil;
 }
 

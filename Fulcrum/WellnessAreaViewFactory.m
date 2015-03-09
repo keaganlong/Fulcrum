@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "WellnessAreaViewFactory.h"
 #import "WellnessAreaViewController.h"
+#import "PhysicalWellnessAreaView.h"
 
 @implementation WellnessAreaViewFactory
 
@@ -28,6 +29,9 @@
             [controller setGraphBackgroundColor:[UIColor colorWithRed:0.0 green:0.7 blue:0.8 alpha:0.65]];
             break;
         case PHYSICAL:
+            controller = [[PhysicalWellnessAreaView alloc] init];
+            [controller setGraphBackgroundColor:[UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.65]];
+            break;
         default:
             controller = [[WellnessAreaViewController alloc] initWithWellnessArea:PHYSICAL];
             [controller setGraphBackgroundColor:[UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.65]];

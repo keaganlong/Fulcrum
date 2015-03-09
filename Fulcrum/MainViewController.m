@@ -15,6 +15,8 @@
 #import "FulcrumAPIFacade.h"
 #import <EventKit/EventKit.h>
 #import "iCalService.h"
+#import "UPApiService.h"
+#import <UPPlatformSDK/UPPlatformSDK.h>
 
 @implementation MainViewController
 
@@ -33,6 +35,7 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 
 - (void)initView
 {
+    [UPApiService getUserPermission];
     self.frame = [[UIScreen mainScreen] applicationFrame];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     UpperCarouselDataSourceAndDelegate* upperCarouselDSandD = [[UpperCarouselDataSourceAndDelegate alloc] initWithController:self];

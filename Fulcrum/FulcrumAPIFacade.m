@@ -58,7 +58,7 @@
         }
         for(int j = 0; j<10;j++){
             DailySurveyQuestionResponse* res = [[DailySurveyQuestionResponse alloc] init];
-            [res setValue:value+1-(rand()%2)];
+            [res setValue:value-(rand()%2)];
             [qrs addObject:res];
         }
         [curr setDailySurveyQuestionResponses:qrs];

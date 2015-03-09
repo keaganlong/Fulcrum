@@ -53,6 +53,10 @@
 		ECACFA311A814F910047285B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA301A814F910047285B /* DateViewController.m */; };
 		ECD590021A1AD4CE00DC307F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */; };
 		ECDE86031A8C605E00310EB6 /* CalenderEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDE86021A8C605E00310EB6 /* CalenderEventView.m */; };
+		ECE77D221AABD52500E9A766 /* UPPlatformSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE77D211AABD52500E9A766 /* UPPlatformSDK.framework */; };
+		ECE77D251AABD59B00E9A766 /* UPApiService.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE77D241AABD59B00E9A766 /* UPApiService.m */; };
+		ECE77D281AACDE0C00E9A766 /* PhysicalWellnessAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE77D271AACDE0C00E9A766 /* PhysicalWellnessAreaView.m */; };
+		ECE77D2B1AAD019600E9A766 /* AggregationAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE77D2A1AAD019600E9A766 /* AggregationAlgorithm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +151,13 @@
 		ECD590011A1AD4CE00DC307F /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 		ECDE86011A8C603F00310EB6 /* CalenderEventView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalenderEventView.h; sourceTree = "<group>"; };
 		ECDE86021A8C605E00310EB6 /* CalenderEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalenderEventView.m; sourceTree = "<group>"; };
+		ECE77D211AABD52500E9A766 /* UPPlatformSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UPPlatformSDK.framework; sourceTree = "<group>"; };
+		ECE77D231AABD58B00E9A766 /* UPApiService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPApiService.h; sourceTree = "<group>"; };
+		ECE77D241AABD59B00E9A766 /* UPApiService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPApiService.m; sourceTree = "<group>"; };
+		ECE77D261AACDDE300E9A766 /* PhysicalWellnessAreaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicalWellnessAreaView.h; sourceTree = "<group>"; };
+		ECE77D271AACDE0C00E9A766 /* PhysicalWellnessAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicalWellnessAreaView.m; sourceTree = "<group>"; };
+		ECE77D291AAD018900E9A766 /* AggregationAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AggregationAlgorithm.h; sourceTree = "<group>"; };
+		ECE77D2A1AAD019600E9A766 /* AggregationAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggregationAlgorithm.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +168,7 @@
 				EC72567E1A0C2990006F87B1 /* CoreGraphics.framework in Frameworks */,
 				EC7256801A0C2990006F87B1 /* UIKit.framework in Frameworks */,
 				EC72567C1A0C2990006F87B1 /* Foundation.framework in Frameworks */,
+				ECE77D221AABD52500E9A766 /* UPPlatformSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +216,7 @@
 		EC72567A1A0C2990006F87B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ECE77D211AABD52500E9A766 /* UPPlatformSDK.framework */,
 				EC72567B1A0C2990006F87B1 /* Foundation.framework */,
 				EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */,
 				EC72567F1A0C2990006F87B1 /* UIKit.framework */,
@@ -380,6 +393,8 @@
 				EC9FD8011A65B48200EE6446 /* DateService.h */,
 				EC9FD8161A7ECF5000EE6446 /* iCalService.h */,
 				EC9FD8171A7ECF6800EE6446 /* iCalService.m */,
+				ECE77D231AABD58B00E9A766 /* UPApiService.h */,
+				ECE77D241AABD59B00E9A766 /* UPApiService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -390,6 +405,10 @@
 				EC9FD8031A6C551800EE6446 /* Factories */,
 				EC9FD7F21A588CD600EE6446 /* WellnessAreaViewController.h */,
 				EC9FD7F41A588D1400EE6446 /* WellnessAreaViewController.m */,
+				ECE77D261AACDDE300E9A766 /* PhysicalWellnessAreaView.h */,
+				ECE77D271AACDE0C00E9A766 /* PhysicalWellnessAreaView.m */,
+				ECE77D291AAD018900E9A766 /* AggregationAlgorithm.h */,
+				ECE77D2A1AAD019600E9A766 /* AggregationAlgorithm.m */,
 			);
 			name = WellnessAreaView;
 			sourceTree = "<group>";
@@ -572,6 +591,7 @@
 				ECACFA2A1A8137E40047285B /* LowerCarouselDateView.m in Sources */,
 				EC9FD7E61A53745900EE6446 /* FulcrumAPIService.m in Sources */,
 				EC9609DC1A107B05001FB02A /* JBLineChartView.m in Sources */,
+				ECE77D281AACDE0C00E9A766 /* PhysicalWellnessAreaView.m in Sources */,
 				EC9FD7EF1A53909300EE6446 /* FulcrumAPIFacade.m in Sources */,
 				EC1580901A1555EC00AEFC84 /* iCarousel.m in Sources */,
 				EC9FD7FE1A6590F200EE6446 /* DailySurveyWellnessAverage.m in Sources */,
@@ -584,6 +604,7 @@
 				EC9FD7F81A5DA64800EE6446 /* JBLineChartFooterView.m in Sources */,
 				EC7256951A0C2990006F87B1 /* LoginViewController.m in Sources */,
 				EC9FD7EC1A538FE700EE6446 /* DailySurveyResponse.m in Sources */,
+				ECE77D251AABD59B00E9A766 /* UPApiService.m in Sources */,
 				EC15809F1A16D44D00AEFC84 /* DailySurveyViewController.m in Sources */,
 				EC9FD7D11A4A64E300EE6446 /* UpperCarouselDataSourceAndDelegate.m in Sources */,
 				EC7256881A0C2990006F87B1 /* main.m in Sources */,
@@ -593,6 +614,7 @@
 				EC9FD8091A6CD6D300EE6446 /* WellnessAreaViewFactory.m in Sources */,
 				EC9FD7D91A4FBB8400EE6446 /* DailySurveyQuestionView.m in Sources */,
 				EC9609CD1A106F80001FB02A /* MainViewController.m in Sources */,
+				ECE77D2B1AAD019600E9A766 /* AggregationAlgorithm.m in Sources */,
 				EC9FD8181A7ECF6800EE6446 /* iCalService.m in Sources */,
 				EC9FD80C1A6E19C600EE6446 /* RegistrationViewContoller.m in Sources */,
 				ECDE86031A8C605E00310EB6 /* CalenderEventView.m in Sources */,
@@ -724,9 +746,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fulcrum/Fulcrum-Prefix.pch";
 				INFOPLIST_FILE = "Fulcrum/Fulcrum-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -740,9 +767,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fulcrum/Fulcrum-Prefix.pch";
 				INFOPLIST_FILE = "Fulcrum/Fulcrum-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
