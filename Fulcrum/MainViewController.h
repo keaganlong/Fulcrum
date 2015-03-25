@@ -19,8 +19,9 @@
 @property (strong,nonatomic) UpperCarouselDataSourceAndDelegate* upperCarouselDataSourceAndDelegate;
 @property (nonatomic, strong) iCarousel *lowerCarousel;
 @property (nonatomic) NSMutableArray *dates;
-@property UIButton* dailySurveyButton;
+@property (strong) UIButton* dailySurveyButton;
 @property CGRect frame;
+@property UIButton* overallWellnessButton;
 
 @property UIButton* todayButton;
 

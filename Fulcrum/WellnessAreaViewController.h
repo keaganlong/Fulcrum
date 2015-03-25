@@ -23,6 +23,8 @@
 @property NSDate* latestDate;
 @property YAxisView* yAxisView;
 
+@property UIView* loadingView;
+@property UIActivityIndicatorView *spinner;
 @property UILabel* selectedDateLabel;
 
 @property WELLNESS_AREA wellnessArea;

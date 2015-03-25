@@ -17,6 +17,8 @@
 #import "iCalService.h"
 #import "UPApiService.h"
 #import <UPPlatformSDK/UPPlatformSDK.h>
+#import "WellnessAreaViewController.h"
+#import "WellnessAreaViewFactory.h"
 
 @implementation MainViewController
 
@@ -46,13 +48,33 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     self.upperCarousel.type = iCarouselTypeLinear;
     self.upperCarousel.delegate = self.upperCarouselDataSourceAndDelegate;
     self.upperCarousel.dataSource = self.upperCarouselDataSourceAndDelegate;
+    self.upperCarousel.wrapEnabled = YES;
+    //self.upperCarousel.layer.borderColor = [[UIColor redColor] CGColor];
+    //self.upperCarousel.layer.borderWidth = 4.0;
     
     [self.view addSubview:self.upperCarousel];
     
-    [self initDailySurveyButton];
+    UIButton* overallWellnessButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    overallWellnessButton.frame = CGRectMake(-80+self.frame.size.width/2,220,160,40);
+    [overallWellnessButton setTitle:@"Overall Wellness" forState:UIControlStateNormal];
+    [overallWellnessButton setBackgroundColor:[UIColor greenColor]];
+    [overallWellnessButton setTintColor:[UIColor whiteColor]];
+    [overallWellnessButton addTarget:self action:@selector(onOverallWellnessButtonOnTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:overallWellnessButton];
+    [self setOverallWellnessButton:overallWellnessButton];
+    
     
     [self initCalender];
+    
+    
 
+}
+
+
+-(IBAction)onOverallWellnessButtonOnTouchUpInside:(id)sender{
+    WellnessAreaViewController* controller = [WellnessAreaViewFactory wellnessAreaViewControllerForWellnessArea:OVERALL];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)initCalender{
@@ -69,10 +91,11 @@ CGFloat const CAROUSEL_HEIGHT = 200;
                    ^{
 
                        
-                       self.lowerCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0,220,self.frame.size.width,400)];
+                       self.lowerCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0,290,self.frame.size.width,270)];
                        self.lowerCarousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
                        self.lowerCarousel.type = iCarouselTypeLinear;
-                       
+                       //self.lowerCarousel.layer.borderColor = [[UIColor purpleColor] CGColor];
+                       //self.lowerCarousel.layer.borderWidth = 4.0;
                        LowerCarouselDataSourceAndDelegate* lowerCarouselDSandD = [[LowerCarouselDataSourceAndDelegate alloc] initWithController:self AndWithCarousel:self.lowerCarousel];
                        self.lowerCarouselDataSourceAndDelegate = lowerCarouselDSandD;
                        
@@ -96,21 +119,21 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 -(void)initDailySurveyButton{
     [FulcrumAPIFacade lastDateDailySurveyCompletedForWithCallback:^(NSDate *lastDate) {
         //NSDate* today = [NSDate date];
-        NSDate* today = [DateService dateFromYearMonthDateString:@"2016-02-16"];
-        //NSLog(@"%@ %@",lastDate, today);
+        NSDate* today = [NSDate date];//[DateService dateFromYearMonthDateString:@"2016-04-17"];
+        //NSLog(@"lastDate: %@ today: %@",lastDate, today);
         if([DateService date1:lastDate compareToDate2:today]==NSOrderedAscending){
             dispatch_async(dispatch_get_main_queue(),
                            ^{
-                               UIButton* dailySurveyButton = [[UIButton alloc]initWithFrame:CGRectMake(-80+self.frame.size.width/2,230,160,40)];
-                               NSMutableString* dailySurveyButtonString = [NSMutableString stringWithString:@"Take Daily Survey"];
-                               [dailySurveyButton setTitle:dailySurveyButtonString forState:UIControlStateNormal];
-                               [dailySurveyButton setBackgroundColor:[UIColor blueColor]];
-                               [dailySurveyButton addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-                               [self setDailySurveyButton:dailySurveyButton];
-                               [self.view addSubview:dailySurveyButton];
+                               if(self.dailySurveyButton==nil){
+                                   UIButton* dailySurveyButton = [[UIButton alloc]initWithFrame:CGRectMake(-80+self.frame.size.width/2,280,160,40)];
+                                   NSMutableString* dailySurveyButtonString = [NSMutableString stringWithString:@"Take Daily Survey"];
+                                   [dailySurveyButton setTitle:dailySurveyButtonString forState:UIControlStateNormal];
+                                   [dailySurveyButton setBackgroundColor:[UIColor blueColor]];
+                                   [dailySurveyButton addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+                                   self.dailySurveyButton = dailySurveyButton;
+                                   [self.view addSubview:dailySurveyButton];
+                               }
                            });
-        }
-        else{
         }
     }];
 }
@@ -119,8 +142,8 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     [super viewWillAppear:animated];
     if(self.dailySurveyButton!=nil){
         self.dailySurveyButton.hidden = YES;
-        [self.dailySurveyButton removeFromSuperview];
         self.dailySurveyButton = nil;
+        [self.dailySurveyButton removeFromSuperview];
     }
     [self initDailySurveyButton];
 }

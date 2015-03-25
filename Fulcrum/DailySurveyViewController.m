@@ -124,7 +124,6 @@
     
     UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self saveResponses];
-        [self surveySubmitted];
     }];
     
     [self presentViewController:confirmationAlertController animated:YES completion:^(void) {}];
@@ -137,8 +136,9 @@
     DailySurveyResponse* dailySurveyResponse = [[DailySurveyResponse alloc]init];
     [dailySurveyResponse setSubmissionDate:[NSDate date]];
     //[dailySurveyResponse setForDate:[NSDate date]];
-    NSDate* hackDate = [DateService dateFromYearMonthDateString:@"2015-02-16"];
-    [dailySurveyResponse setForDate:hackDate];
+    //NSDate* hackDate = [DateService dateFromYearMonthDateString:@"2015-04-17"];
+    NSDate* today = [NSDate date];
+    [dailySurveyResponse setForDate:today];
     NSMutableArray* dailySurveyQuestionResponses = [NSMutableArray new];
     for(int i = 0;i<[self.dailySurveyQuestionViews count];i++){
         DailySurveyQuestionView* currView = [self.dailySurveyQuestionViews objectAtIndex:i];
@@ -154,9 +154,12 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* token = [defaults valueForKey:@"access_token"];
     if(token != nil){
-        //NSLog(@"%@",token);
+        CGRect fullFrame = [[UIScreen mainScreen] bounds];
+        UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
+        loadingView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+        [self.view addSubview:loadingView];
         [FulcrumAPIFacade submitDailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
-            NSLog(@"Submit Error: %@",error);
+            [self surveySubmitted];
         }];
     }
 }

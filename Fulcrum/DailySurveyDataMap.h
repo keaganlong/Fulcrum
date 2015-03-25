@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Keagan Long. All rights reserved.
 //
 
-typedef enum { EMOTIONAL, ACADEMIC, PHYSICAL, SOCIAL } WELLNESS_AREA;
+typedef enum { EMOTIONAL, ACADEMIC, PHYSICAL, SOCIAL, OVERALL} WELLNESS_AREA;
 
 @interface DailySurveyDataMap: NSObject
 

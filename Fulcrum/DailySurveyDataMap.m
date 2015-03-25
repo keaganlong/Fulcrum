@@ -64,7 +64,6 @@
         NSString* forDateString = [DateService yearMonthDateStringFromDate:forDate];
         sleepScoreDictionary[forDateString] = currSleep.quality;
     }
-    
 }
 
 -(CGFloat)valueForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area{
@@ -106,6 +105,7 @@
 }
 
 -(CGFloat)getMissingValueForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area{
+    return 0;
     if(self.firstDate == nil || self.lastDate == nil){
         return 0;
     }

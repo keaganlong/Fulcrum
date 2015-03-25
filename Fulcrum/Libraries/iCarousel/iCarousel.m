@@ -117,7 +117,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign, getter = isDecelerating) BOOL decelerating;
 @property (nonatomic, assign) CGFloat previousTranslation;
-@property (nonatomic, assign, getter = isWrapEnabled) BOOL wrapEnabled;
+//@property (nonatomic, assign, getter = isWrapEnabled) BOOL wrapEnabled;
 @property (nonatomic, assign, getter = isDragging) BOOL dragging;
 @property (nonatomic, assign) BOOL didDrag;
 @property (nonatomic, assign) NSTimeInterval toggleTime;
@@ -1062,16 +1062,16 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     switch (_type)
     {
         case iCarouselTypeRotary:
-            _wrapEnabled = YES;
-            break;
+            //_wrapEnabled = NO;
+            //break;
         case iCarouselTypeInvertedRotary:
         case iCarouselTypeCylinder:
         case iCarouselTypeInvertedCylinder:
         case iCarouselTypeWheel:
         case iCarouselTypeInvertedWheel:
         {
-            _wrapEnabled = YES;
-            break;
+            //_wrapEnabled = NO;
+            //break;
         }
         case iCarouselTypeCoverFlow:
         case iCarouselTypeCoverFlow2:
@@ -1080,8 +1080,8 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
         case iCarouselTypeLinear:
         case iCarouselTypeCustom:
         {
-            _wrapEnabled = YES;
-            break;
+            //_wrapEnabled = NO;
+            //break;
         }
     }
     //_wrapEnabled = !![self valueForOption:iCarouselOptionWrap withDefault:_wrapEnabled];

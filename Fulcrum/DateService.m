@@ -116,6 +116,15 @@
 
 
 +(NSComparisonResult)date1:(NSDate*)date1 compareToDate2:(NSDate*)date2{
+    if(date1 == nil && date2 == nil){
+        return NSOrderedSame;
+    }
+    else if(date2==nil){
+        return NSOrderedDescending;
+    }
+    else if(date1==nil){
+        return NSOrderedAscending;
+    }
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];

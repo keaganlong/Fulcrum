@@ -17,54 +17,54 @@
 @implementation FulcrumAPIFacade
 
 -(void)getDailySurveyResponsesWithCallback:(void(^)(NSMutableArray *dailySurveyResponses))callbackFunction{
-//    [FulcrumAPIService getDailySurveyResponsesWithCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        NSError* serializeError = nil;
-//        NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
-//        if([self validateGetDailySurveyResponses:serializedObject]){
-//            NSArray* jsonArray = (NSArray*)serializedObject;
-//            NSMutableArray* dailySurveyResponses = [NSMutableArray new];
-//            for(NSDictionary* dailySurveyResponseDictionary in jsonArray){
-//                DailySurveyResponse* dailySurveyResponse = [self dictionaryToDailySurveyResponse:dailySurveyResponseDictionary];
-//                [dailySurveyResponses addObject:dailySurveyResponse];
-//            }
-//            callbackFunction(dailySurveyResponses);
-//        }
-//        else{
-//            callbackFunction(nil);
-//        }
-//    }];
-    NSMutableArray* arr = [NSMutableArray new];
-    NSMutableArray* dates = [DateService getDateRangeStartingWithDate:[NSDate date] withInteger:74];
-    for(int i = 0; i<[dates count];i++){
-        if(i<0){
-            continue;
-        }
-        DailySurveyResponse* curr = [[DailySurveyResponse alloc] init];
-        NSDate* date = [dates objectAtIndex:i];
-        [curr setForDate:date];
-        NSMutableArray* qrs = [NSMutableArray new];
-        int value = 3;
-        if(i<=[dates count]-20){
-            value = 2;
-            value+=rand()%2;
-        }
-        else if(i>[dates count]-20 && i<[dates count]-10){
-            value = 3;
-            value+=rand()%2;
+    [FulcrumAPIService getDailySurveyResponsesWithCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSError* serializeError = nil;
+        NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
+        if([self validateGetDailySurveyResponses:serializedObject]){
+            NSArray* jsonArray = (NSArray*)serializedObject;
+            NSMutableArray* dailySurveyResponses = [NSMutableArray new];
+            for(NSDictionary* dailySurveyResponseDictionary in jsonArray){
+                DailySurveyResponse* dailySurveyResponse = [self dictionaryToDailySurveyResponse:dailySurveyResponseDictionary];
+                [dailySurveyResponses addObject:dailySurveyResponse];
+            }
+            callbackFunction(dailySurveyResponses);
         }
         else{
-            value = 4;
-            value+=rand()%2;
+            callbackFunction(nil);
         }
-        for(int j = 0; j<10;j++){
-            DailySurveyQuestionResponse* res = [[DailySurveyQuestionResponse alloc] init];
-            [res setValue:value-(rand()%2)];
-            [qrs addObject:res];
-        }
-        [curr setDailySurveyQuestionResponses:qrs];
-        [arr addObject:curr];
-    }
-    callbackFunction(arr);
+    }];
+//    NSMutableArray* arr = [NSMutableArray new];
+//    NSMutableArray* dates = [DateService getDateRangeStartingWithDate:[NSDate date] withInteger:74];
+//    for(int i = 0; i<[dates count];i++){
+//        if(i<0){
+//            continue;
+//        }
+//        DailySurveyResponse* curr = [[DailySurveyResponse alloc] init];
+//        NSDate* date = [dates objectAtIndex:i];
+//        [curr setForDate:date];
+//        NSMutableArray* qrs = [NSMutableArray new];
+//        int value = 3;
+//        if(i<=[dates count]-20){
+//            value = 2;
+//            value+=rand()%2;
+//        }
+//        else if(i>[dates count]-20 && i<[dates count]-10){
+//            value = 3;
+//            value+=rand()%2;
+//        }
+//        else{
+//            value = 4;
+//            value+=rand()%2;
+//        }
+//        for(int j = 0; j<10;j++){
+//            DailySurveyQuestionResponse* res = [[DailySurveyQuestionResponse alloc] init];
+//            [res setValue:value-(rand()%2)];
+//            [qrs addObject:res];
+//        }
+//        [curr setDailySurveyQuestionResponses:qrs];
+//        [arr addObject:curr];
+//    }
+//    callbackFunction(arr);
 }
 
 -(BOOL)validateGetDailySurveyResponses:(NSObject*)object{
@@ -111,7 +111,7 @@
         NSDictionary* jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&deserializeError];
         if(jsonDictionary[@"ModelState"]!=nil){
             NSDictionary* modelStateDictionary = jsonDictionary[@"ModelState"];
-            NSString* errorMessage = modelStateDictionary[@""];
+            NSString* errorMessage = modelStateDictionary[@""][1];
             callbackFunction(errorMessage);
         }
         else{
@@ -183,6 +183,7 @@
             else{
                 NSError* serializeError;
                 NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
+                NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 if([self validateGetDailySurveyResponse:serializedObject]){
                     NSDictionary* dict = (NSDictionary*)serializedObject;
                     DailySurveyResponse* lastResponse = [self dictionaryToDailySurveyResponse:dict];

@@ -30,8 +30,8 @@
     
     [self.view addGestureRecognizer:tap];
     
-    [self.emailTextField setText:@"k@k.com"];
-    [self.passwordTextField setText:@"kkkkkk"];
+    [self.emailTextField setText:@"qwe@qwe.com"];
+    [self.passwordTextField setText:@"qweqwe"];
 }
 
 - (void)didReceiveMemoryWarning

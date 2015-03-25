@@ -23,67 +23,117 @@
     self = [super init];
     if(self){
         self.wellnessArea = area;
-        
-        CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-        UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,70,appFrame.size.width-20,30)];
-        [titleLabel setText:@"Social"];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        [titleLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 26.0f]];
-        [self.view addSubview:titleLabel];
-        
-        UIButton* allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [allButton setTitle:@"All" forState:UIControlStateNormal];
-        [allButton addTarget:self action:@selector(onTouchUpInsideAllButton:) forControlEvents:UIControlEventTouchUpInside];
-        allButton.frame = CGRectMake(0,100,60,60);
-        
-        UIButton* threeMonthButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [threeMonthButton setTitle:@"3Mo" forState:UIControlStateNormal];
-        [threeMonthButton addTarget:self action:@selector(onTouchUpInsideThreeMonthButton:) forControlEvents:UIControlEventTouchUpInside];
-        threeMonthButton.frame = CGRectMake(45,100,60,60);
-        
-        UIButton* monthButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        monthButton.frame = CGRectMake(95,100,60,60);
-        [monthButton setTitle:@"1Mo" forState:UIControlStateNormal];
-        [monthButton addTarget:self action:@selector(onTouchUpInsideMonthButton:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIButton* weekButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [weekButton setTitle:@"Week" forState:UIControlStateNormal];
-        [weekButton addTarget:self action:@selector(onTouchUpInsideWeekButton:) forControlEvents:UIControlEventTouchUpInside];
-        weekButton.frame = CGRectMake(150,100,60,60);
-
-        [self.view addSubview:allButton];
-        [self.view addSubview:threeMonthButton];
-        [self.view addSubview:monthButton];
-        [self.view addSubview:weekButton];
-        
-        self.view.backgroundColor = [UIColor whiteColor];
-        JBLineChartView* lineChartView = [[JBLineChartView alloc] init];
-        CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
-        lineChartView.frame = CGRectMake(35,150,screenFrame.size.width-40,screenFrame.size.height-150);
-        [lineChartView setDataSource:self];
-        [lineChartView setDelegate:self];
-        [lineChartView setMinimumValue:0];
-        [lineChartView setMaximumValue:5];
-        [lineChartView setHeaderPadding:50];
-        [lineChartView setFooterPadding:0];
-        
-        [self setLineChartView:lineChartView];
-        [self.view addSubview:self.lineChartView];
-        [lineChartView setHeaderView:nil];
-        
-        self.selectedDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(-100+screenFrame.size.width/2.0,160,240,25)];
-        [self.selectedDateLabel setFont:[UIFont fontWithName:@"Helvetica" size:16.0]];
-        [self.view addSubview:self.selectedDateLabel];
-        
-        YAxisView* yAxisView = [[YAxisView alloc] initWithFrame:CGRectMake(10,150,25,screenFrame.size.height-150) AndHeaderPadding:50 StartValue:0 EndValue:5];
-        
-        [self setYAxisView:yAxisView];
-        [self.view addSubview:yAxisView];
+        [self initView];
+        [self hideGraph];
+        [self startLoading];
         [self initData];
     }
     return self;
 }
 
+-(void)hideGraph{
+    self.lineChartView.hidden = YES;
+    self.yAxisView.hidden = YES;
+}
+
+-(void)showGraph{
+    self.lineChartView.hidden = NO;
+    self.yAxisView.hidden = NO;
+}
+
+-(void)startLoading{
+    self.loadingView.hidden = NO;
+    self.spinner.hidden = NO;
+}
+
+-(void)endLoading{
+    self.loadingView.hidden = YES;
+    self.spinner.hidden = YES;
+    //[self.loadingView removeFromSuperview];
+    //[self.spinner removeFromSuperview];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+}
+
+-(void)initView{
+    CGRect fullFrame = [[UIScreen mainScreen] bounds];
+    UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
+    loadingView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.5];
+    [self.view addSubview:loadingView];
+    self.loadingView = loadingView;
+    self.loadingView.hidden = YES;
+    
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center = CGPointMake(self.view.center.x, self.view.center.y);
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
+    self.spinner = spinner;
+    self.spinner.hidden = YES;
+    
+    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,70,appFrame.size.width-20,30)];
+    [titleLabel setText:@"Social"];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 26.0f]];
+    [self.view addSubview:titleLabel];
+    
+    UIButton* allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [allButton setTitle:@"All" forState:UIControlStateNormal];
+    [allButton addTarget:self action:@selector(onTouchUpInsideAllButton:) forControlEvents:UIControlEventTouchUpInside];
+    allButton.frame = CGRectMake(0,100,60,60);
+    
+    UIButton* threeMonthButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [threeMonthButton setTitle:@"3Mo" forState:UIControlStateNormal];
+    [threeMonthButton addTarget:self action:@selector(onTouchUpInsideThreeMonthButton:) forControlEvents:UIControlEventTouchUpInside];
+    threeMonthButton.frame = CGRectMake(45,100,60,60);
+    
+    UIButton* monthButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    monthButton.frame = CGRectMake(95,100,60,60);
+    [monthButton setTitle:@"1Mo" forState:UIControlStateNormal];
+    [monthButton addTarget:self action:@selector(onTouchUpInsideMonthButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton* weekButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [weekButton setTitle:@"Week" forState:UIControlStateNormal];
+    [weekButton addTarget:self action:@selector(onTouchUpInsideWeekButton:) forControlEvents:UIControlEventTouchUpInside];
+    weekButton.frame = CGRectMake(150,100,60,60);
+    
+    [self.view addSubview:allButton];
+    [self.view addSubview:threeMonthButton];
+    [self.view addSubview:monthButton];
+    [self.view addSubview:weekButton];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
+    
+    self.selectedDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(-100+screenFrame.size.width/2.0,160,240,25)];
+    [self.selectedDateLabel setFont:[UIFont fontWithName:@"Helvetica" size:16.0]];
+    [self.view addSubview:self.selectedDateLabel];
+    
+    YAxisView* yAxisView = [[YAxisView alloc] initWithFrame:CGRectMake(10,150,25,screenFrame.size.height-150) AndHeaderPadding:50 StartValue:0 EndValue:5];
+    
+    [self setYAxisView:yAxisView];
+    [self.view addSubview:yAxisView];
+    [self initChart];
+}
+
+-(void)initChart{
+    JBLineChartView* lineChartView = [[JBLineChartView alloc] init];
+    CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
+    lineChartView.frame = CGRectMake(35,150,screenFrame.size.width-40,screenFrame.size.height-150);
+    
+    [lineChartView setMinimumValue:0];
+    [lineChartView setMaximumValue:5];
+    [lineChartView setHeaderPadding:50];
+    [lineChartView setFooterPadding:0];
+    [lineChartView setDataSource:self];
+    [lineChartView setDelegate:self];
+    [self setLineChartView:lineChartView];
+    [self.view addSubview:self.lineChartView];
+    [lineChartView setHeaderView:nil];
+}
 
 -(void)setGraphBackgroundColor:(UIColor*)color{
     [self.lineChartView setBackgroundColor:color];
@@ -93,24 +143,28 @@
 - (IBAction)onTouchUpInsideAllButton:(id)sender{
     if(self.dailySurveyDataMap != nil){
         [self setRangeToAll];
+        [self.lineChartView reloadData];
     }
 }
 
 - (IBAction)onTouchUpInsideThreeMonthButton:(id)sender{
     if(self.dailySurveyDataMap != nil){
         [self setRangeToThreeMonth];
+        [self.lineChartView reloadData];
     }
 }
 
 - (IBAction)onTouchUpInsideMonthButton:(id)sender{
     if(self.dailySurveyDataMap != nil){
         [self setRangeToMonth];
+        [self.lineChartView reloadData];
     }
 }
 
 - (IBAction)onTouchUpInsideWeekButton:(id)sender{
     if(self.dailySurveyDataMap != nil){
         [self setRangeToWeek];
+        [self.lineChartView reloadData];
     }
 }
 
@@ -125,7 +179,6 @@
     NSString* lastDateString = [DateService monthDayStringForDate:lastDate];
     JBLineChartFooterView *footerView = [GraphFooterFactory footerViewWithFrame:footerFrame numberOfTicks:self.numberOfVerticalValues firstLabel:firstDateString lastLabel:lastDateString];
     [self.lineChartView setFooterView:footerView];
-    [self.lineChartView reloadData];
 }
 
 -(NSMutableArray*)getDateRangeGoingBackBy:(NSInteger)integer{
@@ -207,15 +260,20 @@
                     [self setDailySurveyDataMap:dataMap];
                     [self setEarliestDate:[dataMap firstDate]];
                     [self setLatestDate:[dataMap lastDate]];
-                    [self setRangeToWeek];
                 }];
             }
             else{
                 [self setDailySurveyDataMap:dataMap];
                 [self setEarliestDate:[dataMap firstDate]];
                 [self setLatestDate:[dataMap lastDate]];
-                [self setRangeToWeek];
             }
+            dispatch_async(dispatch_get_main_queue(),
+                ^{
+                    [self setRangeToWeek];
+                    [self.lineChartView reloadData];
+                    [self endLoading];
+                    [self showGraph];
+                });
         }
         else{
             // Alert user
