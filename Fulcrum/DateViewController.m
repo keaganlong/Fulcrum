@@ -21,9 +21,14 @@
             return [[(CalenderEvent *)obj1 StartDate] compare:[(CalenderEvent*)obj2 StartDate]];
         }];
         self.calenderEvents = sortedEvents;
-        UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(10,60,200,30)];
-        NSString* monthDayString = [DateService monthDayStringForDate:date];
+        CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+        UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(0,80,appFrame.size.width,20)];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterFullStyle];
+        [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
+        NSString* monthDayString = [formatter stringFromDate:date];
         [title setText:monthDayString];
+        title.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:title];
         [self initCalenderEventViews];
     }
@@ -41,7 +46,7 @@
 -(void)initCalenderEventViews{
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     fullScreenRect.origin.x = 20;
-    fullScreenRect.origin.y = 100;
+    fullScreenRect.origin.y = 130;
     fullScreenRect.size.height = fullScreenRect.size.height - 120;
     fullScreenRect.size.width = fullScreenRect.size.width - 40;
     

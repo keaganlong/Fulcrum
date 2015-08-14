@@ -8,7 +8,7 @@
 
 @interface StressStrategy : NSObject
 
--(CGFloat)getBarHeigthFromTotalStress:(NSInteger)totalStress;
--(UIColor*)getBarColorFromTotalStress:(NSInteger)totalStress;
++(CGFloat)getBarHeigthFromNumberOfEvents:(NSInteger)numberEvents;
++(UIColor*)getBarColorFromTotalStress:(NSInteger)totalStress;
 
 @end

@@ -104,8 +104,18 @@
 }
 
 -(void)updateCalenderEvent{
+    UIView* savingView = [[UIView alloc] initWithFrame:self.bounds];
+    savingView.backgroundColor = [UIColor colorWithRed:0.455 green:0.455 blue:0.522 alpha:0.3];
+    self.slider.enabled = NO;
+    [self addSubview:savingView];
     [FulcrumAPIFacade updateCalenderEvent:self.calenderEvent withCompletionHandler:^(NSError * error) {
         NSLog(@"Update error: %@",error);
+        dispatch_async(dispatch_get_main_queue(),
+            ^{
+                self.slider.enabled = YES;
+                savingView.hidden = YES;
+                [savingView removeFromSuperview];
+            });
     }];
 }
 

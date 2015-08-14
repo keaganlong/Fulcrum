@@ -10,6 +10,7 @@
 #import "WellnessAreaViewFactory.h"
 #import "WellnessAreaViewController.h"
 #import "PhysicalWellnessAreaView.h"
+#import "FulcrumColors.h"
 
 @implementation WellnessAreaViewFactory
 
@@ -18,23 +19,24 @@
     switch(area){
         case EMOTIONAL:
             controller = [[WellnessAreaViewController alloc] initWithWellnessArea:EMOTIONAL];
-            [controller setGraphBackgroundColor:[UIColor colorWithRed:0.0 green:0.4 blue:0.3 alpha:0.65]];
+            [controller setGraphBackgroundColor:[FulcrumColors emotionalBaseColor]];
             break;
         case ACADEMIC:
             controller = [[WellnessAreaViewController alloc] initWithWellnessArea:ACADEMIC];
-            [controller setGraphBackgroundColor:[UIColor colorWithRed:0.0 green:0.6 blue:0.9 alpha:0.65]];
+            [controller setGraphBackgroundColor:[FulcrumColors academicBaseColor]];
             break;
         case SOCIAL:
             controller = [[WellnessAreaViewController alloc] initWithWellnessArea:SOCIAL];
-            [controller setGraphBackgroundColor:[UIColor colorWithRed:0.0 green:0.7 blue:0.8 alpha:0.65]];
+            [controller setGraphBackgroundColor:[FulcrumColors socialBaseColor]];
             break;
         case PHYSICAL:
             controller = [[PhysicalWellnessAreaView alloc] init];
-            [controller setGraphBackgroundColor:[UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.65]];
+            [controller setGraphBackgroundColor:[FulcrumColors physicalBaseColor]];
             break;
+        case OVERALL:
         default:
-            controller = [[WellnessAreaViewController alloc] initWithWellnessArea:PHYSICAL];
-            [controller setGraphBackgroundColor:[UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.65]];
+            controller = [[WellnessAreaViewController alloc] initWithWellnessArea:OVERALL];
+            [controller setGraphBackgroundColor:[FulcrumColors overallBaseColor]];
             break;
     }
     return controller;

@@ -15,13 +15,9 @@ NSString *const appSecret = @"040527806cacbd1b00bc748ffb710dd2272092f1";
 
 @implementation UPApiService
 
-+(void)getUserPermission{
++(void)getUserPermissionWithCompletionHandler:(void(^)(UPSession*))completionFunction{
     [[UPPlatform sharedPlatform] startSessionWithClientID:clientID clientSecret:appSecret authScope:UPPlatformAuthScopeAll completion:^(UPSession *session, NSError *error) {
-        if(session!=nil){
-            NSLog(@"Jawbone user: %@",session.currentUser);
-        }else{
-            NSLog(@"session nil");
-        }
+        completionFunction(session);
     }];
 }
 
@@ -31,6 +27,10 @@ NSString *const appSecret = @"040527806cacbd1b00bc748ffb710dd2272092f1";
     }];
 }
 
-
++(void)getEventsWithCompletionHandler:(void(^)(NSArray*))completionFunction{
+    [UPMoveAPI getMovesWithLimit:1000 completion:^(NSArray *results, UPURLResponse *response, NSError *error) {
+        completionFunction(results);
+    }];
+}
 
 @end

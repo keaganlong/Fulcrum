@@ -30,6 +30,9 @@
         self.passwordConfirmTextField = [self textFieldWithFrame:CGRectMake(20,200,250,30)];
         self.passwordConfirmTextField.placeholder = @"Confirm Password";
         
+        self.passwordTextField.secureTextEntry = YES;
+        self.passwordConfirmTextField.secureTextEntry = YES;
+        
         [self.view addSubview:self.emailTextField];
         [self.view addSubview:self.passwordTextField];
         [self.view addSubview:self.passwordConfirmTextField];

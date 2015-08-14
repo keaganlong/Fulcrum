@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000785959B9B5417B00D753D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0D770F5056D58C14543C18 /* libPods.a */; };
 		EC1580901A1555EC00AEFC84 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC15808F1A1555EC00AEFC84 /* iCarousel.m */; };
 		EC15809A1A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1580991A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m */; };
 		EC15809F1A16D44D00AEFC84 /* DailySurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC15809E1A16D44D00AEFC84 /* DailySurveyViewController.m */; };
@@ -57,6 +58,7 @@
 		ECE77D251AABD59B00E9A766 /* UPApiService.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE77D241AABD59B00E9A766 /* UPApiService.m */; };
 		ECE77D281AACDE0C00E9A766 /* PhysicalWellnessAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE77D271AACDE0C00E9A766 /* PhysicalWellnessAreaView.m */; };
 		ECE77D2B1AAD019600E9A766 /* AggregationAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE77D2A1AAD019600E9A766 /* AggregationAlgorithm.m */; };
+		ECF354BF1AC47C080037C4C5 /* FulcrumColors.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF354BE1AC47C080037C4C5 /* FulcrumColors.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B69524CAFD4ED3468B10FF38 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D2985CFAAFCD27BFA53513C0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EC15808E1A1555EC00AEFC84 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		EC15808F1A1555EC00AEFC84 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		EC1580991A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LowerCarouselDataSourceAndDelegate.m; path = ../LowerCarouselDataSourceAndDelegate.m; sourceTree = "<group>"; };
@@ -158,6 +162,9 @@
 		ECE77D271AACDE0C00E9A766 /* PhysicalWellnessAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicalWellnessAreaView.m; sourceTree = "<group>"; };
 		ECE77D291AAD018900E9A766 /* AggregationAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AggregationAlgorithm.h; sourceTree = "<group>"; };
 		ECE77D2A1AAD019600E9A766 /* AggregationAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggregationAlgorithm.m; sourceTree = "<group>"; };
+		ECF354BE1AC47C080037C4C5 /* FulcrumColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FulcrumColors.m; sourceTree = "<group>"; };
+		ECF354C01AC47C160037C4C5 /* FulcrumColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FulcrumColors.h; sourceTree = "<group>"; };
+		FD0D770F5056D58C14543C18 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +176,7 @@
 				EC7256801A0C2990006F87B1 /* UIKit.framework in Frameworks */,
 				EC72567C1A0C2990006F87B1 /* Foundation.framework in Frameworks */,
 				ECE77D221AABD52500E9A766 /* UPPlatformSDK.framework in Frameworks */,
+				000785959B9B5417B00D753D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +193,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D184FE669C24BCC66B8C917 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D2985CFAAFCD27BFA53513C0 /* Pods.debug.xcconfig */,
+				B69524CAFD4ED3468B10FF38 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EC15808D1A1555EC00AEFC84 /* iCarousel */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +218,7 @@
 				EC7256A61A0C2990006F87B1 /* FulcrumTests */,
 				EC72567A1A0C2990006F87B1 /* Frameworks */,
 				EC7256791A0C2990006F87B1 /* Products */,
+				4D184FE669C24BCC66B8C917 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -221,6 +239,7 @@
 				EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */,
 				EC72567F1A0C2990006F87B1 /* UIKit.framework */,
 				EC7256A01A0C2990006F87B1 /* XCTest.framework */,
+				FD0D770F5056D58C14543C18 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -276,6 +295,7 @@
 		EC72F8701A12F9C600BFD4DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ECF354BD1AC47BD60037C4C5 /* Colors */,
 				ECDE86001A8C600E00310EB6 /* DateView */,
 				ECACFA271A81379A0047285B /* MainView */,
 				EC9FD8121A7D944500EE6446 /* Factories */,
@@ -480,6 +500,15 @@
 			name = DateView;
 			sourceTree = "<group>";
 		};
+		ECF354BD1AC47BD60037C4C5 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				ECF354BE1AC47C080037C4C5 /* FulcrumColors.m */,
+				ECF354C01AC47C160037C4C5 /* FulcrumColors.h */,
+			);
+			name = Colors;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -487,9 +516,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC7256B01A0C2991006F87B1 /* Build configuration list for PBXNativeTarget "Fulcrum" */;
 			buildPhases = (
+				096491875D40D9AE2D78B6B4 /* Check Pods Manifest.lock */,
 				EC7256741A0C2990006F87B1 /* Sources */,
 				EC7256751A0C2990006F87B1 /* Frameworks */,
 				EC7256761A0C2990006F87B1 /* Resources */,
+				6A8EE617C708576E1C59CAF9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -577,6 +608,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		096491875D40D9AE2D78B6B4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6A8EE617C708576E1C59CAF9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EC7256741A0C2990006F87B1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -601,6 +665,7 @@
 				EC15809A1A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m in Sources */,
 				EC9FD7D61A4FB6E200EE6446 /* DailySurveyQuestion.m in Sources */,
 				EC9609DA1A107B05001FB02A /* JBBarChartView.m in Sources */,
+				ECF354BF1AC47C080037C4C5 /* FulcrumColors.m in Sources */,
 				EC9FD7F81A5DA64800EE6446 /* JBLineChartFooterView.m in Sources */,
 				EC7256951A0C2990006F87B1 /* LoginViewController.m in Sources */,
 				EC9FD7EC1A538FE700EE6446 /* DailySurveyResponse.m in Sources */,
@@ -741,7 +806,12 @@
 		};
 		EC7256B11A0C2991006F87B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2985CFAAFCD27BFA53513C0 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -753,16 +823,23 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fulcrum/Fulcrum-Prefix.pch";
 				INFOPLIST_FILE = "Fulcrum/Fulcrum-Info.plist";
-				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		EC7256B21A0C2991006F87B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B69524CAFD4ED3468B10FF38 /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -774,9 +851,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fulcrum/Fulcrum-Prefix.pch";
 				INFOPLIST_FILE = "Fulcrum/Fulcrum-Info.plist";
-				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

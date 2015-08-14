@@ -56,6 +56,22 @@
 -(void) viewWillAppear:(BOOL)animated{
 }
 
+-(NSString*)nameForWellnessArea:(WELLNESS_AREA)area{
+    switch(area){
+        case ACADEMIC:
+            return @"Academic";
+        case EMOTIONAL:
+            return @"Emotional";
+        case PHYSICAL:
+            return @"Physical";
+        case SOCIAL:
+            return @"Social";
+        case OVERALL:
+        default:
+            return @"Overall";
+    }
+}
+
 -(void)initView{
     CGRect fullFrame = [[UIScreen mainScreen] bounds];
     UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
@@ -73,7 +89,8 @@
     
     CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
     UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,70,appFrame.size.width-20,30)];
-    [titleLabel setText:@"Social"];
+    NSString* wellnessAreaName = [self nameForWellnessArea:self.wellnessArea];
+    [titleLabel setText:wellnessAreaName];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 26.0f]];
     [self.view addSubview:titleLabel];
@@ -133,6 +150,10 @@
     [self setLineChartView:lineChartView];
     [self.view addSubview:self.lineChartView];
     [lineChartView setHeaderView:nil];
+    
+    self.selectedDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(-100+screenFrame.size.width/2.0,160,240,25)];
+    [self.selectedDateLabel setFont:[UIFont fontWithName:@"Helvetica" size:16.0]];
+    [self.view addSubview:self.selectedDateLabel];
 }
 
 -(void)setGraphBackgroundColor:(UIColor*)color{
@@ -169,6 +190,10 @@
 }
 
 -(void)setRangeToInteger:(NSInteger)integer{
+    if(self.earliestDate == nil){
+        self.numberOfVerticalValues = 0;
+        return;
+    }
     self.currentDateRange = [self getDateRangeGoingBackBy:integer];
     self.numberOfVerticalValues = [self.currentDateRange count];
     CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
@@ -199,7 +224,7 @@
 -(BOOL)date:(NSDate*)date1 preceedsDate:(NSDate*)date2{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
     NSString* date1String = [formatter stringFromDate:date1];
     NSString* date2String = [formatter stringFromDate:date2];
     //NSLog(@"NO  d1 %@ d2 %@ d1s %@ d2s %@",date1,date2,date1String,date2String);
@@ -214,7 +239,7 @@
 -(BOOL)date:(NSDate*)date1 exceedsDate:(NSDate*)date2{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
     NSString* date1String = [formatter stringFromDate:date1];
     NSString* date2String = [formatter stringFromDate:date2];
     //NSLog(@"NO  d1 %@ d2 %@ d1s %@ d2s %@",date1,date2,date1String,date2String);
@@ -254,26 +279,38 @@
     [FulcrumAPIFacade getDailySurveyResponsesWithCallback:^(NSMutableArray *dailySurveyResponses) {
         if(dailySurveyResponses!=nil){
             DailySurveyDataMap* dataMap = [[DailySurveyDataMap alloc] initWithDailySurveyResponses:dailySurveyResponses];
-            if(self.wellnessArea == PHYSICAL){
+            if(self.wellnessArea == PHYSICAL || self.wellnessArea == OVERALL){
                 [UPApiService getSleepsWithCompletionHandler:^(NSArray* sleeps) {
-                    [dataMap setSleeps:sleeps];
-                    [self setDailySurveyDataMap:dataMap];
-                    [self setEarliestDate:[dataMap firstDate]];
-                    [self setLatestDate:[dataMap lastDate]];
+                    [UPApiService getEventsWithCompletionHandler:^(NSArray * moves) {
+                        [dataMap setSleeps:sleeps];
+                        [dataMap setMoves:moves];
+                        [self setDailySurveyDataMap:dataMap];
+                        [self setEarliestDate:[dataMap firstDate]];
+                        [self setLatestDate:[dataMap lastDate]];
+                        
+                        dispatch_async(dispatch_get_main_queue(),
+                                       ^{
+                                           [self setRangeToWeek];
+                                           [self.lineChartView reloadData];
+                                           [self endLoading];
+                                           [self showGraph];
+                                       });
+                    }];
                 }];
             }
             else{
                 [self setDailySurveyDataMap:dataMap];
                 [self setEarliestDate:[dataMap firstDate]];
                 [self setLatestDate:[dataMap lastDate]];
+                dispatch_async(dispatch_get_main_queue(),
+                               ^{
+                                   [self setRangeToWeek];
+                                   [self.lineChartView reloadData];
+                                   [self endLoading];
+                                   [self showGraph];
+                               });
             }
-            dispatch_async(dispatch_get_main_queue(),
-                ^{
-                    [self setRangeToWeek];
-                    [self.lineChartView reloadData];
-                    [self endLoading];
-                    [self showGraph];
-                });
+
         }
         else{
             // Alert user
@@ -294,6 +331,9 @@
 
 - (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView
 {
+    if(self.earliestDate == nil){
+        return 0;
+    }
     return 1;
 }
 
@@ -305,7 +345,7 @@
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex
 {
-    if(self.dailySurveyDataMap == nil){
+    if(self.dailySurveyDataMap == nil || self.earliestDate == nil){
         //NSLog(@"Map is nuLL");
         return 0;
     }
@@ -355,9 +395,12 @@
 }
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView dotRadiusForDotAtHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex{
+    if(self.earliestDate == nil){
+        return 0;
+    }
     if(self.dailySurveyDataMap != nil){
         NSDate* dateAtIndex = [self.currentDateRange objectAtIndex:horizontalIndex];
-        if([self.dailySurveyDataMap dataExistsForDate:dateAtIndex]){
+        if([self.dailySurveyDataMap dataExistsForDate:dateAtIndex forWellnessArea:self.wellnessArea]){
             return self.dotRadius;
         }
         else{
@@ -381,6 +424,9 @@
 
 - (void)lineChartView:(JBLineChartView *)lineChartView didSelectLineAtIndex:(NSUInteger)lineIndex horizontalIndex:(NSUInteger)horizontalIndex touchPoint:(CGPoint)touchPoint
 {
+    if(self.earliestDate == nil){
+        return;
+    }
     NSDate* selectedDate = [self.currentDateRange objectAtIndex:horizontalIndex];
     NSString* selectedDateString = [DateService readableStringFromDate:selectedDate];
     [self.selectedDateLabel setText:selectedDateString];

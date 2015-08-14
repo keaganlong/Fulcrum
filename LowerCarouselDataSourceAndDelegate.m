@@ -31,11 +31,11 @@
 }
 
 -(void)initCalenderEvents{
-    self.dates = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:7 daysFuture:7];
-    NSDate* startDate = [self.dates firstObject];
-    NSDate* endDate = [self.dates lastObject];
+    self.dates = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:1 daysFuture:13];
+    NSMutableArray* d = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:2 daysFuture:14];
+   
     self.eventMap = [NSMutableDictionary new];
-    [FulcrumAPIFacade getCalenderEventsWithStartDate:startDate AndEndDate:endDate withCompletionHandler:^(NSArray *calenderEvents) {
+    [FulcrumAPIFacade getCalenderEventsWithStartDate:[d firstObject] AndEndDate:[d lastObject] withCompletionHandler:^(NSArray *calenderEvents) {
         if(calenderEvents!=nil){
             NSLog(@"Retrived: %lu calender events",[calenderEvents count]);
             [self processCalenderEvents:calenderEvents];
@@ -45,6 +45,10 @@
         dispatch_async(dispatch_get_main_queue(),
                        ^{
                            [self.carousel reloadData];
+                           CGRect dateBarFrame = CGRectMake(0, 426, 500, 10);
+                           UIView* dateBar = [[UIView alloc] initWithFrame:dateBarFrame];
+                           [dateBar setBackgroundColor:[UIColor blackColor]];
+                           [self.parentViewController.view addSubview:dateBar];
                        });
     }];
 }
@@ -72,22 +76,24 @@
     EKEventStore* store = [iCalService currentStore];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
-    NSDateComponents *oneWeekBeforeNowComponents = [[NSDateComponents alloc] init];
-    oneWeekBeforeNowComponents.day = -7;
+    //NSDateComponents *oneWeekBeforeNowComponents = [[NSDateComponents alloc] init];
+    //oneWeekBeforeNowComponents.day = -7;
     
-    NSDate *oneWeekBeforeNow = [calendar dateByAddingComponents:oneWeekBeforeNowComponents
+    
+//    NSDate *oneWeekBeforeNow = [calendar dateByAddingComponents:oneWeekBeforeNowComponents
+//                                                       toDate:[NSDate date]
+//                                                      options:0];
+    
+    NSDateComponents *twoWeeksFromNowComponents = [[NSDateComponents alloc] init];
+    twoWeeksFromNowComponents.day = 14;
+    
+    NSDate *twoWeeksFromNow = [calendar dateByAddingComponents:twoWeeksFromNowComponents
                                                        toDate:[NSDate date]
                                                       options:0];
-    
-    NSDateComponents *oneWeekFromNowComponents = [[NSDateComponents alloc] init];
-    oneWeekFromNowComponents.day = 7;
-    
-    NSDate *oneWeekFromNow = [calendar dateByAddingComponents:oneWeekFromNowComponents
-                                                       toDate:[NSDate date]
-                                                      options:0];
-    NSPredicate *predicate = [store predicateForEventsWithStartDate:oneWeekBeforeNow
-                                                            endDate:oneWeekFromNow
+    NSPredicate *predicate = [store predicateForEventsWithStartDate:[NSDate date]
+                                                            endDate:twoWeeksFromNow
                                                           calendars:nil];
+    
     NSArray* eventsUnsorted = [store eventsMatchingPredicate:predicate];
     NSArray* events = [eventsUnsorted sortedArrayUsingSelector:@selector(compareStartDateWithEvent:)];
     NSMutableArray* eventsToAdd = [NSMutableArray new];
@@ -98,6 +104,7 @@
         [hackedEventIdentifier appendString:startDateString];
         if(![self.currentEventsSet containsObject:hackedEventIdentifier]){
             [self.currentEventsSet addObject:hackedEventIdentifier];
+            NSLog(@"\t Unseen: %@",event.title);
             [eventsToAdd addObject:event];
         }
     }
@@ -109,6 +116,7 @@
         NSMutableString* hackedEventIdentifier = [NSMutableString stringWithString:event.eventIdentifier];
         NSString* startDateString = [DateService yearMonthDateStringFromDate:event.startDate];
         [hackedEventIdentifier appendString:startDateString];
+        NSLog(@"\t Creating: %@",event.title);
         calenderEvent.EventIdentifier = hackedEventIdentifier;
         calenderEvent.StressLevel = 0;
         calenderEvent.Rated = false;
@@ -123,7 +131,7 @@
     }
     [FulcrumAPIFacade addCalenderEvents:calenderEvents withCompletionHandler:^(NSError * error) {
         if(error != nil){
-            NSLog(@"Error: %@",error);
+            NSLog(@"Adding Calender Events Error: %@",error);
         }
         [self processCalenderEvents:calenderEvents];
     }];
@@ -140,11 +148,12 @@
 //    if(view!=nil){
 //        return view;
 //    }
-    index = (7+index)%[self.dates count];
+    //index = (7+index)%[self.dates count];
     NSDate* date = [self.dates objectAtIndex:index];
     NSInteger totalStress = [self getTotalStressForDate:date];
+    NSInteger numEvents = [self getNumberOfEventsForDate:date];
     
-    LowerCarouselDateView* newView = [[LowerCarouselDateView alloc] initWithDate:date AndTotalStress:totalStress];
+    LowerCarouselDateView* newView = [[LowerCarouselDateView alloc] initWithDate:date AndTotalStress:totalStress AndNumEvents:numEvents];
     [newView setTag:index];
     NSString* dateString = [DateService yearMonthDateStringFromDate:date];
     if([self.needsRatingSet containsObject:dateString]){
@@ -171,9 +180,32 @@
     NSMutableArray* calenderEvents = [self getCalenderEventsForDate:date];
     for(int i = 0; i<[calenderEvents count];i++){
         CalenderEvent* currCalenderEvent = [calenderEvents objectAtIndex:i];
-        output+= currCalenderEvent.StressLevel;
+        output+= [self stressFunction:currCalenderEvent.StressLevel];
     }
     return output;
+}
+
+-(NSInteger)stressFunction:(NSInteger)stressLevel{
+    switch(stressLevel){
+        case 0:
+            return 0;
+        case 1:
+            return 0;
+        case 2:
+            return 1;
+        case 3:
+            return 5;
+        case 4:
+            return 8;
+        case 5:
+        default:
+            return 12;
+    }
+}
+
+-(NSInteger)getNumberOfEventsForDate:(NSDate*)date{
+    NSMutableArray* calenderEvents = [self getCalenderEventsForDate:date];
+    return [calenderEvents count];
 }
 
 -(IBAction)onTap:(id)sender{

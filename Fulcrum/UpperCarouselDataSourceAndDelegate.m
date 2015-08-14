@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "WellnessAreaViewFactory.h"
 #import "WellnessAreaViewController.h"
+#import "FulcrumColors.h"
 
 @implementation UpperCarouselDataSourceAndDelegate
 
@@ -63,25 +64,25 @@
         case 0:
             [label setText: @"Emotional"];
             [view setTag:0];
-            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.4 blue:0.3 alpha:0.8];
+            view.backgroundColor = [FulcrumColors emotionalBaseColor];
             [self addGestureToView:view];
             break;
         case 1:
             [view setTag:1];
             [label setText: @"Social"];
-            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.7 blue:0.8 alpha:0.8];
+            view.backgroundColor = [FulcrumColors socialBaseColor];
             [self addGestureToView:view];
             break;
         case 2:
             [label setText: @"Physical"];
             [view setTag:2];
-            view.backgroundColor = [UIColor colorWithRed:0.1 green:0.04 blue:0.9 alpha:0.8];
+            view.backgroundColor = [FulcrumColors physicalBaseColor];
             [self addGestureToView:view];
             break;
         default:
             [view setTag:3];
             [label setText: @"Academic"];
-            view.backgroundColor = [UIColor colorWithRed:0.0 green:0.6 blue:0.9 alpha:0.8];
+            view.backgroundColor = [FulcrumColors academicBaseColor];
             [self addGestureToView:view];
     }
     //set label

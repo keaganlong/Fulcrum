@@ -10,6 +10,6 @@
 
 @interface AggregationAlgorithm : NSObject
 
-+(NSNumber*)phyiscalScoreWithDailySurveyScore:(NSNumber*)dailySurveyPhysicalScore sleepQuality:(NSNumber*)sleepQuality;
++(NSNumber*)phyiscalScoreWithDailySurveyScore:(NSNumber*)dailySurveyPhysicalScore sleepQuality:(NSNumber*)sleepQuality activeCalories:(NSNumber*)activeCalories;
 
 @end

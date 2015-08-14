@@ -15,8 +15,9 @@ typedef enum { EMOTIONAL, ACADEMIC, PHYSICAL, SOCIAL, OVERALL} WELLNESS_AREA;
 
 -(id)initWithDailySurveyResponses:(NSMutableArray*)dailySurveyResponses;
 -(CGFloat)valueForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area;
--(BOOL)dataExistsForDate:(NSDate*)date;
+-(BOOL)dataExistsForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area;
 -(void)setSleeps:(NSArray*)sleeps;
+-(void)setMoves:(NSArray*)events;
 
 @end
 

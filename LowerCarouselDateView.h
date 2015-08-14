@@ -10,15 +10,14 @@
 
 @interface LowerCarouselDateView : UIView
 
-@property StressStrategy* stressStrategy;
-
 @property NSDate* date;
 @property NSInteger totalStress;
+@property NSInteger numEvents;
 
 @property UIView* barView;
 @property UIView* circleView;
 
--(id)initWithDate:(NSDate*)date AndTotalStress:(NSInteger)totalStress;
+-(id)initWithDate:(NSDate*)date AndTotalStress:(NSInteger)totalStress AndNumEvents:(NSInteger)numEvents;
 -(void)setNeedsRating;
 
 @end

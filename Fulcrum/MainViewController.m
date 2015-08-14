@@ -19,6 +19,7 @@
 #import <UPPlatformSDK/UPPlatformSDK.h>
 #import "WellnessAreaViewController.h"
 #import "WellnessAreaViewFactory.h"
+#import "FulcrumColors.h"
 
 @implementation MainViewController
 
@@ -29,17 +30,26 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 -(id)init{
     self = [super init];
     if(self){
-        [self initView];
-        [[self dailySurveyButton] addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+        [UPApiService getUserPermissionWithCompletionHandler:^(UPSession * session) {
+            [self initView];
+            [[self dailySurveyButton] addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+        }];
     }
     return self;
 }
 
 - (void)initView
 {
-    [UPApiService getUserPermission];
     self.frame = [[UIScreen mainScreen] applicationFrame];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+//    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+//    UIView* border = [[UIView alloc] initWithFrame:CGRectMake(0,64, appFrame.size.width, appFrame.size.height-44)];
+//    border.layer.borderWidth = 7.0;
+//    border.layer.borderColor = [[UIColor grayColor] CGColor];
+//    [self.view addSubview:border];
+
+    
     UpperCarouselDataSourceAndDelegate* upperCarouselDSandD = [[UpperCarouselDataSourceAndDelegate alloc] initWithController:self];
     self.upperCarouselDataSourceAndDelegate = upperCarouselDSandD;
     
@@ -55,9 +65,9 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     [self.view addSubview:self.upperCarousel];
     
     UIButton* overallWellnessButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    overallWellnessButton.frame = CGRectMake(-80+self.frame.size.width/2,220,160,40);
+    overallWellnessButton.frame = CGRectMake(-80+self.frame.size.width/2,210,160,40);
     [overallWellnessButton setTitle:@"Overall Wellness" forState:UIControlStateNormal];
-    [overallWellnessButton setBackgroundColor:[UIColor greenColor]];
+    [overallWellnessButton setBackgroundColor:[FulcrumColors overallBaseColor]];
     [overallWellnessButton setTintColor:[UIColor whiteColor]];
     [overallWellnessButton addTarget:self action:@selector(onOverallWellnessButtonOnTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -118,17 +128,17 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 
 -(void)initDailySurveyButton{
     [FulcrumAPIFacade lastDateDailySurveyCompletedForWithCallback:^(NSDate *lastDate) {
-        //NSDate* today = [NSDate date];
-        NSDate* today = [NSDate date];//[DateService dateFromYearMonthDateString:@"2016-04-17"];
+        NSDate* today = [NSDate date];
+        //NSDate* today = [DateService dateFromYearMonthDateString:@"2016-03-22"];
         //NSLog(@"lastDate: %@ today: %@",lastDate, today);
         if([DateService date1:lastDate compareToDate2:today]==NSOrderedAscending){
             dispatch_async(dispatch_get_main_queue(),
                            ^{
                                if(self.dailySurveyButton==nil){
-                                   UIButton* dailySurveyButton = [[UIButton alloc]initWithFrame:CGRectMake(-80+self.frame.size.width/2,280,160,40)];
+                                   UIButton* dailySurveyButton = [[UIButton alloc]initWithFrame:CGRectMake(-80+self.frame.size.width/2,260,160,40)];
                                    NSMutableString* dailySurveyButtonString = [NSMutableString stringWithString:@"Take Daily Survey"];
                                    [dailySurveyButton setTitle:dailySurveyButtonString forState:UIControlStateNormal];
-                                   [dailySurveyButton setBackgroundColor:[UIColor blueColor]];
+                                   [dailySurveyButton setBackgroundColor:[FulcrumColors dailySurveyButtonColor]];
                                    [dailySurveyButton addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
                                    self.dailySurveyButton = dailySurveyButton;
                                    [self.view addSubview:dailySurveyButton];

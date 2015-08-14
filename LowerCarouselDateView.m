@@ -11,12 +11,12 @@
 
 @implementation LowerCarouselDateView
 
--(id)initWithDate:(NSDate*)date AndTotalStress:(NSInteger)totalStress{
+-(id)initWithDate:(NSDate*)date AndTotalStress:(NSInteger)totalStress AndNumEvents:(NSInteger)numEvents{
     self = [self initWithFrame:CGRectMake(0,0,100,260)];
     if(self){
         self.totalStress = totalStress;
         self.date = date;
-        self.stressStrategy = [[StressStrategy alloc] init];
+        self.numEvents = numEvents;
         [self initViews];
     }
     return self;
@@ -32,10 +32,11 @@
 }
 
 -(void)initViews{
-    int barHeight = [self.stressStrategy getBarHeigthFromTotalStress:self.totalStress];
+    
+    int barHeight = [StressStrategy getBarHeigthFromNumberOfEvents:self.numEvents];
     UIView* barView = [[UIView alloc] initWithFrame:CGRectMake(0,0,70,barHeight)];
     
-    UIColor* color = [self.stressStrategy getBarColorFromTotalStress:self.totalStress];
+    UIColor* color = [StressStrategy getBarColorFromTotalStress:self.totalStress];
     
     barView.backgroundColor = color;
     barView.alpha = 0.8;

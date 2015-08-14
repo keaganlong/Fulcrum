@@ -246,7 +246,7 @@
     if(valid){
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:serializedCalenderEvents options:NSJSONWritingPrettyPrinted error:&serializeError];
         [FulcrumAPIService postCalenderEvents:jsonData withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            NSLog(@"Response: %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            NSLog(@"POST CalEvent Response: %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             completionFunction(error);
         }];
     }
