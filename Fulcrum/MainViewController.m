@@ -20,6 +20,7 @@
 #import "WellnessAreaViewController.h"
 #import "WellnessAreaViewFactory.h"
 #import "FulcrumColors.h"
+#import <Parse/Parse.h>
 
 @implementation MainViewController
 
@@ -30,6 +31,7 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 -(id)init{
     self = [super init];
     if(self){
+        self.currDate = [NSDate date];
         [UPApiService getUserPermissionWithCompletionHandler:^(UPSession * session) {
             [self initView];
             [[self dailySurveyButton] addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
@@ -76,9 +78,6 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     
     
     [self initCalender];
-    
-    
-
 }
 
 
@@ -123,15 +122,11 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 }
 
 -(IBAction)onTodayButtonTouchUpInside:(id)sender{
-    [self.lowerCarousel scrollToItemAtIndex:0 animated:YES];
+    [self.lowerCarousel scrollToItemAtIndex:7 animated:YES];
 }
 
 -(void)initDailySurveyButton{
     [FulcrumAPIFacade lastDateDailySurveyCompletedForWithCallback:^(NSDate *lastDate) {
-        NSDate* today = [NSDate date];
-        //NSDate* today = [DateService dateFromYearMonthDateString:@"2016-03-22"];
-        //NSLog(@"lastDate: %@ today: %@",lastDate, today);
-        if([DateService date1:lastDate compareToDate2:today]==NSOrderedAscending){
             dispatch_async(dispatch_get_main_queue(),
                            ^{
                                if(self.dailySurveyButton==nil){
@@ -144,18 +139,29 @@ CGFloat const CAROUSEL_HEIGHT = 200;
                                    [self.view addSubview:dailySurveyButton];
                                }
                            });
-        }
     }];
 }
 
+-(void)dateChangedTo:(NSDate*)newDate{
+    NSString* newDateString = [DateService monthDayStringForDate:newDate];
+    [self.todayButton setTitle:newDateString forState:UIControlStateNormal];
+    self.currDate = newDate;
+}
+
 -(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    if(self.dailySurveyButton!=nil){
-        self.dailySurveyButton.hidden = YES;
-        self.dailySurveyButton = nil;
-        [self.dailySurveyButton removeFromSuperview];
-    }
-    [self initDailySurveyButton];
+    [FulcrumAPIFacade getDailySurveyResponsesWithCallback:^(NSMutableArray *dailySurveyResponses) {
+        if(dailySurveyResponses!=nil){
+            DailySurveyDataMap* dataMap = [[DailySurveyDataMap alloc] initWithDailySurveyResponses:dailySurveyResponses];
+            self.dataMap = dataMap;
+        }
+        [super viewWillAppear:animated];
+        if(self.dailySurveyButton!=nil){
+            self.dailySurveyButton.hidden = YES;
+            self.dailySurveyButton = nil;
+            [self.dailySurveyButton removeFromSuperview];
+        }
+        [self initDailySurveyButton];
+    }];
 }
 
 -(void) loadView{
@@ -168,7 +174,11 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 }
 
 -(IBAction)onDailySurveyButtonTouchUpInside:(id)sender{
-    DailySurveyViewController* dailySurveyViewController = [[DailySurveyViewController alloc]init];
+    DailySurveyResponse* dailySurveyResponse;
+    if(self.dataMap){
+        dailySurveyResponse = [self.dataMap dailySurveyResponseForDate:self.currDate];
+    }
+    DailySurveyViewController* dailySurveyViewController = [[DailySurveyViewController alloc]initWithDailySurveyResponse:dailySurveyResponse];
     [self.navigationController pushViewController:dailySurveyViewController animated:YES];
 }
 

@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "DailySurveyQuestion.h"
+#import "DailySurveyResponse.h"
 
 @interface DailySurveyViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
-@property NSMutableArray* dailySurveyQuestions;
+@property NSArray* dailySurveyQuestions;
 @property NSMutableArray* dailySurveyQuestionViews;
+
+@property DailySurveyResponse* dailySurveyResponse;
+
+-(id)initWithDailySurveyResponse:(DailySurveyResponse*) dailySurveyResponse;
 
 @end

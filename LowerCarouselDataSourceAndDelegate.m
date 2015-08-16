@@ -31,8 +31,8 @@
 }
 
 -(void)initCalenderEvents{
-    self.dates = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:1 daysFuture:13];
-    NSMutableArray* d = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:2 daysFuture:14];
+    self.dates = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:8 daysFuture:8];
+    NSMutableArray* d = [DateService getDateRangeStartingWithDate:[NSDate date] daysPrior:9 daysFuture:9];
    
     self.eventMap = [NSMutableDictionary new];
     [FulcrumAPIFacade getCalenderEventsWithStartDate:[d firstObject] AndEndDate:[d lastObject] withCompletionHandler:^(NSArray *calenderEvents) {
@@ -45,6 +45,7 @@
         dispatch_async(dispatch_get_main_queue(),
                        ^{
                            [self.carousel reloadData];
+                           [self.carousel scrollToItemAtIndex:7 animated:NO];
                            CGRect dateBarFrame = CGRectMake(0, 426, 500, 10);
                            UIView* dateBar = [[UIView alloc] initWithFrame:dateBarFrame];
                            [dateBar setBackgroundColor:[UIColor blackColor]];
@@ -137,6 +138,10 @@
     }];
 }
 
+- (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel{
+    NSDate* newDate = [self.dates objectAtIndex:carousel.currentItemIndex];
+    [self.parentViewController dateChangedTo:newDate];
+}
 
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
@@ -145,10 +150,6 @@
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
-//    if(view!=nil){
-//        return view;
-//    }
-    //index = (7+index)%[self.dates count];
     NSDate* date = [self.dates objectAtIndex:index];
     NSInteger totalStress = [self getTotalStressForDate:date];
     NSInteger numEvents = [self getNumberOfEventsForDate:date];

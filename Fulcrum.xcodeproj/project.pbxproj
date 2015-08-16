@@ -11,6 +11,17 @@
 		EC1580901A1555EC00AEFC84 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC15808F1A1555EC00AEFC84 /* iCarousel.m */; };
 		EC15809A1A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1580991A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m */; };
 		EC15809F1A16D44D00AEFC84 /* DailySurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC15809E1A16D44D00AEFC84 /* DailySurveyViewController.m */; };
+		EC1A89011B7EA70700BF242C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89001B7EA70700BF242C /* Parse.framework */; };
+		EC1A890B1B7EA76400BF242C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89021B7EA76300BF242C /* AudioToolbox.framework */; };
+		EC1A890C1B7EA76400BF242C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89031B7EA76300BF242C /* CFNetwork.framework */; };
+		EC1A890D1B7EA76400BF242C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89041B7EA76300BF242C /* CoreLocation.framework */; };
+		EC1A890E1B7EA76400BF242C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89051B7EA76400BF242C /* libsqlite3.dylib */; };
+		EC1A890F1B7EA76400BF242C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89061B7EA76400BF242C /* libz.dylib */; };
+		EC1A89101B7EA76400BF242C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89071B7EA76400BF242C /* QuartzCore.framework */; };
+		EC1A89111B7EA76400BF242C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89081B7EA76400BF242C /* Security.framework */; };
+		EC1A89121B7EA76400BF242C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89091B7EA76400BF242C /* StoreKit.framework */; };
+		EC1A89131B7EA76400BF242C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A890A1B7EA76400BF242C /* SystemConfiguration.framework */; };
+		EC1A89151B7EA89400BF242C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1A89141B7EA89400BF242C /* Bolts.framework */; };
 		EC72567C1A0C2990006F87B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567B1A0C2990006F87B1 /* Foundation.framework */; };
 		EC72567E1A0C2990006F87B1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */; };
 		EC7256801A0C2990006F87B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC72567F1A0C2990006F87B1 /* UIKit.framework */; };
@@ -80,6 +91,17 @@
 		EC15809B1A16770600AEFC84 /* LowerCarouselDataSourceAndDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LowerCarouselDataSourceAndDelegate.h; path = ../LowerCarouselDataSourceAndDelegate.h; sourceTree = "<group>"; };
 		EC15809E1A16D44D00AEFC84 /* DailySurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailySurveyViewController.m; sourceTree = "<group>"; };
 		EC1580A01A16D45B00AEFC84 /* DailySurveyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DailySurveyViewController.h; path = ../DailySurveyViewController.h; sourceTree = "<group>"; };
+		EC1A89001B7EA70700BF242C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		EC1A89021B7EA76300BF242C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		EC1A89031B7EA76300BF242C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		EC1A89041B7EA76300BF242C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EC1A89051B7EA76400BF242C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		EC1A89061B7EA76400BF242C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		EC1A89071B7EA76400BF242C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EC1A89081B7EA76400BF242C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EC1A89091B7EA76400BF242C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		EC1A890A1B7EA76400BF242C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EC1A89141B7EA89400BF242C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		EC7256781A0C2990006F87B1 /* Fulcrum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fulcrum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC72567B1A0C2990006F87B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -172,11 +194,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1A890B1B7EA76400BF242C /* AudioToolbox.framework in Frameworks */,
+				EC1A890C1B7EA76400BF242C /* CFNetwork.framework in Frameworks */,
+				EC1A890D1B7EA76400BF242C /* CoreLocation.framework in Frameworks */,
+				EC1A890E1B7EA76400BF242C /* libsqlite3.dylib in Frameworks */,
+				EC1A890F1B7EA76400BF242C /* libz.dylib in Frameworks */,
+				EC1A89101B7EA76400BF242C /* QuartzCore.framework in Frameworks */,
+				EC1A89111B7EA76400BF242C /* Security.framework in Frameworks */,
+				EC1A89121B7EA76400BF242C /* StoreKit.framework in Frameworks */,
+				EC1A89131B7EA76400BF242C /* SystemConfiguration.framework in Frameworks */,
 				EC72567E1A0C2990006F87B1 /* CoreGraphics.framework in Frameworks */,
 				EC7256801A0C2990006F87B1 /* UIKit.framework in Frameworks */,
 				EC72567C1A0C2990006F87B1 /* Foundation.framework in Frameworks */,
 				ECE77D221AABD52500E9A766 /* UPPlatformSDK.framework in Frameworks */,
+				EC1A89011B7EA70700BF242C /* Parse.framework in Frameworks */,
 				000785959B9B5417B00D753D /* libPods.a in Frameworks */,
+				EC1A89151B7EA89400BF242C /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +267,17 @@
 		EC72567A1A0C2990006F87B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC1A89141B7EA89400BF242C /* Bolts.framework */,
+				EC1A89001B7EA70700BF242C /* Parse.framework */,
+				EC1A89021B7EA76300BF242C /* AudioToolbox.framework */,
+				EC1A89031B7EA76300BF242C /* CFNetwork.framework */,
+				EC1A89041B7EA76300BF242C /* CoreLocation.framework */,
+				EC1A89051B7EA76400BF242C /* libsqlite3.dylib */,
+				EC1A89061B7EA76400BF242C /* libz.dylib */,
+				EC1A89071B7EA76400BF242C /* QuartzCore.framework */,
+				EC1A89081B7EA76400BF242C /* Security.framework */,
+				EC1A89091B7EA76400BF242C /* StoreKit.framework */,
+				EC1A890A1B7EA76400BF242C /* SystemConfiguration.framework */,
 				ECE77D211AABD52500E9A766 /* UPPlatformSDK.framework */,
 				EC72567B1A0C2990006F87B1 /* Foundation.framework */,
 				EC72567D1A0C2990006F87B1 /* CoreGraphics.framework */,

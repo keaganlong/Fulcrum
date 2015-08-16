@@ -6,9 +6,13 @@
 //  Copyright (c) 2014 Keagan Long. All rights reserved.
 //
 
+#import <Parse/Parse.h>
+
 @interface DailySurveyQuestion: NSObject
 
 @property NSString* questionString;
 @property NSMutableArray* responses;
+
+@property PFObject* pfDailySurveyQuestion;
 
 @end

@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Keagan Long. All rights reserved.
 //
 
+#import "DailySurveyResponse.h"
+
 typedef enum { EMOTIONAL, ACADEMIC, PHYSICAL, SOCIAL, OVERALL} WELLNESS_AREA;
 
 @interface DailySurveyDataMap: NSObject
@@ -18,6 +20,8 @@ typedef enum { EMOTIONAL, ACADEMIC, PHYSICAL, SOCIAL, OVERALL} WELLNESS_AREA;
 -(BOOL)dataExistsForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area;
 -(void)setSleeps:(NSArray*)sleeps;
 -(void)setMoves:(NSArray*)events;
+
+-(DailySurveyResponse*)dailySurveyResponseForDate:(NSDate*)date;
 
 @end
 

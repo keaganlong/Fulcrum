@@ -11,6 +11,7 @@
 #import "JBBarChartView.h"
 #import "LowerCarouselDataSourceAndDelegate.h"
 #import "UpperCarouselDataSourceAndDelegate.h"
+#import "DailySurveyDataMap.h"
 
 @interface MainViewController:UIViewController
 
@@ -25,6 +26,10 @@
 
 @property UIButton* todayButton;
 
+@property DailySurveyDataMap* dataMap;
+@property NSDate* currDate;
+
 -(void)changeToViewController:(UIViewController*)viewController;
+-(void)dateChangedTo:(NSDate*)newDate;
 
 @end

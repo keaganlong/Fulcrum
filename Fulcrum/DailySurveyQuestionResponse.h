@@ -6,9 +6,12 @@
 //  Copyright (c) 2014 Keagan Long. All rights reserved.
 //
 
+#import "DailySurveyQuestion.h"
+
 @interface DailySurveyQuestionResponse : NSObject
 
-@property NSString* title;
-@property NSInteger value;
+@property DailySurveyQuestion* question;
+@property NSString* response;
+@property NSNumber* value;
 
 @end

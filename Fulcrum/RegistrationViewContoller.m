@@ -10,6 +10,7 @@
 #import "RegistrationViewController.h"
 #import "FulcrumAPIFacade.h"
 #import "AlertFactory.h"
+#import <Parse/Parse.h>
 
 @implementation RegistrationViewController
 
@@ -67,8 +68,13 @@
 }
 
 -(void)registerAccountWithEmail:(NSString*)email andPassword:(NSString*)password{
-    [FulcrumAPIFacade registerAccountWithUsername:email andPassword:password withCallback:^(NSString * errorMessage) {
-        if(errorMessage == nil){
+    PFUser* newUser = [PFUser user];
+    newUser.username = email;
+    newUser.password = password;
+    newUser.email = email;
+    
+    [FulcrumAPIFacade registerAccountWithUsername:email andPassword:password withCallback:^(NSError* error) {
+        if(!error){
             dispatch_async(dispatch_get_main_queue(),
                 ^{
                     [self.navigationController popViewControllerAnimated:YES];
@@ -77,7 +83,7 @@
         else{
             dispatch_async(dispatch_get_main_queue(),
                 ^{
-                    UIAlertController* confirmationAlertController = [AlertFactory alertWithMessage:errorMessage];
+                    UIAlertController* confirmationAlertController = [AlertFactory alertWithMessage:@"Error occured."];
                     [self presentViewController:confirmationAlertController animated:YES completion:^(void) {}];
                 });
         }

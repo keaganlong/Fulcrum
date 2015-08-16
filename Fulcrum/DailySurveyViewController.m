@@ -21,9 +21,14 @@
     NSArray* questionTitles;
 }
 -(id)init{
+    return [self initWithDailySurveyResponse:nil];
+}
+
+-(id)initWithDailySurveyResponse:(DailySurveyResponse*) dailySurveyResponse{
     self = [super init];
     if(self){
         self.view.backgroundColor = [UIColor whiteColor];
+        self.dailySurveyResponse = dailySurveyResponse;
     }
     return self;
 }
@@ -34,52 +39,50 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.dailySurveyQuestionViews = [[NSMutableArray alloc]init];
+    [self initDailySurveyQuestions:^{
+        [super viewWillAppear:animated];
+    }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.dailySurveyQuestionViews = [[NSMutableArray alloc]init];
-    questionResponses = [NSArray arrayWithObjects:
-                        [NSArray arrayWithObjects:@"Not Coping",@"Poorly",@"Ok",@"Well", @"Very Well", nil],
-                        [NSArray arrayWithObjects:@"Terrible",@"Bad",@"Fair",@"Good", @"Fantastic", nil],
-                        [NSArray arrayWithObjects:@"Hopeless",@"Down",@"Ok",@"Good", @"Amazing", nil],
-                        [NSArray arrayWithObjects:@"Very Dissatisfied",@"Dissatisfied",@"Neutral",@"Satisfied", @"Very Satisfied", nil],
-                        [NSArray arrayWithObjects:@"Very Stressed",@"Stressed",@"Ok",@"Somewhat Relaxed", @"Relaxed", nil],
-                        [NSArray arrayWithObjects:@"Very Dissatisfied",@"Dissatisfied",@"Neutral",@"Satisfied", @"Very Satisfied", nil],
-                        [NSArray arrayWithObjects:@"Very Dissatisfied",@"Dissatisfied",@"Neutral",@"Satisfied", @"Very Satisfied", nil],
-                        [NSArray arrayWithObjects:@"Very Unhealthy",@"Unhealthy",@"Ok",@"Healthy", @"Very Healthy", nil],
-                        [NSArray arrayWithObjects:@"Very Dissatisfied",@"Dissatisfied",@"Neutral",@"Satisfied", @"Very Satisfied", nil],
-                        [NSArray arrayWithObjects:@"Distant",@"Unconnected",@"Eh..",@"Connected", @"Very Connected", nil], nil];
-
-    questionTitles = [NSArray arrayWithObjects:
-                      @"How well did you cope today?",
-                      @"How did you feel today overall?",
-                      @"How did you feel about yourself today?",
-                      @"How do you feel about your academic performance today?",
-                      @"How stressed do you feel today?",
-                      @"How satisfied are you with your academic productivity today?",
-                      @"How satisfied are you with your physical activity today",
-                      @"How healthy do you feel today",
-                      @"Rate your social life today",
-                      @"How connected to others did you feel today?",
-                      nil];
-
-    
-    [self initDailySurveyQuestions];
-    [self initQuestionViews];
-    
-
-    
 }
 
--(void)initDailySurveyQuestions{
-    self.dailySurveyQuestions = [[NSMutableArray alloc] init];
+-(void)initDailySurveyQuestions:(void(^)())callBack{
+    if(self.dailySurveyResponse){
+        NSArray* questionResponses = self.dailySurveyResponse.dailySurveyQuestionResponses;
+        NSMutableArray* questions = [NSMutableArray new];
+        for(DailySurveyQuestionResponse* questionResponse in questionResponses){
+            [questions addObject:questionResponse.question];
+        }
+        self.dailySurveyQuestions = questions;
+        [self initQuestionViews];
+        [self setSliderValues];
+    }
+    else{
+        [FulcrumAPIFacade getDailySurveyQuestions:^(NSArray* questions) {
+            if(questions){
+                self.dailySurveyQuestions = questions;
+                [self initQuestionViews];
+                callBack();
+            }
+            else{
+                callBack();
+            }
+        }];
+    }
+}
 
-    for(int i = 0; i< [questionTitles count];i++){
-        DailySurveyQuestion* q = [[DailySurveyQuestion alloc] init];
-        [q setQuestionString:[questionTitles objectAtIndex:i]];
-        [q setResponses:[questionResponses objectAtIndex:i]];
-        [self.dailySurveyQuestions addObject:q];
+-(void)setSliderValues{
+    NSArray* questionResponses = self.dailySurveyResponse.dailySurveyQuestionResponses;
+    for(int i = 0; i<[questionResponses count];i++){
+        DailySurveyQuestionView* currView = [self.dailySurveyQuestionViews objectAtIndex:i];
+        DailySurveyQuestionResponse* currQuestionResponse = [questionResponses objectAtIndex:i];
+        float value = [currQuestionResponse.value floatValue];
+        [currView.slider setValue:value];
     }
 }
 
@@ -96,7 +99,7 @@
     
     int i;
     for(i = 0; i<[self.dailySurveyQuestions count];i++){
-        UIView* currView = [[DailySurveyQuestionView alloc] initWithDailySurveyQuestion:[self.dailySurveyQuestions objectAtIndex:i]AndWithFrame:CGRectMake(0,140*i,fullScreenRect.size.width-40,140)];
+        DailySurveyQuestionView* currView = [[DailySurveyQuestionView alloc] initWithDailySurveyQuestion:[self.dailySurveyQuestions objectAtIndex:i]AndWithFrame:CGRectMake(0,140*i,fullScreenRect.size.width-40,140)];
         [self.dailySurveyQuestionViews addObject:currView];
         [scrollView addSubview:currView];
     }
@@ -133,34 +136,54 @@
 }
 
 -(void)saveResponses{
-    DailySurveyResponse* dailySurveyResponse = [[DailySurveyResponse alloc]init];
-    [dailySurveyResponse setSubmissionDate:[NSDate date]];
-    //[dailySurveyResponse setForDate:[NSDate date]];
-    //NSDate* hackDate = [DateService dateFromYearMonthDateString:@"2015-03-22"];
-    NSDate* today = [NSDate date];
-    [dailySurveyResponse setForDate:today];
-    NSMutableArray* dailySurveyQuestionResponses = [NSMutableArray new];
-    for(int i = 0;i<[self.dailySurveyQuestionViews count];i++){
-        DailySurveyQuestionView* currView = [self.dailySurveyQuestionViews objectAtIndex:i];
-        float rawValue = [[currView slider] value];
-        int roundedValue = round(rawValue);
-        DailySurveyQuestionResponse* questionResponse = [[DailySurveyQuestionResponse alloc] init];
-        [questionResponse setValue:roundedValue];
-        [questionResponse setTitle:[[currView currentSelectionLabel] text]];
-        [dailySurveyQuestionResponses addObject:questionResponse];
-    }
-    [dailySurveyResponse setDailySurveyQuestionResponses:dailySurveyQuestionResponses];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* token = [defaults valueForKey:@"access_token"];
-    if(token != nil){
+    if(self.dailySurveyResponse){
+        NSArray* questionResponses = self.dailySurveyResponse.dailySurveyQuestionResponses;
+        for(int i = 0;i<[self.dailySurveyQuestionViews count];i++){
+            DailySurveyQuestionView* currView = [self.dailySurveyQuestionViews objectAtIndex:i];
+            float rawValue = [[currView slider] value];
+            int roundedValue = round(rawValue);
+            DailySurveyQuestionResponse* questionResponse = [questionResponses objectAtIndex:i];
+            [questionResponse setValue:[NSNumber numberWithInt:roundedValue]];
+            [questionResponse setResponse:[[currView currentSelectionLabel] text]];
+        }
         CGRect fullFrame = [[UIScreen mainScreen] bounds];
         UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
         loadingView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
         [self.view addSubview:loadingView];
-        [FulcrumAPIFacade submitDailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
+        [FulcrumAPIFacade updateDailySurveyResponse:self.dailySurveyResponse withCallback:^(NSError *error) {
             [self surveySubmitted];
         }];
+        
+    }
+    else{
+        DailySurveyResponse* dailySurveyResponse = [[DailySurveyResponse alloc]init];
+        NSDate* today = [NSDate date];
+        [dailySurveyResponse setForDate:today];
+
+        NSMutableArray* dailySurveyQuestionResponses = [NSMutableArray new];
+        for(int i = 0;i<[self.dailySurveyQuestionViews count];i++){
+            DailySurveyQuestionView* currView = [self.dailySurveyQuestionViews objectAtIndex:i];
+            float rawValue = [[currView slider] value];
+            int roundedValue = round(rawValue);
+            DailySurveyQuestionResponse* questionResponse = [[DailySurveyQuestionResponse alloc] init];
+            [questionResponse setValue:[NSNumber numberWithInt:roundedValue]];
+            [questionResponse setResponse:[[currView currentSelectionLabel] text]];
+            questionResponse.question = [self.dailySurveyQuestions objectAtIndex:i];
+            [dailySurveyQuestionResponses addObject:questionResponse];
+        }
+        [dailySurveyResponse setDailySurveyQuestionResponses:dailySurveyQuestionResponses];
+
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        NSString* token = [defaults valueForKey:@"access_token"];
+        if(token != nil){
+            CGRect fullFrame = [[UIScreen mainScreen] bounds];
+            UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
+            loadingView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+            [self.view addSubview:loadingView];
+            [FulcrumAPIFacade submitDailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
+                [self surveySubmitted];
+            }];
+        }
     }
 }
 

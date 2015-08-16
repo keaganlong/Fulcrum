@@ -20,28 +20,28 @@
         CGFloat academicTotal = 0;
         CGFloat physicalTotal = 0;
         DailySurveyQuestionResponse* questionResponse = [dailySurveyQuetionResponses objectAtIndex:0];
-        emotionalTotal += [questionResponse value];
+        emotionalTotal += [[questionResponse value] intValue];
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:1];
-        emotionalTotal += [questionResponse value];
+        emotionalTotal += [[questionResponse value] intValue];
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:2];
-        emotionalTotal += [questionResponse value];
+        emotionalTotal += [[questionResponse value] intValue];
         
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:3];
-        academicTotal += [questionResponse value];
+        academicTotal += [[questionResponse value] intValue];
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:4];
-        academicTotal += [questionResponse value];
+        academicTotal += [[questionResponse value] intValue];
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:5];
-        academicTotal += [questionResponse value];
+        academicTotal += [[questionResponse value] intValue];
         
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:6];
-        physicalTotal += [questionResponse value];
+        physicalTotal += [[questionResponse value] intValue];
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:7];
-        physicalTotal += [questionResponse value];
+        physicalTotal += [[questionResponse value] intValue];
         
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:8];
-        socialTotal += [questionResponse value];
+        socialTotal += [[questionResponse value] intValue];
         questionResponse = [dailySurveyQuetionResponses objectAtIndex:9];
-        socialTotal += [questionResponse value];
+        socialTotal += [[questionResponse value] intValue];
         
         
         NSNumber* emotionalAverage = [NSNumber numberWithFloat:(emotionalTotal/3.0)];

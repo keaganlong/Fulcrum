@@ -13,58 +13,61 @@
 #import "DailySurveyQuestionResponse.h"
 #import "DateService.h"
 #import "CalenderEvent.h"
+#import "DailySurveyQuestion.h"
+
+#import <Parse/Parse.h>
 
 @implementation FulcrumAPIFacade
 
--(void)getDailySurveyResponsesWithCallback:(void(^)(NSMutableArray *dailySurveyResponses))callbackFunction{
-    [FulcrumAPIService getDailySurveyResponsesWithCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSError* serializeError = nil;
-        NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
-        if([self validateGetDailySurveyResponses:serializedObject]){
-            NSArray* jsonArray = (NSArray*)serializedObject;
-            NSMutableArray* dailySurveyResponses = [NSMutableArray new];
-            for(NSDictionary* dailySurveyResponseDictionary in jsonArray){
-                DailySurveyResponse* dailySurveyResponse = [self dictionaryToDailySurveyResponse:dailySurveyResponseDictionary];
-                [dailySurveyResponses addObject:dailySurveyResponse];
+-(void)getDailySurveyResponsesWithCallback:(void(^)(NSMutableArray*))callbackFunction{
+    PFUser *user = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:@"DailySurveyResponse"];
+    [query whereKey:@"user" equalTo:user];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        NSMutableArray *dailySurveyResponses = [NSMutableArray new];
+        for(PFObject* pfDailySurveyResponse in objects){
+            DailySurveyResponse* newDailySurveyResponse = [DailySurveyResponse new];
+            newDailySurveyResponse.forDate = pfDailySurveyResponse[@"date"];
+            NSMutableArray* newDailySurveyQuestionResponses = [NSMutableArray new];
+            
+            PFQuery* questionResponseQuery = [PFQuery queryWithClassName:@"DailySurveyQuestionResponse"];
+            [questionResponseQuery whereKey:@"dailySurveyResponse" equalTo:pfDailySurveyResponse];
+            [questionResponseQuery includeKey:@"question"];
+            NSArray* pfDailySurveyQuestionResponses = [questionResponseQuery findObjects]; //Not async
+            for(PFObject* pfDailySurveyQuestionResponse in pfDailySurveyQuestionResponses){
+                DailySurveyQuestionResponse* newQuestionResponse = [DailySurveyQuestionResponse new];
+                newQuestionResponse.response = pfDailySurveyQuestionResponse[@"response"];
+                newQuestionResponse.value = pfDailySurveyQuestionResponse[@"value"];
+                DailySurveyQuestion* dailySurveyQuestion = [DailySurveyQuestion new];
+                PFObject* pfDailySurveyQuestion = pfDailySurveyQuestionResponse[@"question"];
+                dailySurveyQuestion.pfDailySurveyQuestion = pfDailySurveyQuestion;
+                dailySurveyQuestion.questionString = pfDailySurveyQuestion[@"question"];
+                dailySurveyQuestion.responses = pfDailySurveyQuestion[@"responses"];
+                newQuestionResponse.question = dailySurveyQuestion;
+                [newDailySurveyQuestionResponses addObject:newQuestionResponse];
             }
-            callbackFunction(dailySurveyResponses);
+            newDailySurveyResponse.dailySurveyQuestionResponses = newDailySurveyQuestionResponses;
+            [dailySurveyResponses addObject:newDailySurveyResponse];
         }
-        else{
-            callbackFunction(nil);
-        }
+        callbackFunction(dailySurveyResponses);
     }];
-//    NSMutableArray* arr = [NSMutableArray new];
-//    NSMutableArray* dates = [DateService getDateRangeStartingWithDate:[NSDate date] withInteger:74];
-//    for(int i = 0; i<[dates count];i++){
-//        if(i<0){
-//            continue;
-//        }
-//        DailySurveyResponse* curr = [[DailySurveyResponse alloc] init];
-//        NSDate* date = [dates objectAtIndex:i];
-//        [curr setForDate:date];
-//        NSMutableArray* qrs = [NSMutableArray new];
-//        int value = 3;
-//        if(i<=[dates count]-20){
-//            value = 2;
-//            value+=rand()%2;
-//        }
-//        else if(i>[dates count]-20 && i<[dates count]-10){
-//            value = 3;
-//            value+=rand()%2;
+    
+//    [FulcrumAPIService getDailySurveyResponsesWithCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        NSError* serializeError = nil;
+//        NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
+//        if([self validateGetDailySurveyResponses:serializedObject]){
+//            NSArray* jsonArray = (NSArray*)serializedObject;
+//            NSMutableArray* dailySurveyResponses = [NSMutableArray new];
+//            for(NSDictionary* dailySurveyResponseDictionary in jsonArray){
+//                DailySurveyResponse* dailySurveyResponse = [self dictionaryToDailySurveyResponse:dailySurveyResponseDictionary];
+//                [dailySurveyResponses addObject:dailySurveyResponse];
+//            }
+//            callbackFunction(dailySurveyResponses);
 //        }
 //        else{
-//            value = 4;
-//            value+=rand()%2;
+//            callbackFunction(nil);
 //        }
-//        for(int j = 0; j<10;j++){
-//            DailySurveyQuestionResponse* res = [[DailySurveyQuestionResponse alloc] init];
-//            [res setValue:value-(rand()%2)];
-//            [qrs addObject:res];
-//        }
-//        [curr setDailySurveyQuestionResponses:qrs];
-//        [arr addObject:curr];
-//    }
-//    callbackFunction(arr);
+//    }];
 }
 
 -(BOOL)validateGetDailySurveyResponses:(NSObject*)object{
@@ -82,42 +85,114 @@
 }
 
 -(void)submitDailySurveyResponse:(DailySurveyResponse*)response withCallback:(void(^)(NSError*))callbackFunction{
-    NSError* serializeError = nil;
-    NSDictionary* responseDictionary = [self dailySurveyResponseToDictionary:response];
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:responseDictionary options:NSJSONWritingPrettyPrinted error:&serializeError];
-    [FulcrumAPIService postDailySurveyResponseDate:jsonData withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSMutableArray* dailySurveyQuestionResponses = response.dailySurveyQuestionResponses;
+    
+    PFObject *dailySurveyResponse = [PFObject objectWithClassName:@"DailySurveyResponse"];
+    for(int i = 0; i< [dailySurveyQuestionResponses count];i++){
+        DailySurveyQuestionResponse* currQuestionResponse = [dailySurveyQuestionResponses objectAtIndex:i];
+        PFObject* newQuestionResponse = [PFObject objectWithClassName:@"DailySurveyQuestionResponse"];
+        newQuestionResponse[@"question"] = currQuestionResponse.question.pfDailySurveyQuestion;
+        newQuestionResponse[@"response"] = currQuestionResponse.response;
+        newQuestionResponse[@"value"] = currQuestionResponse.value;
+        newQuestionResponse[@"dailySurveyResponse"] = dailySurveyResponse;
+        [newQuestionResponse save];
+    }
+    
+    dailySurveyResponse[@"date"] = response.forDate;
+    dailySurveyResponse[@"user"] = [PFUser currentUser];
+    
+    [dailySurveyResponse saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            callbackFunction(nil);
+        } else {
+            callbackFunction(error);
+        }
+    }];
+    
+//    NSError* serializeError = nil;
+//    NSDictionary* responseDictionary = [self dailySurveyResponseToDictionary:response];
+//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:responseDictionary options:NSJSONWritingPrettyPrinted error:&serializeError];
+//    [FulcrumAPIService postDailySurveyResponseDate:jsonData withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        callbackFunction(error);
+//    }];
+}
+
+-(void)updateDailySurveyResponse:(DailySurveyResponse*)response withCallback:(void(^)(NSError*))callbackFunction{
+    PFQuery *query = [PFQuery queryWithClassName:@"DailySurveyResponse"];
+    [query whereKey:@"date" equalTo:response.forDate];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *dailySurveyResponse, NSError *error){
+        if(dailySurveyResponse){
+            NSArray* questionResponses = response.dailySurveyQuestionResponses;
+            PFQuery* questionResponsesQuery = [PFQuery queryWithClassName:@"DailySurveyQuestionResponse"];
+            [questionResponsesQuery whereKey:@"dailySurveyResponse" equalTo:dailySurveyResponse];
+            [questionResponsesQuery findObjectsInBackgroundWithBlock:^(NSArray *PFquestionResponses, NSError *error){
+                if(questionResponses){
+                    NSMutableDictionary* questionResponsesMap = [NSMutableDictionary new];
+                    for(DailySurveyQuestionResponse* questionResponse in questionResponses){
+                        NSString* key = [questionResponse.question.pfDailySurveyQuestion objectId];
+                        questionResponsesMap[key] = questionResponse;
+                    }
+                    for(PFObject* PFquestionResponse in PFquestionResponses){
+                        DailySurveyQuestionResponse* currQuestionResponse = questionResponsesMap[[PFquestionResponse[@"question"] objectId]];
+                        PFquestionResponse[@"response"] = currQuestionResponse.response;
+                        PFquestionResponse[@"value"] = currQuestionResponse.value;
+                        [PFquestionResponse save];
+                    }
+                    callbackFunction(nil);
+                }
+                else{
+                    NSLog(@"Update error 2");
+                }
+            }];
+        }
+        else{
+            NSLog(@"Update error");
+        }
+    }];
+}
+
+-(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSError* error))callbackFunction{
+    
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error){
         callbackFunction(error);
     }];
     
+//    [FulcrumAPIService loginWithUsername:username andWithPassword:password withCallback:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        if(error){
+//            NSString* errorMsg = @"Network issue.";
+//            callbackFunction(nil,errorMsg);
+//        }
+//        else{
+//            NSError* deserializeError = nil;
+//            NSDictionary* jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&deserializeError];
+//            callbackFunction(jsonDictionary[@"access_token"],jsonDictionary[@"error_description"]);
+//        }
+//    }];
 }
 
--(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSString* token, NSString* errorMessage))callbackFunction{
-    [FulcrumAPIService loginWithUsername:username andWithPassword:password withCallback:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if(error){
-            NSString* errorMsg = @"Network issue.";
-            callbackFunction(nil,errorMsg);
-        }
-        else{
-            NSError* deserializeError = nil;
-            NSDictionary* jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&deserializeError];
-            callbackFunction(jsonDictionary[@"access_token"],jsonDictionary[@"error_description"]);
-        }
+-(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSError*))callbackFunction{
+    
+    PFUser *user = [PFUser user];
+    user.username = username;
+    user.password = password;
+    user.email = username;
+    
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
+        callbackFunction(error);
     }];
-}
-
--(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSString*))callbackFunction{
-    [FulcrumAPIService registerAccountWithUsername:username andPassword:password withCallback:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSError* deserializeError = nil;
-        NSDictionary* jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&deserializeError];
-        if(jsonDictionary[@"ModelState"]!=nil){
-            NSDictionary* modelStateDictionary = jsonDictionary[@"ModelState"];
-            NSString* errorMessage = modelStateDictionary[@""][1];
-            callbackFunction(errorMessage);
-        }
-        else{
-            callbackFunction(nil);
-        }
-    }];
+    
+//    [FulcrumAPIService registerAccountWithUsername:username andPassword:password withCallback:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        NSError* deserializeError = nil;
+//        NSDictionary* jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&deserializeError];
+//        if(jsonDictionary[@"ModelState"]!=nil){
+//            NSDictionary* modelStateDictionary = jsonDictionary[@"ModelState"];
+//            NSString* errorMessage = modelStateDictionary[@""][1];
+//            callbackFunction(errorMessage);
+//        }
+//        else{
+//            callbackFunction(nil);
+//        }
+//    }];
 }
 
 
@@ -138,7 +213,7 @@
 -(NSDictionary*)dailySurveyQuestionResponseToDictionary:(DailySurveyQuestionResponse*)questionResponse{
     NSMutableDictionary* dictionary = [NSMutableDictionary new];
     [dictionary setValue:[NSNumber numberWithInteger:[questionResponse value]] forKey:@"Value"];
-    [dictionary setValue:[questionResponse title] forKey:@"Title"];
+    [dictionary setValue:[questionResponse response] forKey:@"Title"];
     return dictionary;
 }
 
@@ -313,11 +388,31 @@
 
 -(DailySurveyQuestionResponse*)dictionaryToDailySurveyQuestionResponse:(NSDictionary*)dictionary{
     DailySurveyQuestionResponse* dailySurveyQuestionResponse = [[DailySurveyQuestionResponse alloc]init];
-    NSInteger value = [dictionary[@"Value"] intValue];
+    NSNumber* value = [NSNumber numberWithInt:[dictionary[@"Value"] intValue]];
     NSString* title = dictionary[@"Title"];
     [dailySurveyQuestionResponse setValue:value];
-    [dailySurveyQuestionResponse setTitle:title];
+    [dailySurveyQuestionResponse setResponse:title];
     return dailySurveyQuestionResponse;
+}
+
+
++(void)getDailySurveyQuestions:(void(^)(NSArray*))callback{
+    PFQuery *query = [PFQuery queryWithClassName:@"DailySurveyQuestion"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSMutableArray* dailySurveyQuestions = [NSMutableArray new];
+            for (PFObject *object in objects) {
+                DailySurveyQuestion* newQuestion = [DailySurveyQuestion new];
+                newQuestion.questionString = object[@"question"];
+                newQuestion.responses = object[@"responses"];
+                newQuestion.pfDailySurveyQuestion = object;
+                [dailySurveyQuestions addObject:newQuestion];
+            }
+            callback(dailySurveyQuestions);
+        } else {
+            callback(nil);
+        }
+    }];
 }
 
 +(void)getDailySurveyResponsesWithCallback:(void(^)(NSMutableArray *dailySurveyResponses))callbackFunction{
@@ -328,7 +423,11 @@
     [[self instance] submitDailySurveyResponse:response withCallback:callbackFunction];
 }
 
-+(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSString* token, NSString* errorMessage))callbackFunction{
++(void)updateDailySurveyResponse:(DailySurveyResponse*)response withCallback:(void(^)(NSError*))callbackFunction{
+    [[self instance] updateDailySurveyResponse:response withCallback:callbackFunction];
+}
+
++(void)loginWithUsername:(NSString*)username andWithPassword:(NSString*)password withCallback:(void(^)(NSError*))callbackFunction{
     [[self instance] loginWithUsername:username andWithPassword:password withCallback:callbackFunction];
 }
 
@@ -336,7 +435,7 @@
     [[self instance] lastDateDailySurveyCompletedForWithCallback:(void(^)(NSDate* lastDate))callbackFunction];
 }
 
-+(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSString*))callbackFunction{
++(void)registerAccountWithUsername:(NSString*)username andPassword:(NSString*)password withCallback:(void(^)(NSError*))callbackFunction{
     [[self instance] registerAccountWithUsername:username andPassword:password withCallback:callbackFunction];
 }
 

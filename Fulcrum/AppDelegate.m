@@ -7,13 +7,16 @@
 //
 
 #import "AppDelegate.h"
-#import "LoginViewController.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [Parse enableLocalDatastore];
+    [Parse setApplicationId:@"R5bWP1GkHJAWgUaeWcmLqGb6EXDuScbhk7UkSxUf"
+                  clientKey:@"49J6tQvI7e5aRrmLaRn3gdKVmf7yu18Pf3uano8P"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     return YES;
 }
 							

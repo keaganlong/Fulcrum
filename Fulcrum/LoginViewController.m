@@ -13,7 +13,7 @@
 #import "FulcrumAPIFacade.h"
 #import "RegistrationViewController.h"
 #import "AlertFactory.h"
-
+#import <Parse/Parse.h>
 
 @implementation LoginViewController
 
@@ -31,6 +31,8 @@
     [self initLoginButton];
     [self initEmailTextField];
     [self initPasswordTextField];
+    self.emailTextField.text = @"zxc@zxc.com";
+    self.passwordTextField.text = @"zxczxc";
     [super viewWillAppear:animated];
 }
 
@@ -147,24 +149,24 @@
     self.loginButton.enabled = NO;
     NSString* email = [self.emailTextField text];
     NSString* password = [self.passwordTextField text];
-    [FulcrumAPIFacade loginWithUsername:email andWithPassword:password withCallback:^(NSString * token, NSString* errorMessage) {
-        if(token!=nil){
-            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:token forKey:@"access_token"];
-            
+    
+    
+    [FulcrumAPIFacade loginWithUsername:email andWithPassword:password withCallback:^(NSError* error) {
+        if(!error){
             dispatch_async(dispatch_get_main_queue(),
-                           ^{
-                               MainViewController* mainViewController = [[MainViewController alloc]init];
-                               [self.navigationController setViewControllers:@[mainViewController] animated:YES];
-                           });
+               ^{
+                   MainViewController* mainViewController = [[MainViewController alloc]init];
+                   [self.navigationController setViewControllers:@[mainViewController] animated:YES];
+               });
         }
         else{
             dispatch_async(dispatch_get_main_queue(),
-                           ^{
-                UIAlertController* confirmationAlertController = [AlertFactory alertWithMessage:errorMessage];
-                [self presentViewController:confirmationAlertController animated:YES completion:^(void) {}];
-               self.loginButton.enabled = YES;
-            });
+                ^{
+                    NSString* errorMessage = @"Incorrect username or password.";
+                    UIAlertController* confirmationAlertController = [AlertFactory alertWithMessage:errorMessage];
+                    [self presentViewController:confirmationAlertController animated:YES completion:^(void) {}];
+                    self.loginButton.enabled = YES;
+                });
         }
     }];
 }

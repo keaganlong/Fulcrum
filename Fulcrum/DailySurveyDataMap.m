@@ -16,6 +16,7 @@
 
 @implementation DailySurveyDataMap{
     NSMutableDictionary* dailySurveyScoreDictionary;
+    NSMutableDictionary* dailySurveyResponseDictionary;
     NSMutableDictionary* sleepScoreDictionary;
     NSMutableDictionary* activeCaloriesDictionary;
 }
@@ -25,6 +26,7 @@
     if(self){
         dailySurveyScoreDictionary = [NSMutableDictionary new];
         activeCaloriesDictionary = [NSMutableDictionary new];
+        dailySurveyResponseDictionary = [NSMutableDictionary new];
     }
     return self;
 }
@@ -40,6 +42,7 @@
             NSString* forDateString = [DateService yearMonthDateStringFromDate:forDate];
             DailySurveyWellnessAverage* currWellnessAverage = [[DailySurveyWellnessAverage alloc] initWithDailySurveyQuestionResponses:[currDailySurveyResponse dailySurveyQuestionResponses]];
             [dailySurveyScoreDictionary setObject:currWellnessAverage forKey:forDateString];
+            [dailySurveyResponseDictionary setObject:currDailySurveyResponse forKey:forDateString];
             if(candidateFirstDate==nil || candidateLastDate==nil){
                 candidateFirstDate = forDate;
                 candidateLastDate = forDate;
@@ -122,6 +125,12 @@
     }
     CGFloat averageValue = totalSum/numComponents;
     return averageValue;
+}
+
+-(DailySurveyResponse*)dailySurveyResponseForDate:(NSDate*)date{
+    NSString* dateString = [DateService yearMonthDateStringFromDate:date];
+    DailySurveyResponse* dailySurveyResponse = [dailySurveyResponseDictionary objectForKey:dateString];
+    return dailySurveyResponse;
 }
 
 -(CGFloat)valueForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area{
