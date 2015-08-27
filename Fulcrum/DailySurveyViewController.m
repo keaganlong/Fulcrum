@@ -13,22 +13,26 @@
 #import "FulcrumAPIFacade.h"
 #import "DailySurveyResponse.h"
 #import "DailySurveyQuestionResponse.h"
-
 #import "DateService.h"
+
+#import <FlatUIKit/FlatUIKit.h>
 
 @implementation DailySurveyViewController{
     NSArray *questionResponses;
     NSArray* questionTitles;
 }
+
 -(id)init{
-    return [self initWithDailySurveyResponse:nil];
+    return [self initWithDailySurveyResponse:nil date:nil editable:NO];
 }
 
--(id)initWithDailySurveyResponse:(DailySurveyResponse*) dailySurveyResponse{
+-(id)initWithDailySurveyResponse:(DailySurveyResponse*) dailySurveyResponse date:(NSDate*)date editable:(BOOL)editable{
     self = [super init];
     if(self){
         self.view.backgroundColor = [UIColor whiteColor];
         self.dailySurveyResponse = dailySurveyResponse;
+        self.date = date;
+        self.editable = editable;
     }
     return self;
 }
@@ -52,6 +56,7 @@
 }
 
 -(void)initDailySurveyQuestions:(void(^)())callBack{
+    [self initDateLabel];
     if(self.dailySurveyResponse){
         NSArray* questionResponses = self.dailySurveyResponse.dailySurveyQuestionResponses;
         NSMutableArray* questions = [NSMutableArray new];
@@ -62,7 +67,7 @@
         [self initQuestionViews];
         [self setSliderValues];
     }
-    else{
+    else if(self.editable){
         [FulcrumAPIFacade getDailySurveyQuestions:^(NSArray* questions) {
             if(questions){
                 self.dailySurveyQuestions = questions;
@@ -74,6 +79,39 @@
             }
         }];
     }
+    else{
+        [self initNonCompletedSurveyView];
+        callBack();
+    }
+}
+
+-(void)initDateLabel{
+    CGRect frame = [[UIScreen mainScreen] applicationFrame];
+    frame.origin.x = 10;
+    frame.origin.y = 30;
+    frame.size.height = 100;
+    frame.size.width = frame.size.width - 10;
+    UILabel* dateLabel = [[UILabel alloc] initWithFrame:frame];
+    UIFont* font = [UIFont flatFontOfSize:22];
+    dateLabel.font = font;
+    NSString* dateString = [DateService readableStringFromDate:self.date];
+    [dateLabel setText:dateString];
+    dateLabel.adjustsFontSizeToFitWidth = YES;
+    dateLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:dateLabel];
+}
+
+-(void)initNonCompletedSurveyView{
+    CGRect frame = [[UIScreen mainScreen] applicationFrame];
+    frame.origin.x = 20;
+    frame.origin.y = 80;
+    frame.size.height = 100;
+    frame.size.width = frame.size.width - 20;
+    UILabel* messageLabel = [[UILabel alloc] initWithFrame:frame];
+    messageLabel.adjustsFontSizeToFitWidth = YES;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
+    [messageLabel setText:@"Daily Survey not Completed"];
+    [self.view addSubview:messageLabel];
 }
 
 -(void)setSliderValues{
@@ -83,13 +121,14 @@
         DailySurveyQuestionResponse* currQuestionResponse = [questionResponses objectAtIndex:i];
         float value = [currQuestionResponse.value floatValue];
         [currView.slider setValue:value];
+        currView.slider.enabled = self.editable;
     }
 }
 
 -(void) initQuestionViews{
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     fullScreenRect.origin.x = 20;
-    fullScreenRect.origin.y = 80;
+    fullScreenRect.origin.y = 150;
     fullScreenRect.size.height = fullScreenRect.size.height - 80;
     fullScreenRect.size.width = fullScreenRect.size.width - 20;
     
@@ -112,6 +151,7 @@
     [completeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [completeButton setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [completeButton addTarget:self action:@selector(onTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    completeButton.enabled = self.editable;
     [scrollView addSubview:completeButton];
     
     self.questionScrollView = scrollView;
@@ -189,9 +229,8 @@
 
 -(void)surveySubmitted{
     MainViewController* mainViewController = [[MainViewController alloc]init];
-    [[self navigationController] popViewControllerAnimated:NO];
+    [[self navigationController] popViewControllerAnimated:YES];
     [[self navigationController] pushViewController:mainViewController animated:YES];
-    
 }
 
 @end

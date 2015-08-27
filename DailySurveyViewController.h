@@ -16,8 +16,11 @@
 @property NSArray* dailySurveyQuestions;
 @property NSMutableArray* dailySurveyQuestionViews;
 
+@property NSDate* date;
+@property BOOL editable;
+
 @property DailySurveyResponse* dailySurveyResponse;
 
--(id)initWithDailySurveyResponse:(DailySurveyResponse*) dailySurveyResponse;
+-(id)initWithDailySurveyResponse:(DailySurveyResponse*) dailySurveyResponse date:(NSDate*)date editable:(BOOL)editable;
 
 @end

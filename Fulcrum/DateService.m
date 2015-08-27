@@ -11,6 +11,15 @@
 
 @implementation DateService
 
++(BOOL)isTodayOrYesterday:(NSDate*)date{
+    NSDate* now = [NSDate date];
+    NSDate* yesterday = [self date:now offsetByInteger:-1];
+    NSString* nowString = [self monthDayStringForDate:now];
+    NSString* yesterdayString = [self monthDayStringForDate:yesterday];
+    NSString* dateString = [self monthDayStringForDate:date];
+    return [dateString isEqualToString:nowString] || [dateString isEqualToString:yesterdayString];
+}
+
 +(NSMutableArray*)getSevenDaysPriorStartingWithDate:(NSDate*)date{
     return [DateService getDateRangeStartingWithDate:date withInteger:7];
 }

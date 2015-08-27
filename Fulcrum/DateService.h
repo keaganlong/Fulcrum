@@ -7,7 +7,7 @@
 //
 
 @interface DateService: NSObject
-
++(BOOL)isTodayOrYesterday:(NSDate*)date;
 +(NSMutableArray*)getSevenDaysPriorStartingWithDate:(NSDate*)date;
 +(NSMutableArray*)getThirtyDaysPriorStartingWithDate:(NSDate*)date;
 +(NSMutableArray*)getNinetyDaysPriorStartingWithDate:(NSDate*)date;

@@ -21,6 +21,7 @@
 #import "WellnessAreaViewFactory.h"
 #import "FulcrumColors.h"
 #import <Parse/Parse.h>
+#import <FlatUIKit/FlatUIKit.h>
 
 @implementation MainViewController
 
@@ -32,10 +33,10 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     self = [super init];
     if(self){
         self.currDate = [NSDate date];
-        [UPApiService getUserPermissionWithCompletionHandler:^(UPSession * session) {
+        //[UPApiService getUserPermissionWithCompletionHandler:^(UPSession * session) {
             [self initView];
             [[self dailySurveyButton] addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-        }];
+        //}];
     }
     return self;
 }
@@ -76,8 +77,25 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     [self.view addSubview:overallWellnessButton];
     [self setOverallWellnessButton:overallWellnessButton];
     
-    
+    [self  initSelectedDateLabel];
     [self initCalender];
+}
+
+-(void)initSelectedDateLabel{
+    CGRect frame = [[UIScreen mainScreen] applicationFrame];
+    frame.origin.x = 10;
+    frame.origin.y = 300;
+    frame.size.height = 50;
+    frame.size.width = frame.size.width - 10;
+    UILabel* dateLabel = [[UILabel alloc] initWithFrame:frame];
+    UIFont* font = [UIFont flatFontOfSize:22];
+    dateLabel.font = font;
+    NSString* dateString = [DateService readableStringFromDate:self.currDate];
+    [dateLabel setText:dateString];
+    dateLabel.adjustsFontSizeToFitWidth = YES;
+    dateLabel.textAlignment = NSTextAlignmentCenter;
+    self.selectedDateLabel = dateLabel;
+    [self.view addSubview:dateLabel];
 }
 
 
@@ -143,9 +161,9 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 }
 
 -(void)dateChangedTo:(NSDate*)newDate{
-    NSString* newDateString = [DateService monthDayStringForDate:newDate];
-    [self.todayButton setTitle:newDateString forState:UIControlStateNormal];
     self.currDate = newDate;
+    NSString* dateString = [DateService readableStringFromDate:self.currDate];
+    [self.selectedDateLabel setText:dateString];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -154,13 +172,15 @@ CGFloat const CAROUSEL_HEIGHT = 200;
             DailySurveyDataMap* dataMap = [[DailySurveyDataMap alloc] initWithDailySurveyResponses:dailySurveyResponses];
             self.dataMap = dataMap;
         }
-        [super viewWillAppear:animated];
         if(self.dailySurveyButton!=nil){
             self.dailySurveyButton.hidden = YES;
             self.dailySurveyButton = nil;
             [self.dailySurveyButton removeFromSuperview];
         }
         [self initDailySurveyButton];
+        [self.lowerCarouselDataSourceAndDelegate refresh];
+        [self.upperCarousel reloadData];
+        [super viewWillAppear:animated];
     }];
 }
 
@@ -174,11 +194,13 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 }
 
 -(IBAction)onDailySurveyButtonTouchUpInside:(id)sender{
-    DailySurveyResponse* dailySurveyResponse;
+    DailySurveyResponse* dailySurveyResponse = nil;
+    BOOL editable = [DateService isTodayOrYesterday:self.currDate];
     if(self.dataMap){
         dailySurveyResponse = [self.dataMap dailySurveyResponseForDate:self.currDate];
     }
-    DailySurveyViewController* dailySurveyViewController = [[DailySurveyViewController alloc]initWithDailySurveyResponse:dailySurveyResponse];
+    DailySurveyViewController* dailySurveyViewController = [[DailySurveyViewController alloc]initWithDailySurveyResponse:dailySurveyResponse date:self.currDate editable:editable];
+
     [self.navigationController pushViewController:dailySurveyViewController animated:YES];
 }
 
@@ -194,8 +216,6 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self.lowerCarouselDataSourceAndDelegate refresh];
-    [self.upperCarousel reloadData];
 }
 
 @end

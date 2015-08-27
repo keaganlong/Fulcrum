@@ -49,12 +49,12 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, circleView.frame.size.width, circleView.frame.size.height-12)];
     [label setTextColor:[UIColor whiteColor]];
     label.textAlignment = NSTextAlignmentCenter;
-    [label setFont:[UIFont fontWithName: @"Trebuchet MS" size: 9.0f]];
+    [label setFont:[UIFont fontWithName: @"Helvetica-Bold" size: 16.0f]];
 
-    UILabel* label2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 6, circleView.frame.size.width, circleView.frame.size.height)];
+    UILabel* label2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, circleView.frame.size.width, circleView.frame.size.height)];
     [label2 setTextColor:[UIColor whiteColor]];
     label2.textAlignment = NSTextAlignmentCenter;
-    [label2 setFont:[UIFont fontWithName: @"Trebuchet MS" size: 9.0f]];
+    [label2 setFont:[UIFont fontWithName: @"Helvetica" size: 16.0f]];
     
     CGPoint circleCenter = CGPointMake(self.center.x,self.center.y+65);
     circleView.center = circleCenter;
@@ -78,8 +78,10 @@
     }
     
     NSString* dayName = [dateAsString substringToIndex:i];
+    dayName = [dayName substringToIndex:3];
     NSString* rest = [dateAsString substringFromIndex:i+2];
     rest = [@"" stringByAppendingString:[rest substringToIndex:rest.length-6]];
+    rest = [rest substringFromIndex:[rest length]-2];
     [label setText:dayName];
     [label2 setText:rest];
     [circleView addSubview:label];

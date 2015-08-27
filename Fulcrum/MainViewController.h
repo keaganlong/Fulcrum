@@ -28,6 +28,7 @@
 
 @property DailySurveyDataMap* dataMap;
 @property NSDate* currDate;
+@property UILabel* selectedDateLabel;
 
 -(void)changeToViewController:(UIViewController*)viewController;
 -(void)dateChangedTo:(NSDate*)newDate;
