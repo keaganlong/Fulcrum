@@ -197,7 +197,7 @@
     }
     else{
         DailySurveyResponse* dailySurveyResponse = [[DailySurveyResponse alloc]init];
-        NSDate* today = [NSDate date];
+        NSDate* today = self.date;
         [dailySurveyResponse setForDate:today];
 
         NSMutableArray* dailySurveyQuestionResponses = [NSMutableArray new];
@@ -229,7 +229,7 @@
 
 -(void)surveySubmitted{
     MainViewController* mainViewController = [[MainViewController alloc]init];
-    [[self navigationController] popViewControllerAnimated:YES];
+    //[[self navigationController] popViewControllerAnimated:YES];
     [[self navigationController] pushViewController:mainViewController animated:YES];
 }
 

@@ -60,6 +60,8 @@
 		EC9FD8151A7D94C600EE6446 /* AlertFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD8141A7D94C600EE6446 /* AlertFactory.m */; };
 		EC9FD8181A7ECF6800EE6446 /* iCalService.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD8171A7ECF6800EE6446 /* iCalService.m */; };
 		EC9FD81B1A7F147200EE6446 /* CalenderEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD81A1A7F147200EE6446 /* CalenderEvent.m */; };
+		ECA6CC671B95F9CC0008B294 /* ScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA6CC661B95F9CC0008B294 /* ScoreView.m */; };
+		ECA6CC691B9600BD0008B294 /* DotsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA6CC681B9600BD0008B294 /* DotsView.m */; };
 		ECACFA2A1A8137E40047285B /* LowerCarouselDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA291A8137E40047285B /* LowerCarouselDateView.m */; };
 		ECACFA2D1A8140030047285B /* StressStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA2C1A8140030047285B /* StressStrategy.m */; };
 		ECACFA311A814F910047285B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA301A814F910047285B /* DateViewController.m */; };
@@ -168,6 +170,10 @@
 		EC9FD8171A7ECF6800EE6446 /* iCalService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCalService.m; sourceTree = "<group>"; };
 		EC9FD8191A7F13F200EE6446 /* CalenderEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalenderEvent.h; sourceTree = "<group>"; };
 		EC9FD81A1A7F147200EE6446 /* CalenderEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalenderEvent.m; sourceTree = "<group>"; };
+		ECA6CC651B95F9AF0008B294 /* ScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreView.h; sourceTree = "<group>"; };
+		ECA6CC661B95F9CC0008B294 /* ScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreView.m; sourceTree = "<group>"; };
+		ECA6CC681B9600BD0008B294 /* DotsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DotsView.m; sourceTree = "<group>"; };
+		ECA6CC6A1B9600C50008B294 /* DotsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DotsView.h; sourceTree = "<group>"; };
 		ECACFA281A8137C90047285B /* LowerCarouselDateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LowerCarouselDateView.h; sourceTree = "<group>"; };
 		ECACFA291A8137E40047285B /* LowerCarouselDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LowerCarouselDateView.m; sourceTree = "<group>"; };
 		ECACFA2B1A813F9E0047285B /* StressStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StressStrategy.h; sourceTree = "<group>"; };
@@ -339,6 +345,7 @@
 		EC72F8701A12F9C600BFD4DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ECA6CC641B95F9230008B294 /* ScoreView */,
 				ECF354BD1AC47BD60037C4C5 /* Colors */,
 				ECDE86001A8C600E00310EB6 /* DateView */,
 				ECACFA271A81379A0047285B /* MainView */,
@@ -513,6 +520,17 @@
 				EC9FD8141A7D94C600EE6446 /* AlertFactory.m */,
 			);
 			name = Factories;
+			sourceTree = "<group>";
+		};
+		ECA6CC641B95F9230008B294 /* ScoreView */ = {
+			isa = PBXGroup;
+			children = (
+				ECA6CC651B95F9AF0008B294 /* ScoreView.h */,
+				ECA6CC661B95F9CC0008B294 /* ScoreView.m */,
+				ECA6CC681B9600BD0008B294 /* DotsView.m */,
+				ECA6CC6A1B9600C50008B294 /* DotsView.h */,
+			);
+			name = ScoreView;
 			sourceTree = "<group>";
 		};
 		ECACFA271A81379A0047285B /* MainView */ = {
@@ -692,6 +710,7 @@
 			files = (
 				EC9FD7FB1A658D0D00EE6446 /* DailySurveyDataMap.m in Sources */,
 				EC9FD7E81A538E6E00EE6446 /* DailySurveyQuestionResponse.m in Sources */,
+				ECA6CC691B9600BD0008B294 /* DotsView.m in Sources */,
 				EC9FD7F51A588D1400EE6446 /* WellnessAreaViewController.m in Sources */,
 				EC9FD8151A7D94C600EE6446 /* AlertFactory.m in Sources */,
 				EC72568C1A0C2990006F87B1 /* AppDelegate.m in Sources */,
@@ -705,6 +724,7 @@
 				EC9FD7FE1A6590F200EE6446 /* DailySurveyWellnessAverage.m in Sources */,
 				ECACFA311A814F910047285B /* DateViewController.m in Sources */,
 				EC9FD81B1A7F147200EE6446 /* CalenderEvent.m in Sources */,
+				ECA6CC671B95F9CC0008B294 /* ScoreView.m in Sources */,
 				EC9FD8061A6C553C00EE6446 /* GraphFooterFactory.m in Sources */,
 				EC15809A1A16725C00AEFC84 /* LowerCarouselDataSourceAndDelegate.m in Sources */,
 				EC9FD7D61A4FB6E200EE6446 /* DailySurveyQuestion.m in Sources */,

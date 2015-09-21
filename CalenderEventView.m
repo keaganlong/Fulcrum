@@ -67,14 +67,15 @@
     [self addSubview:self.rateButton];
     
     if(self.calenderEvent.Rated){
-        [currentSelectionLabel setText:[NSString stringWithFormat:@"%lu",self.calenderEvent.StressLevel]];
-        [slider setValue:self.calenderEvent.StressLevel];
+        [currentSelectionLabel setText:[NSString stringWithFormat:@"%@",self.calenderEvent.StressLevel]];
+        [slider setValue:[self.calenderEvent.StressLevel intValue]];
         [self.rateButton setEnabled:NO];
         [self.rateButton setHidden:YES];
     }
     else{
         [self.slider setEnabled:NO];
         [self.slider setHidden:YES];
+        currentSelectionLabel.text = @"";
     }
     self.currentSelectionLabel = currentSelectionLabel;
     [self addSubview:currentSelectionLabel];
@@ -99,7 +100,7 @@
     [self.slider setValue:stressLevel];
     self.calenderEvent.Rated = YES;
     self.calenderEvent.Ignored = NO;
-    self.calenderEvent.StressLevel = stressLevel;
+    self.calenderEvent.StressLevel = [NSNumber numberWithInt:stressLevel];
     [self updateCalenderEvent];
 }
 

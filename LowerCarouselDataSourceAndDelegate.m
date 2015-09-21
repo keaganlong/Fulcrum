@@ -46,7 +46,7 @@
                        ^{
                            [self.carousel reloadData];
                            [self.carousel scrollToItemAtIndex:7 animated:NO];
-                           CGRect dateBarFrame = CGRectMake(0, 426, 500, 10);
+                           CGRect dateBarFrame = CGRectMake(0, 457, 500, 10);
                            UIView* dateBar = [[UIView alloc] initWithFrame:dateBarFrame];
                            [dateBar setBackgroundColor:[UIColor blackColor]];
                            [self.parentViewController.view addSubview:dateBar];

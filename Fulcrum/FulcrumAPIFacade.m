@@ -272,18 +272,23 @@
 }
 
 -(void)updateCalenderEvent:(CalenderEvent*)calenderEvent withCompletionHandler:(void(^)(NSError*))completionFunction{
-    NSError* serializeError = nil;
-    NSMutableDictionary* serializedCalenderEvent = [self calenderEventToDictionary:calenderEvent];
-    bool valid = [NSJSONSerialization isValidJSONObject:serializedCalenderEvent];
-    if(valid){
-        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:serializedCalenderEvent options:NSJSONWritingPrettyPrinted error:&serializeError];
-        [FulcrumAPIService updateCalenderEvent:jsonData withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    PFQuery *query = [PFQuery queryWithClassName:@"CalenderEvent"];
+    [query whereKey:@"eventIdentifier" equalTo:calenderEvent.EventIdentifier];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *pfCalenderEvent, NSError *error){
+        if(!error){
+            pfCalenderEvent[@"stressLevel"] = calenderEvent.StressLevel;
+            pfCalenderEvent[@"startDate"] = calenderEvent.StartDate;
+            pfCalenderEvent[@"endDate"] = calenderEvent.EndDate;
+            pfCalenderEvent[@"title"] = calenderEvent.Title;
+            pfCalenderEvent[@"rated"] = [NSNumber numberWithBool:calenderEvent.Rated];
+            pfCalenderEvent[@"ignored"] = [NSNumber numberWithBool:calenderEvent.Ignored];
+            [pfCalenderEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                completionFunction(error);
+            }];
+        } else{
             completionFunction(error);
-        }];
-    }
-    else{
-        
-    }
+        }
+    }];
 }
 
 +(void)updateCalenderEvent:(CalenderEvent*)calenderEvent withCompletionHandler:(void(^)(NSError*))completionFunction{
@@ -315,41 +320,62 @@
 }
 
 -(void)addCalenderEvents:(NSArray*)calenderEvents withCompletionHandler:(void(^)(NSError*))completionFunction{
-    NSError* serializeError = nil;
-    NSArray* serializedCalenderEvents = [self calenderEventsToJSONAbleArray:calenderEvents];
-    bool valid = [NSJSONSerialization isValidJSONObject:serializedCalenderEvents];
-    if(valid){
-        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:serializedCalenderEvents options:NSJSONWritingPrettyPrinted error:&serializeError];
-        [FulcrumAPIService postCalenderEvents:jsonData withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            NSLog(@"POST CalEvent Response: %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    NSMutableArray* pfCalenderEvents = [NSMutableArray new];
+    for(CalenderEvent* calenderEvent in calenderEvents){
+        PFQuery* query = [PFQuery queryWithClassName:@"CalenderEvent"];
+        [query whereKey:@"eventIdentifier" equalTo:calenderEvent.EventIdentifier];
+        PFObject* foundpfCalenderEvent = [query getFirstObject];
+        if(foundpfCalenderEvent==nil){
+            PFObject* pfCalenderEvent = [PFObject objectWithClassName:@"CalenderEvent"];
+            pfCalenderEvent[@"eventIdentifier"] = calenderEvent.EventIdentifier;
+            if (!(calenderEvent.StressLevel == nil)){
+                pfCalenderEvent[@"stressLevel"] = calenderEvent.StressLevel;
+            }
+            pfCalenderEvent[@"rated"] = [NSNumber numberWithBool:calenderEvent.Rated];
+            pfCalenderEvent[@"ignored"] = [NSNumber numberWithBool:calenderEvent.Ignored];
+            pfCalenderEvent[@"startDate"] = calenderEvent.StartDate;
+            pfCalenderEvent[@"endDate"] = calenderEvent.EndDate;
+            pfCalenderEvent[@"title"] = calenderEvent.Title;
+            pfCalenderEvent[@"user"] = [PFUser currentUser];
+            [pfCalenderEvents addObject:pfCalenderEvent];
+        }
+    }
+    if ([pfCalenderEvents count] > 0){
+        [PFObject saveAllInBackground:pfCalenderEvents block:^(BOOL succeeded, NSError *error) {
             completionFunction(error);
         }];
     }
     else{
-        
+        completionFunction(nil);
     }
 }
 
 -(void)getCalenderEventsWithStartDate:(NSDate*)startDate AndEndDate:(NSDate*)endDate withCompletionHandler:(void(^)(NSArray*))completionFunction{
-    [FulcrumAPIService getCalenderEventsWithStartDate:startDate AndEndDate:endDate withCompletionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    PFUser *user = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:@"CalenderEvent"];
+    [query whereKey:@"user" equalTo:user];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if(error){
             completionFunction(nil);
         }
         else{
-            NSError* serializeError;
-            NSObject* serializedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&serializeError];
-            if([serializedObject isKindOfClass:[NSArray class]]){
-                NSArray* arr = (NSArray*)serializedObject;
-                NSMutableArray* calenderArr = [self jsonToCalenderEventArray:arr];
-//                for(int i = 0; i<[calenderArr count];i++){
-//                    CalenderEvent* e = [calenderArr objectAtIndex:i];
-//                    NSLog(@"%@ %@    %@ %@",e.Title,e.StartDate, e.EndDate, e.EventIdentifier);
-//                }
-                completionFunction(calenderArr);
+            NSMutableArray* calenderEvents = [NSMutableArray new];
+            for(PFObject* pfCalenderEvent in objects){
+                CalenderEvent* newCalenderEvent = [CalenderEvent new];
+                newCalenderEvent.EventIdentifier = pfCalenderEvent[@"eventIdentifier"];
+                newCalenderEvent.StressLevel = pfCalenderEvent[@"stressLevel"];
+                NSNumber* ratedNumber = pfCalenderEvent[@"rated"];
+                bool rated = [ratedNumber boolValue];
+                NSNumber* ignoredNumber = pfCalenderEvent[@"ignored"];
+                bool ignored = [ignoredNumber boolValue];
+                newCalenderEvent.Rated = rated;
+                newCalenderEvent.Ignored = ignored;
+                newCalenderEvent.StartDate = pfCalenderEvent[@"startDate"];
+                newCalenderEvent.EndDate = pfCalenderEvent[@"endDate"];
+                newCalenderEvent.Title = pfCalenderEvent[@"title"];
+                [calenderEvents addObject:newCalenderEvent];
             }
-            else{
-                completionFunction(nil);
-            }
+            completionFunction(calenderEvents);
         }
     }];
 }
@@ -367,7 +393,7 @@
 -(CalenderEvent*)dictionaryToCalenderEvent:(NSDictionary*)dict{
     CalenderEvent* output = [[CalenderEvent alloc] init];
     output.EventIdentifier = dict[@"EventIdentifier"];
-    output.StressLevel = [dict[@"StressLevel"] integerValue];
+    output.StressLevel = dict[@"StressLevel"];
     NSNumber* ratedNumber = dict[@"Rated"];
     output.Rated = [ratedNumber integerValue] == 1 ? YES:NO;
     NSNumber* ignoredNumber = dict[@"Ignored"];

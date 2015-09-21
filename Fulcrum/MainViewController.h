@@ -23,6 +23,7 @@
 @property (strong) UIButton* dailySurveyButton;
 @property CGRect frame;
 @property UIButton* overallWellnessButton;
+@property UIView* scoreView;
 
 @property UIButton* todayButton;
 

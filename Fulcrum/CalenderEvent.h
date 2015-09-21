@@ -9,7 +9,7 @@
 @interface CalenderEvent : NSObject
 
 @property NSString* EventIdentifier;
-@property NSInteger StressLevel;
+@property NSNumber* StressLevel;
 @property bool Rated;
 @property bool Ignored;
 @property NSDate* StartDate;

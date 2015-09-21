@@ -32,7 +32,7 @@
 }
 
 +(UIColor*)dailySurveyButtonColor{
-    return [UIColor colorWithRed:0.282 green:0.259 blue:.851 alpha:1.0];
+    return [UIColor colorWithRed:0.282 green:0.559 blue:.451 alpha:1.0];
 }
 
 @end

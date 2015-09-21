@@ -46,14 +46,14 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[UIView alloc] initWithFrame:CGRectMake(0,0,120,120)];
-        view.layer.cornerRadius = 60;
+        view = [[UIView alloc] initWithFrame:CGRectMake(0,0,100,100)];
+        view.layer.cornerRadius = view.frame.size.width/2;
         view.alpha = 0.7;
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 120)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
         [label setTextColor:[UIColor whiteColor]];
         [label setBackgroundColor:[UIColor clearColor]];
-        [label setFont:[UIFont fontWithName: @"Trebuchet MS" size: 20.0f]];
+        [label setFont:[UIFont fontWithName: @"Trebuchet MS" size: 18.0f]];
         label.textAlignment = NSTextAlignmentCenter;
     }
     else

@@ -12,7 +12,7 @@
 @implementation LowerCarouselDateView
 
 -(id)initWithDate:(NSDate*)date AndTotalStress:(NSInteger)totalStress AndNumEvents:(NSInteger)numEvents{
-    self = [self initWithFrame:CGRectMake(0,0,100,260)];
+    self = [self initWithFrame:CGRectMake(0,0,100,220)];
     if(self){
         self.totalStress = totalStress;
         self.date = date;
@@ -41,20 +41,20 @@
     barView.backgroundColor = color;
     barView.alpha = 0.8;
     
-    UIView* circleView = [[UIView alloc] initWithFrame:CGRectMake(100,100,80,80)];
-    circleView.layer.cornerRadius = 40;
+    UIView* circleView = [[UIView alloc] initWithFrame:CGRectMake(100,100,60,60)];
+    circleView.layer.cornerRadius = circleView.frame.size.width/2;
     circleView.alpha = 1;
     circleView.backgroundColor = color;
     self.circleView = circleView;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, circleView.frame.size.width, circleView.frame.size.height-12)];
     [label setTextColor:[UIColor whiteColor]];
     label.textAlignment = NSTextAlignmentCenter;
-    [label setFont:[UIFont fontWithName: @"Helvetica-Bold" size: 16.0f]];
+    [label setFont:[UIFont fontWithName: @"Helvetica-Bold" size: 14.0f]];
 
     UILabel* label2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, circleView.frame.size.width, circleView.frame.size.height)];
     [label2 setTextColor:[UIColor whiteColor]];
     label2.textAlignment = NSTextAlignmentCenter;
-    [label2 setFont:[UIFont fontWithName: @"Helvetica" size: 16.0f]];
+    [label2 setFont:[UIFont fontWithName: @"Helvetica" size: 14.0f]];
     
     CGPoint circleCenter = CGPointMake(self.center.x,self.center.y+65);
     circleView.center = circleCenter;

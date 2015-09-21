@@ -58,13 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "462069219.923171"
+            timestampString = "463519379.488482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "@implementation MainViewController"
-            landmarkType = "3">
+            startingLineNumber = "26"
+            endingLineNumber = "26">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -232,11 +230,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "462070348.988068"
+            timestampString = "463979820.644043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +246,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "462070348.988068"
+            timestampString = "463979820.644043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -264,11 +262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "462069219.923171"
+            timestampString = "463977503.766167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -286,22 +284,6 @@
             startingLineNumber = "17"
             endingLineNumber = "17"
             landmarkName = "+currentStore"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387597.476316"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
-            landmarkName = "-addCalenderEvents:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -360,11 +342,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387597.476316"
+            timestampString = "462742471.2844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "-dictionaryToDailySurveyQuestionResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -408,11 +390,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387597.476316"
+            timestampString = "462742471.2844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "-dictionaryToCalenderEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -424,11 +406,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387597.476316"
+            timestampString = "462742471.2844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "372"
-            endingLineNumber = "372"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
             landmarkName = "-dictionaryToCalenderEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -440,11 +422,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387597.476316"
+            timestampString = "462742471.2844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "-dictionaryToCalenderEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -472,11 +454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "462069219.923171"
+            timestampString = "463977442.936011"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-initDailySurveyButton"
             landmarkType = "5">
             <Locations>
@@ -520,11 +502,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "462070348.988068"
+            timestampString = "463979820.644043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -536,11 +518,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "462070348.988068"
+            timestampString = "463979820.644043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -552,11 +534,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "462070348.988068"
+            timestampString = "463979820.644043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -590,22 +572,6 @@
             startingLineNumber = "47"
             endingLineNumber = "47"
             landmarkName = "-startLoading"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387597.476316"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
-            landmarkName = "-addCalenderEvents:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

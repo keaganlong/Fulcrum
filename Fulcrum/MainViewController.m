@@ -22,17 +22,21 @@
 #import "FulcrumColors.h"
 #import <Parse/Parse.h>
 #import <FlatUIKit/FlatUIKit.h>
+#import "ScoreView.h"
+#import "DailySurveyWellnessAverage.h"
 
 @implementation MainViewController
 
 CGFloat const CAROUSEL_X = 0;
-CGFloat const CAROUSEL_Y = 35;
-CGFloat const CAROUSEL_HEIGHT = 200;
+CGFloat const CAROUSEL_Y = 40;
+CGFloat const CAROUSEL_HEIGHT = 160;
 
 -(id)init{
     self = [super init];
     if(self){
         self.currDate = [NSDate date];
+        self.scoreView = [UIView new];
+        [self.view addSubview: self.scoreView];
         //[UPApiService getUserPermissionWithCompletionHandler:^(UPSession * session) {
             [self initView];
             [[self dailySurveyButton] addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
@@ -74,7 +78,7 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     [overallWellnessButton setTintColor:[UIColor whiteColor]];
     [overallWellnessButton addTarget:self action:@selector(onOverallWellnessButtonOnTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:overallWellnessButton];
+    //[self.view addSubview:overallWellnessButton];
     [self setOverallWellnessButton:overallWellnessButton];
     
     [self  initSelectedDateLabel];
@@ -84,7 +88,7 @@ CGFloat const CAROUSEL_HEIGHT = 200;
 -(void)initSelectedDateLabel{
     CGRect frame = [[UIScreen mainScreen] applicationFrame];
     frame.origin.x = 10;
-    frame.origin.y = 300;
+    frame.origin.y = 170;
     frame.size.height = 50;
     frame.size.width = frame.size.width - 10;
     UILabel* dateLabel = [[UILabel alloc] initWithFrame:frame];
@@ -118,7 +122,7 @@ CGFloat const CAROUSEL_HEIGHT = 200;
                    ^{
 
                        
-                       self.lowerCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0,290,self.frame.size.width,270)];
+                       self.lowerCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0,308,self.frame.size.width,255)];
                        self.lowerCarousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
                        self.lowerCarousel.type = iCarouselTypeLinear;
                        //self.lowerCarousel.layer.borderColor = [[UIColor purpleColor] CGColor];
@@ -148,8 +152,8 @@ CGFloat const CAROUSEL_HEIGHT = 200;
             dispatch_async(dispatch_get_main_queue(),
                            ^{
                                if(self.dailySurveyButton==nil){
-                                   UIButton* dailySurveyButton = [[UIButton alloc]initWithFrame:CGRectMake(-80+self.frame.size.width/2,260,160,40)];
-                                   NSMutableString* dailySurveyButtonString = [NSMutableString stringWithString:@"Take Daily Survey"];
+                                   UIButton* dailySurveyButton = [[UIButton alloc]initWithFrame:CGRectMake(-80+self.frame.size.width/2,225,160,30)];
+                                   NSMutableString* dailySurveyButtonString = [NSMutableString stringWithString:@"Daily Survey"];
                                    [dailySurveyButton setTitle:dailySurveyButtonString forState:UIControlStateNormal];
                                    [dailySurveyButton setBackgroundColor:[FulcrumColors dailySurveyButtonColor]];
                                    [dailySurveyButton addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
@@ -164,6 +168,7 @@ CGFloat const CAROUSEL_HEIGHT = 200;
     self.currDate = newDate;
     NSString* dateString = [DateService readableStringFromDate:self.currDate];
     [self.selectedDateLabel setText:dateString];
+    [self initScoreView];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -172,16 +177,34 @@ CGFloat const CAROUSEL_HEIGHT = 200;
             DailySurveyDataMap* dataMap = [[DailySurveyDataMap alloc] initWithDailySurveyResponses:dailySurveyResponses];
             self.dataMap = dataMap;
         }
-        if(self.dailySurveyButton!=nil){
-            self.dailySurveyButton.hidden = YES;
-            self.dailySurveyButton = nil;
-            [self.dailySurveyButton removeFromSuperview];
-        }
         [self initDailySurveyButton];
         [self.lowerCarouselDataSourceAndDelegate refresh];
         [self.upperCarousel reloadData];
+        [self initScoreView];
         [super viewWillAppear:animated];
     }];
+}
+
+-(void)initScoreView{
+    [self.scoreView removeFromSuperview];
+    DailySurveyResponse* dailySurveyResponse = [self.dataMap dailySurveyResponseForDate:self.currDate];
+    if(dailySurveyResponse != nil){
+        NSMutableArray* dailySurveyQuestionResponses = dailySurveyResponse.dailySurveyQuestionResponses;
+        DailySurveyWellnessAverage* dailySurveyWellnessAverage = [[DailySurveyWellnessAverage alloc] initWithDailySurveyQuestionResponses:dailySurveyQuestionResponses];
+        CGRect frame = CGRectMake(40, 270, 240, 100);
+        ScoreView* scoreView = [[ScoreView alloc] initWithDailySurveyWellnessAverage:dailySurveyWellnessAverage AndFrame:frame];
+        self.scoreView = scoreView;
+        [self.view addSubview:scoreView];
+    }
+    else{
+        CGRect frame = CGRectMake(40, 280, 240, 100);
+        UILabel* noScoreLabel = [[UILabel alloc] initWithFrame:frame];
+        noScoreLabel.text = @"Daily Survey Not Completed";
+        noScoreLabel.textAlignment = NSTextAlignmentCenter;
+        noScoreLabel.alpha = 0.5;
+        self.scoreView = noScoreLabel;
+        [self.view addSubview:self.scoreView];
+    }
 }
 
 -(void) loadView{
