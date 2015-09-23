@@ -14,7 +14,6 @@
 #import "DateService.h"
 #import "CalenderEvent.h"
 #import "DailySurveyQuestion.h"
-
 #import <Parse/Parse.h>
 
 @implementation FulcrumAPIFacade
@@ -43,6 +42,8 @@
                 dailySurveyQuestion.pfDailySurveyQuestion = pfDailySurveyQuestion;
                 dailySurveyQuestion.questionString = pfDailySurveyQuestion[@"question"];
                 dailySurveyQuestion.responses = pfDailySurveyQuestion[@"responses"];
+                dailySurveyQuestion.wellnessArea = pfDailySurveyQuestion[@"wellnessArea"];
+                dailySurveyQuestion.index = pfDailySurveyQuestion[@"index"];
                 newQuestionResponse.question = dailySurveyQuestion;
                 [newDailySurveyQuestionResponses addObject:newQuestionResponse];
             }
@@ -431,6 +432,8 @@
                 DailySurveyQuestion* newQuestion = [DailySurveyQuestion new];
                 newQuestion.questionString = object[@"question"];
                 newQuestion.responses = object[@"responses"];
+                newQuestion.wellnessArea = object[@"wellnessArea"];
+                newQuestion.index = object[@"index"];
                 newQuestion.pfDailySurveyQuestion = object;
                 [dailySurveyQuestions addObject:newQuestion];
             }

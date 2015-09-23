@@ -18,10 +18,11 @@
 @property NSMutableSet* currentEventsSet;
 @property NSMutableSet* needsRatingSet;
 @property NSMutableArray* currentEvents;
-
+@property int currentDateIndex;
 @property (nonatomic, weak) iCarousel *carousel;
 @property MainViewController* parentViewController;
 @property BOOL firstTimeViewed;
+@property BOOL initialized;
 
 -(void)refresh;
 

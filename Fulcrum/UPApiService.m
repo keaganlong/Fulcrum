@@ -22,13 +22,13 @@ NSString *const appSecret = @"040527806cacbd1b00bc748ffb710dd2272092f1";
 }
 
 +(void)getSleepsWithCompletionHandler:(void(^)(NSArray*))completionFunction{
-    [UPSleepAPI getSleepsWithLimit:100 completion:^(NSArray *sleeps, UPURLResponse *response, NSError *error) {
+    [UPSleepAPI getSleepsWithLimit:1000 completion:^(NSArray *sleeps, UPURLResponse *response, NSError *error) {
         completionFunction(sleeps);
     }];
 }
 
 +(void)getEventsWithCompletionHandler:(void(^)(NSArray*))completionFunction{
-    [UPMoveAPI getMovesWithLimit:1000 completion:^(NSArray *results, UPURLResponse *response, NSError *error) {
+    [UPMoveAPI getMovesWithLimit:10000 completion:^(NSArray *results, UPURLResponse *response, NSError *error) {
         completionFunction(results);
     }];
 }

@@ -27,7 +27,7 @@
     }
     if(sleepQuality != nil){
         totalWeight += SLEEP_QUALITY_WEIGHT;
-        CGFloat floatDecimalValue = [sleepQuality floatValue] / 100.0;
+        CGFloat floatDecimalValue = [sleepQuality floatValue] / 8.0;
         [values addObject:[NSNumber numberWithFloat:floatDecimalValue]];
         NSNumber* weightNumber = [NSNumber numberWithFloat:SLEEP_QUALITY_WEIGHT];
         [weights addObject:weightNumber];

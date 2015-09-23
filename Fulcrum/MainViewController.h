@@ -12,6 +12,7 @@
 #import "LowerCarouselDataSourceAndDelegate.h"
 #import "UpperCarouselDataSourceAndDelegate.h"
 #import "DailySurveyDataMap.h"
+#import "LoadingView.h"
 
 @interface MainViewController:UIViewController
 
@@ -24,7 +25,8 @@
 @property CGRect frame;
 @property UIButton* overallWellnessButton;
 @property UIView* scoreView;
-
+@property UIView* loadingView;
+@property UIActivityIndicatorView *spinner;
 @property UIButton* todayButton;
 
 @property DailySurveyDataMap* dataMap;

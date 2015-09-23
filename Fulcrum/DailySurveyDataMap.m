@@ -27,6 +27,7 @@
         dailySurveyScoreDictionary = [NSMutableDictionary new];
         activeCaloriesDictionary = [NSMutableDictionary new];
         dailySurveyResponseDictionary = [NSMutableDictionary new];
+        sleepScoreDictionary = [NSMutableDictionary new];
     }
     return self;
 }
@@ -67,13 +68,15 @@
         UPSleep* currSleep = [sleeps objectAtIndex:i];
         NSDate* forDate = currSleep.date;
         NSString* forDateString = [DateService yearMonthDateStringFromDate:forDate];
-        sleepScoreDictionary[forDateString] = currSleep.quality;
-        
-        if(self.firstDate == nil || [forDate compare:self.firstDate]==NSOrderedAscending){
-            self.firstDate = forDate;
-        }
-        if(self.lastDate == nil || [forDate compare:self.lastDate]==NSOrderedDescending){
-            self.lastDate = forDate;
+        if(currSleep.quality){
+            sleepScoreDictionary[forDateString] = [NSNumber numberWithFloat:[currSleep.totalTime floatValue]/3600.0];
+            
+            if(self.firstDate == nil || [forDate compare:self.firstDate]==NSOrderedAscending){
+                self.firstDate = forDate;
+            }
+            if(self.lastDate == nil || [forDate compare:self.lastDate]==NSOrderedDescending){
+                self.lastDate = forDate;
+            }
         }
     }
 }
@@ -181,6 +184,7 @@
 }
 
 -(CGFloat)getMissingValueForDate:(NSDate*)date forWellnessArea:(WELLNESS_AREA)area{
+    return 0;
     if(self.firstDate == nil || self.lastDate == nil){
         return 0;
     }

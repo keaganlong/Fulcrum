@@ -12,6 +12,8 @@
 
 @property NSString* questionString;
 @property NSMutableArray* responses;
+@property NSString* wellnessArea;
+@property NSNumber* index;
 
 @property PFObject* pfDailySurveyQuestion;
 

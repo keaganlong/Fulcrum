@@ -62,6 +62,7 @@
 		EC9FD81B1A7F147200EE6446 /* CalenderEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9FD81A1A7F147200EE6446 /* CalenderEvent.m */; };
 		ECA6CC671B95F9CC0008B294 /* ScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA6CC661B95F9CC0008B294 /* ScoreView.m */; };
 		ECA6CC691B9600BD0008B294 /* DotsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA6CC681B9600BD0008B294 /* DotsView.m */; };
+		ECA6CC6E1BB1BFEA0008B294 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA6CC6D1BB1BFEA0008B294 /* LoadingView.m */; };
 		ECACFA2A1A8137E40047285B /* LowerCarouselDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA291A8137E40047285B /* LowerCarouselDateView.m */; };
 		ECACFA2D1A8140030047285B /* StressStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA2C1A8140030047285B /* StressStrategy.m */; };
 		ECACFA311A814F910047285B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECACFA301A814F910047285B /* DateViewController.m */; };
@@ -174,6 +175,8 @@
 		ECA6CC661B95F9CC0008B294 /* ScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreView.m; sourceTree = "<group>"; };
 		ECA6CC681B9600BD0008B294 /* DotsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DotsView.m; sourceTree = "<group>"; };
 		ECA6CC6A1B9600C50008B294 /* DotsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DotsView.h; sourceTree = "<group>"; };
+		ECA6CC6C1BB1BFD10008B294 /* LoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		ECA6CC6D1BB1BFEA0008B294 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		ECACFA281A8137C90047285B /* LowerCarouselDateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LowerCarouselDateView.h; sourceTree = "<group>"; };
 		ECACFA291A8137E40047285B /* LowerCarouselDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LowerCarouselDateView.m; sourceTree = "<group>"; };
 		ECACFA2B1A813F9E0047285B /* StressStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StressStrategy.h; sourceTree = "<group>"; };
@@ -345,6 +348,7 @@
 		EC72F8701A12F9C600BFD4DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ECA6CC6B1BB1BFBD0008B294 /* Util */,
 				ECA6CC641B95F9230008B294 /* ScoreView */,
 				ECF354BD1AC47BD60037C4C5 /* Colors */,
 				ECDE86001A8C600E00310EB6 /* DateView */,
@@ -533,6 +537,15 @@
 			name = ScoreView;
 			sourceTree = "<group>";
 		};
+		ECA6CC6B1BB1BFBD0008B294 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				ECA6CC6C1BB1BFD10008B294 /* LoadingView.h */,
+				ECA6CC6D1BB1BFEA0008B294 /* LoadingView.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		ECACFA271A81379A0047285B /* MainView */ = {
 			isa = PBXGroup;
 			children = (
@@ -709,6 +722,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC9FD7FB1A658D0D00EE6446 /* DailySurveyDataMap.m in Sources */,
+				ECA6CC6E1BB1BFEA0008B294 /* LoadingView.m in Sources */,
 				EC9FD7E81A538E6E00EE6446 /* DailySurveyQuestionResponse.m in Sources */,
 				ECA6CC691B9600BD0008B294 /* DotsView.m in Sources */,
 				EC9FD7F51A588D1400EE6446 /* WellnessAreaViewController.m in Sources */,

@@ -24,6 +24,7 @@
 #import <FlatUIKit/FlatUIKit.h>
 #import "ScoreView.h"
 #import "DailySurveyWellnessAverage.h"
+#import "LoadingView.h"
 
 @implementation MainViewController
 
@@ -37,13 +38,13 @@ CGFloat const CAROUSEL_HEIGHT = 160;
         self.currDate = [NSDate date];
         self.scoreView = [UIView new];
         [self.view addSubview: self.scoreView];
-        //[UPApiService getUserPermissionWithCompletionHandler:^(UPSession * session) {
-            [self initView];
-            [[self dailySurveyButton] addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-        //}];
+        [self initView];
+        [[self dailySurveyButton] addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+
     }
     return self;
 }
+
 
 - (void)initView
 {
@@ -148,20 +149,15 @@ CGFloat const CAROUSEL_HEIGHT = 160;
 }
 
 -(void)initDailySurveyButton{
-    [FulcrumAPIFacade lastDateDailySurveyCompletedForWithCallback:^(NSDate *lastDate) {
-            dispatch_async(dispatch_get_main_queue(),
-                           ^{
-                               if(self.dailySurveyButton==nil){
-                                   UIButton* dailySurveyButton = [[UIButton alloc]initWithFrame:CGRectMake(-80+self.frame.size.width/2,225,160,30)];
-                                   NSMutableString* dailySurveyButtonString = [NSMutableString stringWithString:@"Daily Survey"];
-                                   [dailySurveyButton setTitle:dailySurveyButtonString forState:UIControlStateNormal];
-                                   [dailySurveyButton setBackgroundColor:[FulcrumColors dailySurveyButtonColor]];
-                                   [dailySurveyButton addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-                                   self.dailySurveyButton = dailySurveyButton;
-                                   [self.view addSubview:dailySurveyButton];
-                               }
-                           });
-    }];
+   if(self.dailySurveyButton==nil){
+       UIButton* dailySurveyButton = [[UIButton alloc]initWithFrame:CGRectMake(-80+self.frame.size.width/2,225,160,30)];
+       NSMutableString* dailySurveyButtonString = [NSMutableString stringWithString:@"Daily Survey"];
+       [dailySurveyButton setTitle:dailySurveyButtonString forState:UIControlStateNormal];
+       [dailySurveyButton setBackgroundColor:[FulcrumColors dailySurveyButtonColor]];
+       [dailySurveyButton addTarget:self action:@selector(onDailySurveyButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+       self.dailySurveyButton = dailySurveyButton;
+       [self.view addSubview:dailySurveyButton];
+   }
 }
 
 -(void)dateChangedTo:(NSDate*)newDate{
@@ -171,18 +167,41 @@ CGFloat const CAROUSEL_HEIGHT = 160;
     [self initScoreView];
 }
 
+-(void)startLoading{
+    CGRect fullFrame = [[UIScreen mainScreen] bounds];
+    UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
+    loadingView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.5];
+    [self.view addSubview:loadingView];
+    self.loadingView = loadingView;
+
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center = CGPointMake(self.view.center.x, self.view.center.y);
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
+    self.spinner = spinner;
+}
+
+-(void)endLoading{
+    self.loadingView.hidden = YES;
+    self.spinner.hidden = YES;
+}
+
 -(void) viewWillAppear:(BOOL)animated{
-    [FulcrumAPIFacade getDailySurveyResponsesWithCallback:^(NSMutableArray *dailySurveyResponses) {
-        if(dailySurveyResponses!=nil){
-            DailySurveyDataMap* dataMap = [[DailySurveyDataMap alloc] initWithDailySurveyResponses:dailySurveyResponses];
-            self.dataMap = dataMap;
-        }
-        [self initDailySurveyButton];
-        [self.lowerCarouselDataSourceAndDelegate refresh];
-        [self.upperCarousel reloadData];
-        [self initScoreView];
-        [super viewWillAppear:animated];
+    [self startLoading];
+    [UPApiService getUserPermissionWithCompletionHandler:^(UPSession * session) {
+        [FulcrumAPIFacade getDailySurveyResponsesWithCallback:^(NSMutableArray *dailySurveyResponses) {
+            if(dailySurveyResponses!=nil){
+                DailySurveyDataMap* dataMap = [[DailySurveyDataMap alloc] initWithDailySurveyResponses:dailySurveyResponses];
+                self.dataMap = dataMap;
+            }
+            [self initDailySurveyButton];
+            [self.lowerCarouselDataSourceAndDelegate refresh];
+            [self.upperCarousel reloadData];
+            [self initScoreView];
+            [self endLoading];
+        }];
     }];
+    [super viewWillAppear:animated];
 }
 
 -(void)initScoreView{

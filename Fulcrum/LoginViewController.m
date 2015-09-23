@@ -31,8 +31,15 @@
     [self initLoginButton];
     [self initEmailTextField];
     [self initPasswordTextField];
-    self.emailTextField.text = @"zxc@zxc.com";
-    self.passwordTextField.text = @"zxczxc";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.emailTextField.text = @"";
+    self.passwordTextField.text = @"";
+    NSString* savedEmail = [defaults objectForKey:@"email"];
+    NSString* savedPassword = [defaults objectForKey:@"password"];
+    if(savedEmail && savedPassword){
+        self.emailTextField.text = savedEmail;
+        self.passwordTextField.text = savedPassword;
+    }
     [super viewWillAppear:animated];
 }
 
@@ -112,6 +119,7 @@
     myTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     myTextField.textAlignment = UITextAlignmentCenter;
     self.passwordTextField = myTextField;
+    self.passwordTextField.secureTextEntry = YES;
     [self.view addSubview:self.passwordTextField];
 }
 
@@ -149,7 +157,9 @@
     self.loginButton.enabled = NO;
     NSString* email = [self.emailTextField text];
     NSString* password = [self.passwordTextField text];
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:email forKey:@"email"];
+    [defaults setObject:password forKey:@"password"];
     
     [FulcrumAPIFacade loginWithUsername:email andWithPassword:password withCallback:^(NSError* error) {
         if(!error){

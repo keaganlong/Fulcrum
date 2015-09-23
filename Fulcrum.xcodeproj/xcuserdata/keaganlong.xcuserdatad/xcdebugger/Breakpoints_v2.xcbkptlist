@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyViewController.m"
-            timestampString = "462070518.781997"
+            timestampString = "464552350.343118"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "-initQuestionViews"
             landmarkType = "5">
          </BreakpointContent>
@@ -134,23 +134,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387597.476316"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "-lastDateDailySurveyCompletedForWithCallback:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387597.476316"
+            timestampString = "464653100.460785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "263"
@@ -166,12 +150,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387065.954349"
+            timestampString = "464653100.460785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "-validateGetDailySurveyResponse:"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "-lastDateDailySurveyCompletedForWithCallback:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -182,27 +166,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387065.954349"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "-validateGetDailySurveyResponse:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "461387065.954349"
+            timestampString = "464653100.460785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "82"
             endingLineNumber = "82"
+            landmarkName = "-validateGetDailySurveyResponse:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fulcrum/FulcrumAPIFacade.m"
+            timestampString = "464653100.460785"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-validateGetDailySurveyResponse:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fulcrum/FulcrumAPIFacade.m"
+            timestampString = "464653100.460785"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "-validateGetDailySurveyResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -230,11 +230,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "463979820.644043"
+            timestampString = "464664027.497547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -246,11 +246,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "463979820.644043"
+            timestampString = "464664027.497547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -262,11 +262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "463977503.766167"
+            timestampString = "464664027.497547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -342,11 +342,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "462742471.2844"
+            timestampString = "464653100.460785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "414"
-            endingLineNumber = "414"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
             landmarkName = "-dictionaryToDailySurveyQuestionResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -358,11 +358,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LowerCarouselDataSourceAndDelegate.m"
-            timestampString = "461273168.225798"
+            timestampString = "464655205.022404"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "-getNumberOfEventsForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -390,11 +390,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "462742471.2844"
+            timestampString = "464653100.460785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "-dictionaryToCalenderEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -406,11 +406,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "462742471.2844"
+            timestampString = "464653100.460785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "-dictionaryToCalenderEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -422,11 +422,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/FulcrumAPIFacade.m"
-            timestampString = "462742471.2844"
+            timestampString = "464653100.460785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
             landmarkName = "-dictionaryToCalenderEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -454,59 +454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "463977442.936011"
+            timestampString = "464664027.497547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-initDailySurveyButton"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[MainViewController initDailySurveyButton]"
-                  moduleName = "Fulcrum"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/keaganlong/Desktop/Fulcrum/Fulcrum/MainViewController.m"
-                  timestampString = "448907521.704852"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "124"
-                  endingLineNumber = "124"
-                  offsetFromSymbolStart = "119">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__43-[MainViewController initDailySurveyButton]_block_invoke"
-                  moduleName = "Fulcrum"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/keaganlong/Desktop/Fulcrum/Fulcrum/MainViewController.m"
-                  timestampString = "448907521.705365"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "124"
-                  endingLineNumber = "124"
-                  offsetFromSymbolStart = "46">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/MainViewController.m"
-            timestampString = "463979820.644043"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -518,11 +470,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "463979820.644043"
+            timestampString = "464664027.497547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -534,11 +486,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/MainViewController.m"
-            timestampString = "463979820.644043"
+            timestampString = "464664027.497547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -582,11 +534,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LowerCarouselDataSourceAndDelegate.m"
-            timestampString = "449092014.047056"
+            timestampString = "464644106.174306"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "-initCalenderEvents"
             landmarkType = "5">
          </BreakpointContent>
@@ -598,11 +550,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "-valueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -646,11 +598,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-setMoves:"
             landmarkType = "5">
          </BreakpointContent>
@@ -662,11 +614,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-setMoves:"
             landmarkType = "5">
          </BreakpointContent>
@@ -678,11 +630,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "-setMoves:"
             landmarkType = "5">
          </BreakpointContent>
@@ -694,11 +646,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "-valueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -710,11 +662,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "-valueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -742,11 +694,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "-overallValueForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -758,11 +710,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "-overallValueForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -774,11 +726,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "-overallValueForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -790,11 +742,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-valueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -806,11 +758,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "-valueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -822,11 +774,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -838,71 +790,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "-getMissingValueForDate:forWellnessArea:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
-            landmarkName = "-getMissingValueForDate:forWellnessArea:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "-getMissingValueForDate:forWellnessArea:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "-getMissingValueForDate:forWellnessArea:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "214"
@@ -918,11 +806,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -934,11 +822,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -950,7 +838,39 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "-getMissingValueForDate:forWellnessArea:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fulcrum/DailySurveyDataMap.m"
+            timestampString = "464667412.913729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
+            landmarkName = "-getMissingValueForDate:forWellnessArea:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fulcrum/DailySurveyDataMap.m"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "221"
@@ -966,11 +886,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -982,11 +902,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "-getMissingValueForDate:forWellnessArea:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fulcrum/DailySurveyDataMap.m"
+            timestampString = "464667412.913729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "-getMissingValueForDate:forWellnessArea:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fulcrum/DailySurveyDataMap.m"
+            timestampString = "464666229.53883"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "-overallValueForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -998,11 +950,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "-overallValueForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1014,11 +966,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "-overallValueForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1030,11 +982,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1046,11 +998,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1062,11 +1014,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1078,11 +1030,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1094,11 +1046,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "-getMissingValueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1110,11 +1062,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LowerCarouselDataSourceAndDelegate.m"
-            timestampString = "449274867.672332"
+            timestampString = "464644106.174306"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "-initCalenderEvents"
             landmarkType = "5">
          </BreakpointContent>
@@ -1126,11 +1078,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LowerCarouselDataSourceAndDelegate.m"
-            timestampString = "449274867.672332"
+            timestampString = "464644106.174306"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "-initCalenderEvents"
             landmarkType = "5">
          </BreakpointContent>
@@ -1142,11 +1094,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LowerCarouselDataSourceAndDelegate.m"
-            timestampString = "449274867.672332"
+            timestampString = "464644106.174306"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "-initCalenderEvents"
             landmarkType = "5">
          </BreakpointContent>
@@ -1174,11 +1126,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666038.784133"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "-initWithDailySurveyResponses:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1328,11 +1280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-dataExistsForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1344,11 +1296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "-dataExistsForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1360,11 +1312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "-dataExistsForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1376,11 +1328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "-dataExistsForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1392,7 +1344,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464667412.913729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "-dataExistsForDate:forWellnessArea:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fulcrum/DailySurveyDataMap.m"
+            timestampString = "464667412.913729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "237"
@@ -1408,27 +1376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "-dataExistsForDate:forWellnessArea:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "-setMoves:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1440,11 +1392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "-setMoves:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1456,11 +1408,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "-setMoves:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1536,11 +1488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-overallValueForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1552,11 +1504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "-overallValueForDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1568,11 +1520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "-valueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1584,11 +1536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fulcrum/DailySurveyDataMap.m"
-            timestampString = "461384785.25519"
+            timestampString = "464666229.53883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "-valueForDate:forWellnessArea:"
             landmarkType = "5">
          </BreakpointContent>

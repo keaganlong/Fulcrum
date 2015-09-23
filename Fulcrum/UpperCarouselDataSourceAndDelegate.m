@@ -27,7 +27,7 @@
 
 -(void) initItems{
     self.items = [NSMutableArray array];
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
         [self.items addObject:[NSNumber numberWithInt:i]];
     }
@@ -79,10 +79,16 @@
             view.backgroundColor = [FulcrumColors physicalBaseColor];
             [self addGestureToView:view];
             break;
-        default:
+        case 3:
             [view setTag:3];
             [label setText: @"Academic"];
             view.backgroundColor = [FulcrumColors academicBaseColor];
+            [self addGestureToView:view];
+            break;
+        default:
+            [view setTag:4];
+            [label setText: @"Overall"];
+            view.backgroundColor = [FulcrumColors overallBaseColor];
             [self addGestureToView:view];
     }
     //set label
@@ -109,8 +115,11 @@
         case 2:
             area = PHYSICAL;
             break;
-        default:
+        case 3:
             area = ACADEMIC;
+            break;
+        default:
+            area = OVERALL;
             break;
     }
     WellnessAreaViewController* controller;
@@ -129,12 +138,12 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"page.png"]];
-        label = [[UILabel alloc] initWithFrame:view.bounds];
-        label.backgroundColor = [UIColor clearColor];
-        label.textAlignment = UITextAlignmentCenter;
-        label.font = [label.font fontWithSize:50.0f];
-        [view addSubview:label];
+//        view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"page.png"]];
+//        label = [[UILabel alloc] initWithFrame:view.bounds];
+//        label.backgroundColor = [UIColor clearColor];
+//        label.textAlignment = UITextAlignmentCenter;
+//        label.font = [label.font fontWithSize:50.0f];
+//        [view addSubview:label];
     }
     else
     {

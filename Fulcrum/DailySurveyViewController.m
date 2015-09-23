@@ -136,6 +136,12 @@
     scrollView.contentSize=CGSizeMake(fullScreenRect.size.width-60,140*[self.dailySurveyQuestions count]+100);
     //scrollView.contentInset=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
     
+    self.dailySurveyQuestions = [self.dailySurveyQuestions sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSNumber* obj1Index = ((DailySurveyQuestion*)obj1).index;
+        NSNumber* obj2Index = ((DailySurveyQuestion*)obj2).index;
+        return [obj1Index compare:obj2Index];
+    }];
+    
     int i;
     for(i = 0; i<[self.dailySurveyQuestions count];i++){
         DailySurveyQuestionView* currView = [[DailySurveyQuestionView alloc] initWithDailySurveyQuestion:[self.dailySurveyQuestions objectAtIndex:i]AndWithFrame:CGRectMake(0,140*i,fullScreenRect.size.width-40,140)];
@@ -228,9 +234,7 @@
 }
 
 -(void)surveySubmitted{
-    MainViewController* mainViewController = [[MainViewController alloc]init];
-    //[[self navigationController] popViewControllerAnimated:YES];
-    [[self navigationController] pushViewController:mainViewController animated:YES];
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 @end

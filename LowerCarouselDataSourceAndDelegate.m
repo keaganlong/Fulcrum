@@ -24,6 +24,8 @@
 - (id)initWithController:(MainViewController*)mainViewController AndWithCarousel:(iCarousel*)carousel{
     self = [super init];
     if (self) {
+        self.initialized = NO;
+        self.currentDateIndex = 7;
         self.parentViewController = mainViewController;
         self.carousel = carousel;
     }
@@ -40,17 +42,18 @@
             NSLog(@"Retrived: %lu calender events",[calenderEvents count]);
             [self processCalenderEvents:calenderEvents];
         }
-        [self retrieveNewCalenderEvents];
-        
-        dispatch_async(dispatch_get_main_queue(),
-                       ^{
-                           [self.carousel reloadData];
-                           [self.carousel scrollToItemAtIndex:7 animated:NO];
-                           CGRect dateBarFrame = CGRectMake(0, 457, 500, 10);
-                           UIView* dateBar = [[UIView alloc] initWithFrame:dateBarFrame];
-                           [dateBar setBackgroundColor:[UIColor blackColor]];
-                           [self.parentViewController.view addSubview:dateBar];
-                       });
+        [self retrieveNewCalenderEventsWithCallback:^{
+            dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       [self.carousel reloadData];
+                       [self.carousel scrollToItemAtIndex:self.currentDateIndex animated:NO];
+                       CGRect dateBarFrame = CGRectMake(0, 457, 500, 10);
+                       UIView* dateBar = [[UIView alloc] initWithFrame:dateBarFrame];
+                       [dateBar setBackgroundColor:[UIColor blackColor]];
+                       [self.parentViewController.view addSubview:dateBar];
+                       self.initialized = YES;
+                   });
+        }];
     }];
 }
 
@@ -62,10 +65,10 @@
         [self.currentEvents addObject:currEvent];
         
         NSString* key = [DateService yearMonthDateStringFromDate:currEvent.StartDate];
-        if(!currEvent.Rated){
+        if(!currEvent.Rated) {
             [self.needsRatingSet addObject:key];
         }
-        if(self.eventMap[key]==nil){
+        if(self.eventMap[key]==nil) {
             self.eventMap[key] = [NSMutableArray new];
         }
         NSMutableArray* eventListForDate = self.eventMap[key];
@@ -73,7 +76,7 @@
     }
 }
 
--(void)retrieveNewCalenderEvents{
+-(void)retrieveNewCalenderEventsWithCallback:(void(^)())callBack{
     EKEventStore* store = [iCalService currentStore];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
@@ -103,8 +106,9 @@
         NSMutableString* hackedEventIdentifier = [NSMutableString stringWithString:event.eventIdentifier];
         NSString* startDateString = [DateService yearMonthDateStringFromDate:event.startDate];
         [hackedEventIdentifier appendString:startDateString];
-        if(![self.currentEventsSet containsObject:hackedEventIdentifier]){
-            [self.currentEventsSet addObject:hackedEventIdentifier];
+        NSString* hackedEventIdentifierString = [NSString stringWithString:hackedEventIdentifier];
+        if(![self.currentEventsSet containsObject:hackedEventIdentifierString]){
+            [self.currentEventsSet addObject:hackedEventIdentifierString];
             NSLog(@"\t Unseen: %@",event.title);
             [eventsToAdd addObject:event];
         }
@@ -130,16 +134,25 @@
         NSString* key = [DateService yearMonthDateStringFromDate:calenderEvent.StartDate];
         [self.needsRatingSet addObject:key];
     }
-    [FulcrumAPIFacade addCalenderEvents:calenderEvents withCompletionHandler:^(NSError * error) {
-        if(error != nil){
-            NSLog(@"Adding Calender Events Error: %@",error);
-        }
-        [self processCalenderEvents:calenderEvents];
-    }];
+    if([calenderEvents count] > 0){
+        [FulcrumAPIFacade addCalenderEvents:calenderEvents withCompletionHandler:^(NSError * error) {
+            if(error != nil){
+                NSLog(@"Adding Calender Events Error: %@",error);
+            }
+            [self processCalenderEvents:calenderEvents];
+            callBack();
+        }];
+    }
+    else {
+        callBack();
+    }
 }
 
 - (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel{
     NSDate* newDate = [self.dates objectAtIndex:carousel.currentItemIndex];
+    if(self.initialized){
+        self.currentDateIndex = carousel.currentItemIndex;
+    }
     [self.parentViewController dateChangedTo:newDate];
 }
 
@@ -321,6 +334,7 @@
     self.needsRatingSet = [NSMutableSet new];
     [self initCalenderEvents];
 }
+
 
 
 @end
