@@ -190,16 +190,17 @@
 }
 
 -(NSInteger)getTotalStressForDate:(NSDate*)date{
-    NSInteger output = 0;
+    int output = 0;
     NSMutableArray* calenderEvents = [self getCalenderEventsForDate:date];
     for(int i = 0; i<[calenderEvents count];i++){
         CalenderEvent* currCalenderEvent = [calenderEvents objectAtIndex:i];
-        output+= [self stressFunction:currCalenderEvent.StressLevel];
+        int intValue = [self stressFunction:[currCalenderEvent.StressLevel integerValue]];
+        output+= intValue;
     }
     return output;
 }
 
--(NSInteger)stressFunction:(NSInteger)stressLevel{
+-(int)stressFunction:(NSInteger)stressLevel{
     switch(stressLevel){
         case 0:
             return 0;
@@ -208,12 +209,12 @@
         case 2:
             return 1;
         case 3:
-            return 5;
+            return 3;
         case 4:
-            return 8;
+            return 5;
         case 5:
         default:
-            return 12;
+            return 8;
     }
 }
 
