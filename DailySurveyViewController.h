@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
 @property NSArray* dailySurveyQuestions;
 @property NSMutableArray* dailySurveyQuestionViews;
-
+@property UIView* loadingView;
 @property NSDate* date;
 @property BOOL editable;
 

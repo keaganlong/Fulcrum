@@ -168,6 +168,8 @@ CGFloat const CAROUSEL_HEIGHT = 160;
 }
 
 -(void)startLoading{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
     CGRect fullFrame = [[UIScreen mainScreen] bounds];
     UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
     loadingView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.5];
@@ -179,11 +181,15 @@ CGFloat const CAROUSEL_HEIGHT = 160;
     [self.view addSubview:spinner];
     [spinner startAnimating];
     self.spinner = spinner;
+                   });
 }
 
 -(void)endLoading{
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
     self.loadingView.hidden = YES;
     self.spinner.hidden = YES;
+                   });
 }
 
 -(void) viewWillAppear:(BOOL)animated{

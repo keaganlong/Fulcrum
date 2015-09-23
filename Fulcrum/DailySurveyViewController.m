@@ -122,6 +122,9 @@
         float value = [currQuestionResponse.value floatValue];
         [currView.slider setValue:value];
         currView.slider.enabled = self.editable;
+        
+        [currView onSliderValueChanged:nil];
+
     }
 }
 
@@ -192,10 +195,14 @@
             [questionResponse setValue:[NSNumber numberWithInt:roundedValue]];
             [questionResponse setResponse:[[currView currentSelectionLabel] text]];
         }
-        CGRect fullFrame = [[UIScreen mainScreen] bounds];
-        UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
-        loadingView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
-        [self.view addSubview:loadingView];
+        dispatch_async(dispatch_get_main_queue(),
+                       ^{
+                    CGRect fullFrame = [[UIScreen mainScreen] bounds];
+                    UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
+                    loadingView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+                           self.loadingView = loadingView;
+                    [self.view addSubview:loadingView];
+                       });
         [FulcrumAPIFacade updateDailySurveyResponse:self.dailySurveyResponse withCallback:^(NSError *error) {
             [self surveySubmitted];
         }];
@@ -218,18 +225,17 @@
             [dailySurveyQuestionResponses addObject:questionResponse];
         }
         [dailySurveyResponse setDailySurveyQuestionResponses:dailySurveyQuestionResponses];
-
-        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-        NSString* token = [defaults valueForKey:@"access_token"];
-        if(token != nil){
-            CGRect fullFrame = [[UIScreen mainScreen] bounds];
-            UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
-            loadingView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
-            [self.view addSubview:loadingView];
-            [FulcrumAPIFacade submitDailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
-                [self surveySubmitted];
-            }];
-        }
+        dispatch_async(dispatch_get_main_queue(),
+                       ^{
+        CGRect fullFrame = [[UIScreen mainScreen] bounds];
+        UIView* loadingView = [[UIView alloc] initWithFrame:fullFrame];
+        loadingView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+                           self.loadingView = loadingView;
+        [self.view addSubview:loadingView];
+                            });
+        [FulcrumAPIFacade submitDailySurveyResponse:dailySurveyResponse withCallback:^(NSError *error) {
+            [self surveySubmitted];
+        }];
     }
 }
 
